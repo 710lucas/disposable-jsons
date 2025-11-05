@@ -1,10 +1,11 @@
+// ...existing code...
 {
   "display": "flex",
   "justify-content": "center",
   "align-items": "center",
   "padding": "2rem",
   "background": "transparent",
-  "flex-direction" : "column",
+  "flex-direction": "column",
   "sections": [
     {
       "width": "900px",
@@ -63,12 +64,12 @@
             {
               "width": "100%",
               "max-width": "840px",
-              "background": "transparent",
+              "background": "rgba(255,255,255,0.86)",
               "padding": "1.25rem 1.5rem",
               "border-radius": "0.6rem",
               "box-shadow": "0 8px 20px rgba(5,10,30,0.06)",
               "display": "flex",
-              "flex-direction": "row",
+              "flex-direction": "column",
               "gap": "0.6rem",
               "data": [
                 {
@@ -91,43 +92,14 @@
                 },
                 {
                   "type": "p",
-                  "literal_value": "nascido em",
-                  "color": "#0f172a",
-                  "font-weight": "500",
-                  "font-size": "0.9rem",
-                  "text-align": "center"
-                },
-                {
                   "type": "p",
-                  "value": "attributes.data_nascimento_aluno",
-                  "color": "#0b3b7a",
-                  "font-weight": "600",
-                  "font-size": "0.95rem",
-                  "text-align": "center"
-                },
-                {
-                  "type": "p",
-                  "literal_value": "portador do CPF nº",
-                  "color": "#0f172a",
-                  "font-weight": "500",
-                  "font-size": "0.9rem",
-                  "text-align": "center"
-                },
-                {
-                  "type": "p",
-                  "value": "attributes.cpf_aluno",
-                  "color": "#0b3b7a",
-                  "font-weight": "700",
-                  "font-size": "0.95rem",
-                  "text-align": "center"
-                },
-                {
-                  "type": "p",
-                  "literal_value": "concluiu o Ensino Médio neste estabelecimento.",
+                  "value": "attributes.descricao_curso",
                   "color": "#07143b",
                   "font-weight": "600",
                   "font-size": "0.95rem",
-                  "text-align": "center"
+                  "text-align": "center",
+                  "margin-top": "0.25rem",
+                  "line-height": "1.5rem"
                 }
               ]
             }
@@ -394,3 +366,4 @@
     }
   ]
 }
+// ...existing code...
