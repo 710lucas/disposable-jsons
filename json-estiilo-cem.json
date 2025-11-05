@@ -5,6 +5,7 @@
   "padding": "2rem",
   "background": "transparent",
   "flex-direction": "column",
+  "font-family": "Georgia, 'Times New Roman', Times, serif",
   "sections": [
     {
       "width": "900px",
