@@ -12,7 +12,7 @@
       "max-width": "98%",
       "height": "560px",
       "background-image": "url('https://img.freepik.com/vetores-gratis/fundo-de-quadro-decorativo-vetor-de-design-de-flor-vintage-azul_53876-157569.jpg?semt=ais_hybrid&w=740&q=80')",
-      "background-size": "cover",
+      "background-size": "100% 100%",
       "background-position": "center",
       "border-radius": "1rem",
       "box-shadow": "0 14px 40px rgba(2,6,23,0.45)",
