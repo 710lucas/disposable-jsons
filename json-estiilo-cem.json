@@ -34,14 +34,12 @@
               "width": "84px",
               "height": "84px",
               "object-fit": "contain",
-              "border-radius": "8px",
-              "border": "3px solid rgba(255,255,255,0.85)",
-              "box-shadow": "0 6px 18px rgba(0,0,0,0.15)"
+              "border-radius": "8px"
             },
             {
               "type": "h1",
               "literal_value": "Certificado de Conclusão",
-              "color": "#07143b",
+              "color" : "black",
               "font-weight": "800",
               "font-size": "1.8rem",
               "text-align": "center",
@@ -64,10 +62,9 @@
             {
               "width": "100%",
               "max-width": "840px",
-              "background": "rgba(255,255,255,0.86)",
+              "background": "transparent",
               "padding": "1.25rem 1.5rem",
               "border-radius": "0.6rem",
-              "box-shadow": "0 8px 20px rgba(5,10,30,0.06)",
               "display": "flex",
               "flex-direction": "column",
               "gap": "0.6rem",
@@ -75,7 +72,7 @@
                 {
                   "type": "p",
                   "literal_value": "Certificamos que",
-                  "color": "#0f172a",
+                  "color" : "dar-gray", 
                   "font-weight": "600",
                   "font-size": "0.95rem",
                   "text-align": "center",
@@ -84,7 +81,7 @@
                 {
                   "type": "h2",
                   "value": "attributes.nome_aluno",
-                  "color": "#07143b",
+                  "color" : "black",
                   "font-weight": "800",
                   "font-size": "1.4rem",
                   "text-align": "center",
@@ -94,8 +91,8 @@
                   "type": "p",
                   "type": "p",
                   "value": "attributes.descricao_curso",
-                  "color": "#07143b",
-                  "font-weight": "600",
+                  "color" : "rgb(20,20,20)",
+                  "font-weight": "500",
                   "font-size": "0.95rem",
                   "text-align": "center",
                   "margin-top": "0.25rem",
@@ -121,7 +118,7 @@
         {
           "type": "p",
           "literal_value": "Local e data:",
-          "color": "#0f172a",
+          "color" : "black",
           "font-weight": "600",
           "font-size": "0.85rem",
           "text-align": "right",
@@ -131,7 +128,7 @@
         {
           "type": "p",
           "value": "attributes.uf",
-          "color": "#0b3b7a",
+          "color" : "black",
           "font-weight": "700",
           "font-size": "0.9rem",
           "margin": "0 0.6rem 0 0.6rem"
@@ -139,7 +136,7 @@
         {
           "type": "p",
           "value": "attributes.data_emissao",
-          "color": "#07143b",
+          "color" : "black",
           "font-weight": "700",
           "font-size": "0.9rem",
           "margin": "0"
@@ -154,13 +151,13 @@
       "width": "900px",
       "max-width": "98%",
       "margin-top": "1rem",
-      "font-family": "sans-serif",
+        "font-family": "sans-serif",
       "collapsible_sections": [
         {
           "title": {
             "type": "h3",
             "literal_value": "Ver Mais Detalhes (Dados Adicionais)",
-            "color": "#07143b",
+            "color" : "black",
             "font-weight": "700",
             "font-size": "1rem"
           },
@@ -179,121 +176,121 @@
                 {
                   "type": "p",
                   "literal_value": "Nome da Escola",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.nome_escola",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "INEP",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.inep",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "Endereço",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.endereco_escola",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "UF",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.uf",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "Nome do Aluno",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.nome_aluno",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "Data de Nascimento",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.data_nascimento_aluno",
-                  "color": "#0b3b7a",
+                  "color" : "black", 
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "CPF",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.cpf_aluno",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "Secretário(a) Emissor(a)",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.nome_curso",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 },
                 {
                   "type": "p",
                   "literal_value": "Observações / Descrição",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.descricao_curso",
-                  "color": "#0b3b7a",
+                  "color" : "black", 
                   "font-weight": "500"
                 },
                 {
                   "type": "p",
                   "literal_value": "Data de Emissão",
-                  "color": "#0f172a",
+                  "color" : "black",
                   "font-weight": "700"
                 },
                 {
                   "type": "p",
                   "value": "attributes.data_emissao",
-                  "color": "#0b3b7a",
+                  "color" : "black",
                   "font-weight": "600"
                 }
               ]
