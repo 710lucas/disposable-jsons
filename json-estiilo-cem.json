@@ -4,6 +4,7 @@
   "align-items": "center",
   "padding": "2rem",
   "background": "transparent",
+  "flex-direction" : "column",
   "sections": [
     {
       "width": "900px",
