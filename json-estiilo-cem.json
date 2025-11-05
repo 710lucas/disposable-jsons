@@ -1,0 +1,395 @@
+{
+  "display": "flex",
+  "justify-content": "center",
+  "align-items": "center",
+  "padding": "2rem",
+  "background": "transparent",
+  "sections": [
+    {
+      "width": "900px",
+      "max-width": "98%",
+      "height": "560px",
+      "background-image": "url('https://img.freepik.com/vetores-gratis/fundo-de-quadro-decorativo-vetor-de-design-de-flor-vintage-azul_53876-157569.jpg?semt=ais_hybrid&w=740&q=80')",
+      "background-size": "cover",
+      "background-position": "center",
+      "border-radius": "1rem",
+      "box-shadow": "0 14px 40px rgba(2,6,23,0.45)",
+      "overflow": "hidden",
+      "padding": "2.25rem",
+      "display": "flex",
+      "flex-direction": "column",
+      "gap": "1rem",
+      "sections": [
+        {
+          "display": "flex",
+          "justify-content": "space-between",
+          "align-items": "center",
+          "background": "transparent",
+          "data": [
+            {
+              "type": "img",
+              "value": "attributes.brasao_url",
+              "width": "84px",
+              "height": "84px",
+              "object-fit": "contain",
+              "border-radius": "8px",
+              "border": "3px solid rgba(255,255,255,0.85)",
+              "box-shadow": "0 6px 18px rgba(0,0,0,0.15)"
+            },
+            {
+              "type": "h1",
+              "literal_value": "Certificado de Conclusão",
+              "color": "#07143b",
+              "font-weight": "800",
+              "font-size": "1.8rem",
+              "text-align": "center",
+              "margin": "0"
+            },
+            {
+              "type": "div",
+              "literal_value": "",
+              "width": "84px"
+            }
+          ]
+        },
+        {
+          "display": "flex",
+          "justify-content": "center",
+          "align-items": "center",
+          "background": "transparent",
+          "padding": "0.5rem 1rem",
+          "sections": [
+            {
+              "width": "100%",
+              "max-width": "840px",
+              "background": "rgba(255,255,255,0.86)",
+              "padding": "1.25rem 1.5rem",
+              "border-radius": "0.6rem",
+              "box-shadow": "0 8px 20px rgba(5,10,30,0.06)",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "0.6rem",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Certificamos que",
+                  "color": "#0f172a",
+                  "font-weight": "600",
+                  "font-size": "0.95rem",
+                  "text-align": "center",
+                  "margin": "0"
+                },
+                {
+                  "type": "h2",
+                  "value": "attributes.nome_aluno",
+                  "color": "#07143b",
+                  "font-weight": "800",
+                  "font-size": "1.4rem",
+                  "text-align": "center",
+                  "margin": "0"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "nascido em",
+                  "color": "#0f172a",
+                  "font-weight": "500",
+                  "font-size": "0.9rem",
+                  "text-align": "center"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.data_nascimento_aluno",
+                  "color": "#0b3b7a",
+                  "font-weight": "600",
+                  "font-size": "0.95rem",
+                  "text-align": "center"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "portador do CPF nº",
+                  "color": "#0f172a",
+                  "font-weight": "500",
+                  "font-size": "0.9rem",
+                  "text-align": "center"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.cpf_aluno",
+                  "color": "#0b3b7a",
+                  "font-weight": "700",
+                  "font-size": "0.95rem",
+                  "text-align": "center"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "concluiu o Ensino Médio neste estabelecimento.",
+                  "color": "#07143b",
+                  "font-weight": "600",
+                  "font-size": "0.95rem",
+                  "text-align": "center"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "display": "flex",
+          "justify-content": "space-between",
+          "align-items": "flex-end",
+          "background": "transparent",
+          "padding": "0.5rem 0",
+          "sections": [
+            {
+              "width": "45%",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "(Assinatura Diretor)",
+                  "color": "#0f172a",
+                  "font-weight": "600",
+                  "font-size": "0.9rem",
+                  "text-align": "center"
+                },
+                {
+                  "type": "div",
+                  "literal_value": "",
+                  "border-top": "2px solid rgba(7,20,59,0.8)",
+                  "width": "80%",
+                  "margin": "0.5rem auto 0  auto"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Diretor(a)",
+                  "color": "#07143b",
+                  "font-weight": "600",
+                  "font-size": "0.8rem",
+                  "text-align": "center",
+                  "margin-top": "0.35rem"
+                }
+              ]
+            },
+            {
+              "width": "45%",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "(Assinatura Secretário)",
+                  "color": "#0f172a",
+                  "font-weight": "600",
+                  "font-size": "0.9rem",
+                  "text-align": "center"
+                },
+                {
+                  "type": "div",
+                  "literal_value": "",
+                  "border-top": "2px solid rgba(7,20,59,0.8)",
+                  "width": "80%",
+                  "margin": "0.5rem auto 0 auto"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_curso",
+                  "color": "#07143b",
+                  "font-weight": "700",
+                  "font-size": "0.85rem",
+                  "text-align": "center",
+                  "margin-top": "0.35rem"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Secretário(a)",
+                  "color": "#07143b",
+                  "font-weight": "500",
+                  "font-size": "0.75rem",
+                  "text-align": "center"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "display": "flex",
+          "justify-content": "center",
+          "align-items": "center",
+          "gap": "0.5rem",
+          "background": "transparent",
+          "data": [
+            {
+              "type": "p",
+              "literal_value": "Local e data:",
+              "color": "#0f172a",
+              "font-weight": "600",
+              "font-size": "0.85rem",
+              "margin-top": "0.8rem"
+            },
+            {
+              "type": "p",
+              "value": "attributes.uf",
+              "color": "#0b3b7a",
+              "font-weight": "700",
+              "font-size": "0.9rem"
+            },
+            {
+              "type": "p",
+              "value": "attributes.data_emissao",
+              "color": "#07143b",
+              "font-weight": "700",
+              "font-size": "0.9rem"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": "900px",
+      "max-width": "98%",
+      "margin-top": "1rem",
+      "collapsible_sections": [
+        {
+          "title": {
+            "type": "h3",
+            "literal_value": "Ver Mais Detalhes (Dados Adicionais)",
+            "color": "#07143b",
+            "font-weight": "700",
+            "font-size": "1rem"
+          },
+          "expand_indicator": "▾",
+          "collapsed": true,
+          "background": "rgba(255,255,255,0.95)",
+          "border-radius": "0.6rem",
+          "padding": "0.9rem 1rem",
+          "sections": [
+            {
+              "display": "grid",
+              "grid-template-columns": "200px 1fr",
+              "gap": "0.5rem 1rem",
+              "align-items": "start",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Nome da Escola",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_escola",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "INEP",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.inep",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Endereço",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.endereco_escola",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "UF",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.uf",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Nome do Aluno",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_aluno",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Data de Nascimento",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.data_nascimento_aluno",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "CPF",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.cpf_aluno",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Secretário(a) Emissor(a)",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_curso",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Observações / Descrição",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.descricao_curso",
+                  "color": "#0b3b7a",
+                  "font-weight": "500"
+                },
+                {
+                  "type": "p",
+                  "literal_value": "Data de Emissão",
+                  "color": "#0f172a",
+                  "font-weight": "700"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.data_emissao",
+                  "color": "#0b3b7a",
+                  "font-weight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
