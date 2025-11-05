@@ -154,6 +154,7 @@
       "width": "900px",
       "max-width": "98%",
       "margin-top": "1rem",
+      "font-family": "sans-serif",
       "collapsible_sections": [
         {
           "title": {
