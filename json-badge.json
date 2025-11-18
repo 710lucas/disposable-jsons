@@ -1,0 +1,273 @@
+{
+  "display": "flex",
+  "justify-content": "center",
+  "align-items": "flex-start",
+  "padding": "2rem",
+  "background": "#f0f2f5",
+  "flex-direction": "row",
+  "font-family": "Arial, sans-serif",
+  "gap": "2rem",
+  "flex-wrap": "wrap",
+  "overflow": "auto",
+  "sections": [
+    {
+      "width": "100%",
+      "max-width": "900px",
+      "display": "flex",
+      "flex-direction": "column",
+      "gap": "1.5rem",
+      "background": "transparent",
+      "sections": [
+        {
+          "comment": "--- SEÇÃO SUPERIOR: O VISUAL DO BADGE ---",
+          "width": "100%",
+          "height": "auto",
+          "min-height": "300px",
+          "background": "linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%)",
+          "border-radius": "1rem",
+          "box-shadow": "0 10px 20px rgba(0,0,0,0.15)",
+          "display": "flex",
+          "flex-direction": "row",
+          "align-items": "center",
+          "justify-content": "space-around",
+          "padding": "2rem",
+          "flex-wrap": "wrap",
+          "sections": [
+            {
+              "comment": "--- LADO ESQUERDO: A ARTE DO BADGE ---",
+              "width": "250px",
+              "height": "250px",
+              "display": "flex",
+              "justify-content": "center",
+              "align-items": "center",
+              "background-image": "url('https://cdn-icons-png.flaticon.com/512/1426/1426735.png')", 
+              "background-size": "contain",
+              "background-repeat": "no-repeat",
+              "background-position": "center",
+              "filter": "drop-shadow(0px 10px 15px rgba(0,0,0,0.3))"
+            },
+            {
+              "comment": "--- LADO DIREITO: TÍTULO E EMISSOR ---",
+              "width": "calc(100% - 280px)",
+              "min-width": "300px",
+              "display": "flex",
+              "flex-direction": "column",
+              "justify-content": "center",
+              "gap": "0.5rem",
+              "data": [
+                {
+                  "type": "text",
+                  "value": "CERTIFICADO DE RECONHECIMENTO",
+                  "color": "#aaa",
+                  "font-size": "0.9rem",
+                  "font-weight": "600",
+                  "letter-spacing": "2px",
+                  "text-transform": "uppercase"
+                },
+                {
+                  "type": "text",
+                  "value": "attributes.titulo",
+                  "color": "#ffffff",
+                  "font-size": "2.5rem",
+                  "font-weight": "bold",
+                  "text-shadow": "0px 2px 4px rgba(0,0,0,0.5)"
+                },
+                {
+                  "type": "container",
+                  "display": "flex",
+                  "align-items": "center",
+                  "gap": "0.5rem",
+                  "margin-top": "1rem",
+                  "sub_data": [
+                    {
+                      "type": "text",
+                      "value": "Emitido por:",
+                      "color": "#ffd700",
+                      "font-weight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "value": "attributes.emissor_nome",
+                      "color": "#fff",
+                      "font-size": "1.1rem"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "comment": "--- SEÇÃO INFERIOR: ABAS E DADOS (Estilo CRM) ---",
+          "width": "100%",
+          "background": "#ffffff",
+          "border-radius": "1rem",
+          "box-shadow": "0 4px 6px rgba(0,0,0,0.05)",
+          "overflow": "hidden",
+          "display": "flex",
+          "flex-direction": "column",
+          "sections": [
+            {
+              "comment": "--- CABEÇALHO DAS ABAS (Simulado visualmente) ---",
+              "width": "100%",
+              "background": "#f8f9fa",
+              "padding": "1rem 2rem",
+              "border-bottom": "1px solid #e0e0e0",
+              "display": "flex",
+              "gap": "2rem",
+              "data": [
+                {
+                  "type": "text",
+                  "value": "VISÃO GERAL",
+                  "color": "#0056b3",
+                  "font-weight": "bold",
+                  "cursor": "pointer",
+                  "border-bottom": "2px solid #0056b3"
+                },
+                {
+                  "type": "text",
+                  "value": "HABILIDADES & CRITÉRIOS",
+                  "color": "#666",
+                  "font-weight": "normal",
+                  "cursor": "pointer"
+                }
+              ]
+            },
+            {
+              "comment": "--- CONTEÚDO DAS ABAS ---",
+              "padding": "2rem",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "2rem",
+              "sections": [
+                {
+                  "comment": "--- BLOCO 1: DESCRIÇÃO ---",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "0.5rem",
+                  "data": [
+                    {
+                      "type": "text",
+                      "value": "Sobre a Conquista",
+                      "font-size": "1.2rem",
+                      "font-weight": "bold",
+                      "color": "#333",
+                      "margin-bottom": "0.5rem"
+                    },
+                    {
+                      "type": "text",
+                      "value": "attributes.descricao",
+                      "font-size": "1rem",
+                      "color": "#555",
+                      "line-height": "1.6",
+                      "text-align": "justify"
+                    }
+                  ]
+                },
+                {
+                  "width": "100%",
+                  "height": "1px",
+                  "background": "#eee"
+                },
+                {
+                  "comment": "--- BLOCO 2: SKILLS (Layout de Tags/Pills) ---",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "1rem",
+                  "data": [
+                    {
+                      "type": "text",
+                      "value": "Habilidades Desenvolvidas",
+                      "font-size": "1.2rem",
+                      "font-weight": "bold",
+                      "color": "#333"
+                    }
+                  ],
+                  "sections": [
+                    {
+                      "display": "flex",
+                      "flex-wrap": "wrap",
+                      "gap": "0.75rem",
+                      "data": [
+                        {
+                          "type": "text",
+                          "value": "attributes.skill_1",
+                          "padding": "0.5rem 1rem",
+                          "background": "#e3f2fd",
+                          "color": "#1565c0",
+                          "border-radius": "20px",
+                          "font-size": "0.9rem",
+                          "font-weight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "value": "attributes.skill_2",
+                          "padding": "0.5rem 1rem",
+                          "background": "#e3f2fd",
+                          "color": "#1565c0",
+                          "border-radius": "20px",
+                          "font-size": "0.9rem",
+                          "font-weight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "value": "attributes.skill_3",
+                          "padding": "0.5rem 1rem",
+                          "background": "#e3f2fd",
+                          "color": "#1565c0",
+                          "border-radius": "20px",
+                          "font-size": "0.9rem",
+                          "font-weight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "value": "attributes.skills_extra",
+                          "padding": "0.5rem 1rem",
+                          "background": "#f5f5f5",
+                          "color": "#666",
+                          "border-radius": "20px",
+                          "font-size": "0.9rem"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                 {
+                  "width": "100%",
+                  "height": "1px",
+                  "background": "#eee"
+                },
+                {
+                  "comment": "--- BLOCO 3: REQUISITOS ---",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "0.5rem",
+                  "data": [
+                    {
+                      "type": "text",
+                      "value": "Critérios de Obtenção",
+                      "font-size": "1.2rem",
+                      "font-weight": "bold",
+                      "color": "#333"
+                    },
+                    {
+                      "type": "text",
+                      "value": "attributes.requisitos",
+                      "font-size": "0.95rem",
+                      "color": "#666",
+                      "font-style": "italic",
+                      "background": "#fff8e1",
+                      "padding": "1rem",
+                      "border-left": "4px solid #ffc107",
+                      "border-radius": "0 0.5rem 0.5rem 0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
