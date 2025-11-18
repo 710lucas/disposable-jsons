@@ -9,7 +9,7 @@
   "gap": "2rem",
   "flex-wrap": "wrap",
   "overflow": "auto",
-  "width" : "90%",
+  "width" : "85%",
   "margin" : "auto",
   "sections": [
     {
