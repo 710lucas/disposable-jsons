@@ -2,35 +2,32 @@
   "display": "flex",
   "justify-content": "center",
   "align-items": "flex-start",
+  "align-content" : "center",
   "padding": "2rem",
-  "background": "#f0f2f5",
-  "flex-direction": "row",
-  "font-family": "Arial, sans-serif",
+  "flex-direction": "column",
+  "font-family": "Serif",
   "gap": "2rem",
   "flex-wrap": "wrap",
   "overflow": "auto",
+  "width" : "90%",
+  "margin" : "auto",
   "sections": [
     {
       "width": "100%",
-      "max-width": "900px",
+      "max-width": "50%",
       "display": "flex",
-      "flex-direction": "column",
-      "gap": "1.5rem",
+      "flex-direction" : "row",
+      "gap": "2rem",
       "background": "transparent",
+      "margin" : "auto",
       "sections": [
         {
           "comment": "--- SEÇÃO SUPERIOR: O VISUAL DO BADGE ---",
-          "width": "100%",
-          "height": "auto",
-          "min-height": "300px",
-          "background": "linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%)",
-          "border-radius": "1rem",
-          "box-shadow": "0 10px 20px rgba(0,0,0,0.15)",
+          "height": "100%",
           "display": "flex",
           "flex-direction": "row",
           "align-items": "center",
-          "justify-content": "space-around",
-          "padding": "2rem",
+          "justify-content": "start",
           "flex-wrap": "wrap",
           "sections": [
             {
@@ -40,20 +37,32 @@
               "display": "flex",
               "justify-content": "center",
               "align-items": "center",
-              "background-image": "url('https://cdn-icons-png.flaticon.com/512/1426/1426735.png')", 
               "background-size": "contain",
               "background-repeat": "no-repeat",
               "background-position": "center",
-              "filter": "drop-shadow(0px 10px 15px rgba(0,0,0,0.3))"
-            },
+              "filter": "drop-shadow(0px 10px 15px rgba(0,0,0,0.3))",
+              "data": [
+                {
+                  "type": "img",
+                  "value": "image"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "comment": "--- SEÇÃO INFERIOR: ABAS E DADOS (Estilo CRM) ---",
+          "width": "100%",
+          "overflow": "hidden",
+          "display": "flex",
+          "flex-direction": "column",
+          "sections": [
             {
               "comment": "--- LADO DIREITO: TÍTULO E EMISSOR ---",
-              "width": "calc(100% - 280px)",
               "min-width": "300px",
               "display": "flex",
               "flex-direction": "column",
               "justify-content": "center",
-              "gap": "0.5rem",
               "data": [
                 {
                   "type": "text",
@@ -67,10 +76,9 @@
                 {
                   "type": "text",
                   "value": "attributes.titulo",
-                  "color": "#ffffff",
+                  "color": "black",
                   "font-size": "2.5rem",
-                  "font-weight": "bold",
-                  "text-shadow": "0px 2px 4px rgba(0,0,0,0.5)"
+                  "font-weight": "bold"
                 },
                 {
                   "type": "container",
@@ -94,48 +102,25 @@
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "comment": "--- SEÇÃO INFERIOR: ABAS E DADOS (Estilo CRM) ---",
-          "width": "100%",
-          "background": "#ffffff",
-          "border-radius": "1rem",
-          "box-shadow": "0 4px 6px rgba(0,0,0,0.05)",
-          "overflow": "hidden",
-          "display": "flex",
-          "flex-direction": "column",
-          "sections": [
+            },
             {
-              "comment": "--- CABEÇALHO DAS ABAS (Simulado visualmente) ---",
-              "width": "100%",
-              "background": "#f8f9fa",
-              "padding": "1rem 2rem",
-              "border-bottom": "1px solid #e0e0e0",
               "display": "flex",
-              "gap": "2rem",
+              "flex-direction": "row",
+              "gap" : "0.5rem",
               "data": [
                 {
-                  "type": "text",
-                  "value": "VISÃO GERAL",
-                  "color": "#0056b3",
-                  "font-weight": "bold",
-                  "cursor": "pointer",
-                  "border-bottom": "2px solid #0056b3"
+                  "type": "p",
+                  "literal_value": "Emitido Por: "
                 },
                 {
-                  "type": "text",
-                  "value": "HABILIDADES & CRITÉRIOS",
-                  "color": "#666",
-                  "font-weight": "normal",
-                  "cursor": "pointer"
+                  "type": "p",
+                  "value": "attributes.emissor_nome",
+                  "text-decoration" : "underline"
                 }
               ]
             },
             {
               "comment": "--- CONTEÚDO DAS ABAS ---",
-              "padding": "2rem",
               "display": "flex",
               "flex-direction": "column",
               "gap": "2rem",
@@ -144,21 +129,11 @@
                   "comment": "--- BLOCO 1: DESCRIÇÃO ---",
                   "display": "flex",
                   "flex-direction": "column",
-                  "gap": "0.5rem",
                   "data": [
                     {
-                      "type": "text",
-                      "value": "Sobre a Conquista",
-                      "font-size": "1.2rem",
-                      "font-weight": "bold",
-                      "color": "#333",
-                      "margin-bottom": "0.5rem"
-                    },
-                    {
-                      "type": "text",
+                      "type": "p",
                       "value": "attributes.descricao",
                       "font-size": "1rem",
-                      "color": "#555",
                       "line-height": "1.6",
                       "text-align": "justify"
                     }
@@ -193,36 +168,35 @@
                           "type": "text",
                           "value": "attributes.skill_1",
                           "padding": "0.5rem 1rem",
-                          "background": "#e3f2fd",
-                          "color": "#1565c0",
-                          "border-radius": "20px",
+                          "background": "lightgray",
+                          "color": "black",
+                          "border-radius": "4px",
                           "font-size": "0.9rem",
                           "font-weight": "600"
                         },
-                        {
+                         {
                           "type": "text",
                           "value": "attributes.skill_2",
                           "padding": "0.5rem 1rem",
-                          "background": "#e3f2fd",
-                          "color": "#1565c0",
-                          "border-radius": "20px",
+                          "background": "lightgray",
+                          "color": "black",
+                          "border-radius": "4px",
                           "font-size": "0.9rem",
                           "font-weight": "600"
                         },
-                        {
+                         {
                           "type": "text",
                           "value": "attributes.skill_3",
                           "padding": "0.5rem 1rem",
-                          "background": "#e3f2fd",
-                          "color": "#1565c0",
-                          "border-radius": "20px",
+                          "background": "lightgray",
+                          "color": "black",
+                          "border-radius": "4px",
                           "font-size": "0.9rem",
                           "font-weight": "600"
                         },
                         {
                           "type": "text",
                           "value": "attributes.skills_extra",
-                          "padding": "0.5rem 1rem",
                           "background": "#f5f5f5",
                           "color": "#666",
                           "border-radius": "20px",
@@ -232,7 +206,7 @@
                     }
                   ]
                 },
-                 {
+                {
                   "width": "100%",
                   "height": "1px",
                   "background": "#eee"
@@ -244,8 +218,8 @@
                   "gap": "0.5rem",
                   "data": [
                     {
-                      "type": "text",
-                      "value": "Critérios de Obtenção",
+                      "type": "p",
+                      "literal_value": "Earning Criteria",
                       "font-size": "1.2rem",
                       "font-weight": "bold",
                       "color": "#333"
@@ -255,11 +229,308 @@
                       "value": "attributes.requisitos",
                       "font-size": "0.95rem",
                       "color": "#666",
-                      "font-style": "italic",
-                      "background": "#fff8e1",
-                      "padding": "1rem",
-                      "border-left": "4px solid #ffc107",
-                      "border-radius": "0 0.5rem 0.5rem 0"
+                      "font-style": "italic"
+                    }
+                  ]
+                }
+
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+                        "box-shadow": "0px 4px 12px rgba(0,0,0,0.08)",
+                  "overflow" : "auto",
+      "width" : "100%",
+  "collapsible_sections": [
+    {
+      "title": {
+        "type": "h3",
+        "literal_value": "Mais Detalhes",
+        "color": "black",
+        "font-weight": "600",
+        "font-size": "0.95rem",
+        "text-transform": "none",
+        "letter-spacing": "0.02em"
+      },
+      "expanded_style": {
+        "background": "#f9fafb",
+        "border-bottom": "2px solid #e0e0e0",
+        "box-shadow": "inset 0 1px 0 0 rgba(52, 211, 153, 0.15)"
+      },
+      "expand_indicator": " ",
+      "collapsed": true,
+      "background": "white",
+      "border": "none",
+      "border-bottom": "3px solid transparent",
+      "border-radius": "0",
+      "padding": "1.1rem 2rem 0.9rem 2rem",
+      "box-shadow": "none",
+      "transition": "all 0.3s ease",
+      "background" : "#e0e0e0",
+      "sections": [
+        {
+          "display": "flex",
+          "flex-direction": "column",
+          "width": "100%",
+          "background": "#f8f9fa",
+          "padding": "0",
+          "border-top": "2px solid #34d399",
+          "sections": [
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "width": "100%",
+              "gap": "0",
+              "background": "white",
+              "border-bottom": "1px solid #e8e8e8",
+              "sections": [
+                {
+                  "flex": "1",
+                  "font-family": "sans-serif",
+                  "collapsible_sections": [
+                    {
+                      "title": {
+                        "type": "h4",
+                        "literal_value": "Dados do Curso",
+                        "color": "#6c757d",
+                        "font-weight": "600",
+                        "font-size": "0.875rem",
+                        "text-transform": "none",
+                        "letter-spacing": "0.01em",
+                        "expanded_style": {
+                          "color": "#34d399"
+                        }
+                      },
+                      "expand_indicator": " ",
+                      "collapsed": true,
+                      "background": "white",
+                      "border": "none",
+                      "border-bottom": "3px solid transparent",
+                      "border-radius": "0",
+                      "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                      "box-shadow": "none",
+                      "transition": "all 0.3s ease",
+                      "min-width": "fit-content",
+                      "expanded_style": {
+                        "background": "rgba(0,0,0,0.05)"
+                      },
+                      "sections": [
+                        {
+                          "display": "grid",
+                          "grid-template-columns": "10rem 25rem",
+                          "gap": "0.75rem 1.5rem",
+                          "align-items": "start",
+                          "padding": "2rem 2.5rem",
+                          "data": [
+                            {
+                              "type": "p",
+                              "literal_value": "Titulo da Certificação",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.titulo",
+                              "font-weight": "600"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Nome do Emissor",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.emissor_nome",
+                              "font-weight": "600"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Descrição da certificação",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.descricao",
+                              "font-weight": "600",
+                              "text-align" : "justify"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Requisitos",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.requisitos",
+                              "font-weight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "flex": "1",
+                  "font-family": "sans-serif",
+                  "collapsible_sections": [
+                    {
+                      "title": {
+                        "type": "h4",
+                        "literal_value": "Habilidades desenvolvidas",
+                        "color": "#6c757d",
+                        "font-weight": "600",
+                        "font-size": "0.875rem",
+                        "text-transform": "none",
+                        "letter-spacing": "0.01em",
+                        "expanded_style": {
+                          "color": "#34d399"
+                        }
+                      },
+                      "expanded_style": {
+                        "background": "rgba(0,0,0,0.05)"
+                      },
+                      "expand_indicator": " ",
+                      "collapsed": true,
+                      "background": "white",
+                      "border": "none",
+                      "border-bottom": "3px solid transparent",
+                      "border-radius": "0",
+                      "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                      "box-shadow": "none",
+                      "transition": "all 0.3s ease",
+                      "sections": [
+                        {
+                          "display": "grid",
+                          "grid-template-columns": "7rem 15rem",
+                          "gap": "0.75rem 1.5rem",
+                          "align-items": "start",
+                          "padding": "2rem 2.5rem",
+                          "data": [
+                            {
+                              "type": "p",
+                              "literal_value": "Habilidade 1",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.Skill_1",
+                              "font-weight": "600"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Hablidade 2",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.Skill_2",
+                              "font-weight": "600"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Habilidade 3",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.skill_3",
+                              "font-weight": "600"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Outras Habilidades",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "p",
+                              "value": "attributes.skills_extra",
+                              "font-weight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "flex": "1",
+                  "font-family": "sans-serif",
+                  "collapsible_sections": [
+                    {
+                      "title": {
+                        "type": "h4",
+                        "literal_value": "Recursos",
+                        "color": "#6c757d",
+                        "font-weight": "600",
+                        "font-size": "0.875rem",
+                        "text-transform": "none",
+                        "letter-spacing": "0.01em",
+                        "expanded_style": {
+                          "color": "#34d399"
+                        }
+                      },
+                      "expand_indicator": " ",
+                      "collapsed": true,
+                      "background": "white",
+                      "border": "none",
+                      "border-bottom": "3px solid transparent",
+                      "border-radius": "0",
+                      "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                      "box-shadow": "none",
+                      "transition": "all 0.3s ease",
+                      "expanded_style": {
+                        "background": "rgba(0,0,0,0.05)"
+                      },
+                      "sections": [
+                        {
+                          "display": "grid",
+                          "grid-template-columns": "10rem 15rem",
+                          "gap": "0.75rem 1.5rem",
+                          "align-items": "start",
+                          "padding": "2rem 2.5rem",
+                          "overflow" : "auto",
+                          "data": [
+                            {
+                              "type": "p",
+                              "literal_value": "Link para imagem",
+                              "font-weight": "700",
+                              "text-wrap" : "nowrap"
+                            },
+                            {
+                              "type": "a",
+                              "value": "image",
+                              "font-weight": "600",
+                              "color" : "blue"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Link para Contrato",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "a",
+                              "contract_value": "a.link_block_scanner",
+                              "font-weight": "600",
+                              "color" : "blue"
+                            },
+                            {
+                              "type": "p",
+                              "literal_value": "Link para payload anterior",
+                              "font-weight": "700"
+                            },
+                            {
+                              "type": "a",
+                              "value": "previousPayloadUri",
+                              "font-weight": "600",
+                              "color" : "blue",
+                              "render_if_present" : "true"
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -269,5 +540,7 @@
         }
       ]
     }
+  ]
+}
   ]
 }
