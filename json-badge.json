@@ -219,7 +219,7 @@
                   "data": [
                     {
                       "type": "p",
-                      "literal_value": "Earning Criteria",
+                      "literal_value": "Requisitos",
                       "font-size": "1.2rem",
                       "font-weight": "bold",
                       "color": "#333"
