@@ -1,145 +1,210 @@
 {
    "display":"flex",
    "justify-content":"center",
-   "align-items":"center",
+   "align-items":"flex-start",
+   "align-content":"center",
    "padding":"2rem",
-   "background":"transparent",
    "flex-direction":"column",
-   "font-family":"Georgia, 'Times New Roman', Times, serif",
+   "font-family":"Inter",
+   "gap":"2rem",
+   "flex-wrap":"wrap",
+   "overflow":"auto",
+   "width":"85%",
+   "margin":"auto",
    "sections":[
       {
-         "width":"900px",
-         "max-width":"98%",
-         "height":"560px",
-         "background-image":"url('https://img.freepik.com/vetores-gratis/fundo-de-quadro-decorativo-vetor-de-design-de-flor-vintage-azul_53876-157569.jpg?semt=ais_hybrid&w=740&q=80')",
-         "background-size":"100% 100%",
-         "background-position":"center",
-         "border-radius":"1rem",
-         "box-shadow":"0 14px 40px rgba(2,6,23,0.45)",
-         "overflow":"hidden",
-         "padding":"2.25rem",
+         "width":"100%",
+         "max-width":"65%",
          "display":"flex",
-         "flex-direction":"column",
-         "gap":"1rem",
+         "flex-direction":"row",
+         "gap":"2rem",
+         "background":"transparent",
+         "margin":"auto",
          "sections":[
             {
+               "comment":"--- SEÇÃO SUPERIOR: O VISUAL DO BADGE ---",
+               "height":"100%",
                "display":"flex",
-               "justify-content":"space-between",
-               "align-items":"center",
-               "background":"transparent",
-               "data":[
-                  {
-                     "type":"img",
-                     "value":"attributes.brasao_url",
-                     "width":"84px",
-                     "height":"84px",
-                     "object-fit":"contain",
-                     "border-radius":"8px"
-                  },
-                  {
-                     "type":"h1",
-                     "literal_value":"Certificado de Conclusão Ensino Médio",
-                     "color":"black",
-                     "font-weight":"800",
-                     "font-size":"1.8rem",
-                     "text-align":"center",
-                     "margin":"0"
-                  },
-                  {
-                     "type":"div",
-                     "literal_value":"",
-                     "width":"84px"
-                  }
-               ]
-            },
-            {
-               "display":"flex",
-               "justify-content":"center",
-               "align-items":"center",
-               "background":"transparent",
-               "padding":"0.5rem 1rem",
+               "flex-direction":"column",
+               "align-items":"start",
+               "justify-content":"start",
+               "flex-wrap":"wrap",
+               "gap" : "0.5rem",
                "sections":[
                   {
-                     "width":"100%",
-                     "max-width":"840px",
-                     "background":"transparent",
-                     "padding":"1.25rem 1.5rem",
-                     "border-radius":"0.6rem",
+                     "comment":"--- LADO ESQUERDO: A ARTE DO BADGE ---",
+                     "width":"250px",
+                     "height":"250px",
                      "display":"flex",
-                     "flex-direction":"column",
-                     "gap":"0.6rem",
+                     "justify-content":"start",
+                     "align-items":"start",
+                     "background-size":"contain",
+                     "background-repeat":"no-repeat",
+                     "background-position":"center",
+                     "border-radius":"0.5rem",
+                     "flex-direction" : "column",
+                     "gap" : "0.5rem",
                      "data":[
                         {
-                           "type":"p",
-                           "literal_value":"Certificamos que",
-                           "color":"dar-gray",
-                           "font-weight":"600",
-                           "font-size":"0.95rem",
-                           "text-align":"center",
-                           "margin":"0"
-                        },
-                        {
-                           "type":"h2",
-                           "value":"attributes.nome_aluno",
-                           "color":"black",
-                           "font-weight":"800",
-                           "font-size":"1.4rem",
-                           "text-align":"center",
-                           "margin":"0"
-                        },
-                        {
-                           "type":"p",
-                           "type":"p",
-                           "value":"attributes.descricao_curso",
-                           "color":"rgb(20,20,20)",
-                           "font-weight":"500",
-                           "font-size":"0.95rem",
-                           "text-align":"center",
-                           "margin-top":"0.25rem",
-                           "line-height":"1.5rem"
+                           "type":"img",
+                           "value":"attributes.brasao_url",
+                           "border-radius":"0.85rem",
+                           "aspect-ratio" : "4/3",
+                           "box-shadow" : "0px 0px 25px #c0c0c0a0"
                         }
                      ]
-                  }
+                  },
+                  {
+                     "width" : "100%",
+                           "sections" : [
+                              {
+                                 "display" : "flex",
+                                 "flex-direction" : "row",
+                                 "jsutify-content" : "space-between",
+                                 "width" : "100%",
+                                 "flex-wrap" : "wrap",
+                                 "gap" : "0.5rem",
+                                 "data" : [
+                                    {
+                                       "type":"p",
+                                       "literal_value":"Concluído",
+                                       "background" : "#d0ffd0",
+                                       "padding" : "0.25rem 0.5rem",
+                                       "border-radius" : "0.25rem",
+                                       "font-size" : "0.85rem",
+                                       "font-weight" : "600"
+                                    },
+                                    {
+                                       "type":"p",
+                                       "literal_value":"Ensino Médio",
+                                       "background" : "#e0e0e0",
+                                       "padding" : "0.25rem 0.5rem",
+                                       "border-radius" : "0.25rem",
+                                       "font-size" : "0.85rem",
+                                       "font-weight" : "600"
+                                    }
+                                 ]
+                              }
+                           ]
+                        }
                ]
             },
             {
+               "comment":"--- SEÇÃO INFERIOR: ABAS E DADOS (Estilo CRM) ---",
+               "width":"100%",
+               "overflow":"hidden",
                "display":"flex",
-               "justify-content":"center",
-               "align-items":"center",
-               "gap":"0.5rem",
-               "background":"transparent",
+               "flex-direction":"column",
+               "gap" : "0.15rem",
                "sections":[
                   {
+                     "comment":"--- LADO DIREITO: TÍTULO E EMISSOR ---",
+                     "min-width":"300px",
                      "display":"flex",
+                     "flex-direction":"column",
                      "justify-content":"center",
-                     "align-items":"center",
-                     "width":"100%",
+                     "data":[
+                        {
+                           "type":"text",
+                           "literal_value":"Certificado de Conclusão de Ensino Médio",
+                           "color":"black",
+                           "font-size":"2.5rem",
+                           "font-weight":"bold"
+                        }
+                     ]
+                  },
+                  {
+                     "display":"flex",
+                     "flex-direction":"row",
+                     "gap":"0.5rem",
                      "data":[
                         {
                            "type":"p",
-                           "literal_value":"Local e data:",
-                           "color":"black",
-                           "font-weight":"600",
-                           "font-size":"0.85rem",
-                           "text-align":"right",
-                           "margin":"0"
+                           "literal_value":"Nome: ",
+                           "font-weight":"600"
                         },
                         {
                            "type":"p",
-                           "value":"attributes.uf",
-                           "color":"black",
-                           "font-weight":"700",
-                           "font-size":"0.9rem",
-                           "margin":"0 0.6rem 0 0.6rem"
-                        },
-                        {
-                           "type":"p",
-                           "value":"attributes.data_emissao",
-                           "color":"black",
-                           "font-weight":"700",
-                           "font-size":"0.9rem",
-                           "margin":"0"
+                           "value":"attributes.nome_aluno"
                         }
+                     ]
+                  },
+                  {
+                     "display":"flex",
+                     "flex-direction":"row",
+                     "gap":"0.5rem",
+                     "data":[
+                        {
+                           "type":"p",
+                           "literal_value":"Emitido Por: ",
+                           "font-weight":"600"
+                        },
+                        {
+                           "type":"p",
+                           "value":"attributes.nome_escola",
+                           "text-decoration":"underline"
+                        }
+                     ]
+                  },
+                  {
+                     "display":"flex",
+                     "flex-direction":"row",
+                     "gap":"0.5rem",
+                     "data":[
+                        {
+                           "type":"p",
+                           "literal_value":"Emitido Em: ",
+                           "font-weight":"600"
+                        },
+                        {
+                           "type":"p",
+                           "value":"attributes.data_emissao"
+                        }
+                     ]
+                  },
+                  {
+                     "display":"flex",
+                     "flex-direction":"row",
+                     "gap":"0.5rem",
+                     "data":[
+                        {
+                           "type":"p",
+                           "font-weight":"600",
+                           "literal_value":"INEP: "
+                        },
+                        {
+                           "type":"p",
+                           "value":"attributes.inep"
+                        }
+                     ]
+                  },
+                  {
+                     "display" : "flex",
+                     "width" : "100%",
+                     "height" : "1px",
+                     "background" : "lightgray",
+                     "margin" : "1rem 0rem"
+                  },
+                  {
+                     "display":"flex",
+                     "flex-direction":"column",
+                     "gap":"0rem",
+                     "data":[
+                        {
+                           "type":"p",
+                           "value" : "attributes.descricao_curso",
+                           "font-weight":"400",
+                           "margin-bottom" : "0rem"
+                        }
+                     ]
+                  },
+                  {
+                     "comment":"--- CONTEÚDO DAS ABAS ---",
+                     "display":"flex",
+                     "flex-direction":"column",
+                     "gap":"2rem",
+                     "sections":[
+                        
                      ]
                   }
                ]
@@ -147,382 +212,356 @@
          ]
       },
       {
-         "display":"flex",
-         "flex-direction":"column",
-         "justify-content":"center",
-         "width":"90%",
-         "max-width":"90%",
-         "margin-top":"2rem",
-         "background":"#f8f9fa",
-         "border-radius":"0.5rem",
-         "padding":"0",
-         "gap":"0",
-         "align-items":"flex-start",
-         "box-shadow":"0px 4px 12px rgba(0,0,0,0.08)",
+         "box-shadow":"0px 0px 10px #e0e0e0f0",
          "overflow":"auto",
-         "flex-wrap":"wrap",
-         "sections":[
+         "width":"95%",
+         "border-radius" : "0.25rem",
+         "collapsible_sections":[
             {
-               "display":"flex",
-               "flex-direction":"row",
-               "width":"100%",
-               "gap":"0",
-               "background":"white",
-               "border-bottom":"1px solid #e8e8e8",
-               "flex-wrap":"wrap",
+               "title":{
+                  "type":"h3",
+                  "literal_value":"Mais Detalhes",
+                  "color":"black",
+                  "font-weight":"600",
+                  "font-size":"0.95rem",
+                  "text-transform":"none",
+                  "letter-spacing":"0.02em"
+               },
+               "expanded_style":{
+                  "background":"#f9fafb",
+                  "border-bottom":"2px solid #e0e0e0",
+                  "border-radius" : "0.25rem"
+               },
+               "expand_indicator":" ",
+               "collapsed":true,
+               "border":"none",
+               "border-bottom":"3px solid transparent",
+               "border-radius":"0.25rem",
+               "padding":"1.1rem 2rem 0.9rem 2rem",
+               "transition":"all 0.3s ease",
+               "background":"#e0e0e0",
+               "background" : "white",
                "sections":[
                   {
-                     "flex":"1",
-                     "font-family":"sans-serif",
-                     "collapsible_sections":[
+                     "display":"flex",
+                     "flex-direction":"column",
+                     "width":"100%",
+                     "padding":"0",
+                     "border-top":"2px solid #34d399",
+                     "min-width" : "fit-content",
+                     "sections":[
                         {
-                           "title":{
-                              "type":"h3",
-                              "literal_value":"Mais Detalhes",
-                              "color":"#6c757d",
-                              "font-weight":"600",
-                              "font-size":"0.95rem",
-                              "text-transform":"none",
-                              "letter-spacing":"0.02em"
-                           },
-                           "expanded_style":{
-                              "background":"#f9fafb",
-                              "border-bottom":"2px solid #e0e0e0",
-                              "box-shadow":"inset 0 1px 0 0 rgba(52, 211, 153, 0.15)"
-                           },
-                           "expand_indicator":" ",
-                           "collapsed":true,
+                           "display":"flex",
+                           "flex-direction":"row",
+                           "min-width" : "fit-content",
+                           "width":"100%",
+                           "gap":"0",
                            "background":"white",
-                           "border":"none",
-                           "border-bottom":"3px solid transparent",
-                           "border-radius":"0",
-                           "padding":"1.1rem 2rem 0.9rem 2rem",
-                           "box-shadow":"none",
-                           "transition":"all 0.3s ease",
+                           "border-bottom":"1px solid #e8e8e8",
                            "sections":[
                               {
-                                 "display":"flex",
-                                 "flex-direction":"column",
-                                 "width":"100%",
-                                 "background":"#f8f9fa",
-                                 "padding":"0",
-                                 "border-top":"2px solid #34d399",
-                                 "sections":[
+                                 "flex":"1",
+                                 "font-family":"sans-serif",
+                                 "collapsible_sections":[
                                     {
-                                       "display":"flex",
-                                       "flex-direction":"row",
-                                       "width":"100%",
-                                       "gap":"0",
+                                       "title":{
+                                          "type":"h4",
+                                          "literal_value":"Dados Pessoais",
+                                          "color":"#6c757d",
+                                          "font-weight":"600",
+                                          "font-size":"0.875rem",
+                                          "text-transform":"none",
+                                          "letter-spacing":"0.01em",
+                                          "expanded_style":{
+                                             "color":"#34d399"
+                                          }
+                                       },
+                                       "expand_indicator":" ",
+                                       "collapsed":true,
                                        "background":"white",
-                                       "border-bottom":"1px solid #e8e8e8",
+                                       "border":"none",
+                                       "border-bottom":"3px solid transparent",
+                                       "border-radius":"0",
+                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
+                                       "box-shadow":"none",
+                                       "transition":"all 0.3s ease",
+                                       "min-width":"fit-content",
+                                       "expanded_style":{
+                                          "background":"rgba(0,0,0,0.05)"
+                                       },
                                        "sections":[
                                           {
-                                             "flex":"1",
-                                             "font-family":"sans-serif",
-                                             "collapsible_sections":[
+                                             "display":"grid",
+                                             "grid-template-columns":"10rem 15rem",
+                                             "gap":"0.75rem 1.5rem",
+                                             "align-items":"start",
+                                             "padding":"2rem 2.5rem",
+                                             "data":[
                                                 {
-                                                   "title":{
-                                                      "type":"h4",
-                                                      "literal_value":"Dados Pessoais",
-                                                      "color":"#6c757d",
-                                                      "font-weight":"600",
-                                                      "font-size":"0.875rem",
-                                                      "text-transform":"none",
-                                                      "letter-spacing":"0.01em",
-                                                      "expanded_style":{
-                                                         "color":"#34d399"
-                                                      }
+                                                   "type":"p",
+                                                   "literal_value":"Nome Completo",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.nome_aluno",
+                                                   "font-weight":"600"
                                                    },
-                                                   "expand_indicator":" ",
-                                                   "collapsed":true,
-                                                   "background":"white",
-                                                   "border":"none",
-                                                   "border-bottom":"3px solid transparent",
-                                                   "border-radius":"0",
-                                                   "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                                   "box-shadow":"none",
-                                                   "transition":"all 0.3s ease",
-                                                   "min-width":"fit-content",
-                                                   "expanded_style":{
-                                                      "background":"rgba(0,0,0,0.05)"
-                                                   },
-                                                   "sections":[
-                                                      {
-                                                         "display":"grid",
-                                                         "grid-template-columns":"10rem 10rem",
-                                                         "gap":"0.75rem 1.5rem",
-                                                         "align-items":"start",
-                                                         "padding":"2rem 2.5rem",
-                                                         "data":[
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Nome Completo",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.nome_aluno",
-                                                               "font-weight":"600"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"CPF do Aluno",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.cpf_aluno",
-                                                               "font-weight":"600"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Data de Nascimento",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.data_nascimento_aluno",
-                                                               "font-weight":"600"
-                                                            }
-                                                         ]
-                                                      }
-                                                   ]
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"CPF",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.cpf_aluno",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Data de Nascimento",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.data_nascimento_aluno",
+                                                   "font-weight":"600"
                                                 }
                                              ]
-                                          },
+                                          }
+                                       ]
+                                    }
+                                 ]
+                              },
+                              {
+                                 "flex":"1",
+                                 "font-family":"sans-serif",
+                                 "collapsible_sections":[
+                                    {
+                                       "title":{
+                                          "type":"h4",
+                                          "literal_value":"Dados do Certificado",
+                                          "color":"#6c757d",
+                                          "font-weight":"600",
+                                          "font-size":"0.875rem",
+                                          "text-transform":"none",
+                                          "letter-spacing":"0.01em",
+                                          "expanded_style":{
+                                             "color":"#34d399"
+                                          }
+                                       },
+                                       "expanded_style":{
+                                          "background":"rgba(0,0,0,0.05)"
+                                       },
+                                       "expand_indicator":" ",
+                                       "collapsed":true,
+                                       "background":"white",
+                                       "border":"none",
+                                       "border-bottom":"3px solid transparent",
+                                       "border-radius":"0",
+                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
+                                       "box-shadow":"none",
+                                       "transition":"all 0.3s ease",
+                                       "sections":[
                                           {
-                                             "flex":"1",
-                                             "font-family":"sans-serif",
-                                             "collapsible_sections":[
+                                             "display":"grid",
+                                             "grid-template-columns":"7rem 15rem",
+                                             "gap":"0.75rem 1.5rem",
+                                             "align-items":"start",
+                                             "padding":"2rem 2.5rem",
+                                             "data":[
                                                 {
-                                                   "title":{
-                                                      "type":"h4",
-                                                      "literal_value":"Dados do Documento",
-                                                      "color":"#6c757d",
-                                                      "font-weight":"600",
-                                                      "font-size":"0.875rem",
-                                                      "text-transform":"none",
-                                                      "letter-spacing":"0.01em",
-                                                      "expanded_style":{
-                                                         "color":"#34d399"
-                                                      }
-                                                   },
-                                                   "expanded_style":{
-                                                      "background":"rgba(0,0,0,0.05)"
-                                                   },
-                                                   "expand_indicator":" ",
-                                                   "collapsed":true,
-                                                   "background":"white",
-                                                   "border":"none",
-                                                   "border-bottom":"3px solid transparent",
-                                                   "border-radius":"0",
-                                                   "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                                   "box-shadow":"none",
-                                                   "transition":"all 0.3s ease",
-                                                   "sections":[
-                                                      {
-                                                         "display":"grid",
-                                                         "grid-template-columns":"7rem 20rem",
-                                                         "gap":"0.75rem 1.5rem",
-                                                         "align-items":"start",
-                                                         "padding":"2rem 2.5rem",
-                                                         "data":[
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Nome da escola",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.nome_escola",
-                                                               "font-weight":"600"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Código INEP",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.inep",
-                                                               "font-weight":"600"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Endereço da escola",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.endereco_escola",
-                                                               "font-weight":"600"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Estado",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.uf",
-                                                               "font-weight":"600"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Nome Secretária",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.nome_curso",
-                                                               "font-weight":"600"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Descrição do documento",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.descricao_curso",
-                                                               "font-weight":"600"
-                                                            }
-                                                         ]
-                                                      }
-                                                   ]
+                                                   "type":"p",
+                                                   "literal_value":"Nome da Escola",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.nome_escola",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"INEP",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.inep",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Endereço da Escola",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.endereco_escola",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Estado da Escola",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.UF",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Nome do Curso",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.nome_curso",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Data de Emissão",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.data_emissao",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Descrição",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"attributes.descricao_curso",
+                                                   "font-weight":"600"
                                                 }
                                              ]
-                                          },
+                                          }
+                                       ]
+                                    }
+                                 ]
+                              },
+                              {
+                                 "flex":"1",
+                                 "font-family":"sans-serif",
+                                 "collapsible_sections":[
+                                    {
+                                       "title":{
+                                          "type":"h4",
+                                          "literal_value":"Recursos",
+                                          "color":"#6c757d",
+                                          "font-weight":"600",
+                                          "font-size":"0.875rem",
+                                          "text-transform":"none",
+                                          "letter-spacing":"0.01em",
+                                          "expanded_style":{
+                                             "color":"#34d399"
+                                          }
+                                       },
+                                       "expand_indicator":" ",
+                                       "collapsed":true,
+                                       "background":"white",
+                                       "border":"none",
+                                       "border-bottom":"3px solid transparent",
+                                       "border-radius":"0",
+                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
+                                       "box-shadow":"none",
+                                       "transition":"all 0.3s ease",
+                                       "expanded_style":{
+                                          "background":"rgba(0,0,0,0.05)"
+                                       },
+                                       "sections":[
                                           {
-                                             "flex":"1",
-                                             "font-family":"sans-serif",
-                                             "collapsible_sections":[
+                                             "display":"grid",
+                                             "grid-template-columns":"10rem 15rem",
+                                             "gap":"0.75rem 1.5rem",
+                                             "align-items":"start",
+                                             "padding":"2rem 2.5rem",
+                                             "overflow":"auto",
+                                             "data":[
                                                 {
-                                                   "title":{
-                                                      "type":"h4",
-                                                      "literal_value":"Datas e Emissão",
-                                                      "color":"#6c757d",
-                                                      "font-weight":"600",
-                                                      "font-size":"0.875rem",
-                                                      "text-transform":"none",
-                                                      "letter-spacing":"0.01em",
-                                                      "expanded_style":{
-                                                         "color":"#34d399"
-                                                      }
-                                                   },
-                                                   "expand_indicator":" ",
-                                                   "collapsed":true,
-                                                   "background":"white",
-                                                   "border":"none",
-                                                   "border-bottom":"3px solid transparent",
-                                                   "border-radius":"0",
-                                                   "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                                   "box-shadow":"none",
-                                                   "transition":"all 0.3s ease",
-                                                   "expanded_style":{
-                                                      "background":"rgba(0,0,0,0.05)"
-                                                   },
-                                                   "sections":[
-                                                      {
-                                                         "display":"grid",
-                                                         "grid-template-columns":"10rem 10rem",
-                                                         "gap":"0.75rem 1.5rem",
-                                                         "align-items":"start",
-                                                         "padding":"2rem 2.5rem",
-                                                         "data":[
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Data de Emissão",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "value":"attributes.data_emissao",
-                                                               "font-weight":"600"
-                                                            }
-                                                         ]
-                                                      }
-                                                   ]
+                                                   "type":"p",
+                                                   "literal_value":"Link para imagem",
+                                                   "font-weight":"700",
+                                                   "text-wrap":"nowrap"
+                                                },
+                                                {
+                                                   "type":"a",
+                                                   "value":"image",
+                                                   "font-weight":"600",
+                                                   "color":"blue"
                                                 }
                                              ]
-                                          },
+                                          }
+                                       ]
+                                    }
+                                 ]
+                              },
+                              {
+                                 "flex":"1",
+                                 "font-family":"sans-serif",
+                                 "collapsible_sections":[
+                                    {
+                                       "title":{
+                                          "type":"h4",
+                                          "literal_value":"Token",
+                                          "color":"#6c757d",
+                                          "font-weight":"600",
+                                          "font-size":"0.875rem",
+                                          "text-transform":"none",
+                                          "letter-spacing":"0.01em",
+                                          "expanded_style":{
+                                             "color":"#34d399"
+                                          }
+                                       },
+                                       "expand_indicator":" ",
+                                       "collapsed":true,
+                                       "background":"white",
+                                       "border":"none",
+                                       "border-bottom":"3px solid transparent",
+                                       "border-radius":"0",
+                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
+                                       "box-shadow":"none",
+                                       "transition":"all 0.3s ease",
+                                       "expanded_style":{
+                                          "background":"rgba(0,0,0,0.05)"
+                                       },
+                                       "sections":[
                                           {
-                                             "flex":"1",
-                                             "font-family":"sans-serif",
-                                             "collapsible_sections":[
+                                             "display":"grid",
+                                             "grid-template-columns":"10rem 15rem",
+                                             "gap":"0.75rem 1.5rem",
+                                             "align-items":"start",
+                                             "padding":"2rem 2.5rem",
+                                             "overflow":"auto",
+                                             "data":[
                                                 {
-                                                   "title":{
-                                                      "type":"h4",
-                                                      "literal_value":"Recursos",
-                                                      "color":"#6c757d",
-                                                      "font-weight":"600",
-                                                      "font-size":"0.875rem",
-                                                      "text-transform":"none",
-                                                      "letter-spacing":"0.01em",
-                                                      "expanded_style":{
-                                                         "color":"#34d399"
-                                                      }
-                                                   },
-                                                   "expand_indicator":" ",
-                                                   "collapsed":true,
-                                                   "background":"white",
-                                                   "border":"none",
-                                                   "border-bottom":"3px solid transparent",
-                                                   "border-radius":"0",
-                                                   "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                                   "box-shadow":"none",
-                                                   "transition":"all 0.3s ease",
-                                                   "expanded_style":{
-                                                      "background":"rgba(0,0,0,0.05)"
-                                                   },
-                                                   "sections":[
-                                                      {
-                                                         "display":"grid",
-                                                         "grid-template-columns":"10rem 10rem",
-                                                         "gap":"0.75rem 1.5rem",
-                                                         "align-items":"start",
-                                                         "padding":"2rem 2.5rem",
-                                                         "overflow":"auto",
-                                                         "data":[
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Brasão",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"img",
-                                                               "value":"attributes.brasao_url",
-                                                               "width":"80px",
-                                                               "height":"80px",
-                                                               "object-fit":"contain"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Link para contrato",
-                                                               "font-weight":"700",
-                                                               "overflow":"auto"
-                                                            },
-                                                            {
-                                                               "type":"a",
-                                                               "contract_value":"a.link_block_scanner",
-                                                               "width":"80px",
-                                                               "height":"80px",
-                                                               "color":"blue"
-                                                            },
-                                                            {
-                                                               "type":"p",
-                                                               "literal_value":"Link Payload anterior",
-                                                               "font-weight":"700"
-                                                            },
-                                                            {
-                                                               "type":"a",
-                                                               "value":"previousPayloadUri",
-                                                               "font-weight":"600",
-                                                               "color":"blue"
-                                                            }
-                                                         ]
-                                                      }
-                                                   ]
+                                                   "type":"p",
+                                                   "literal_value":"Link para Contrato",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"a",
+                                                   "contract_value":"a.link_block_scanner",
+                                                   "font-weight":"600",
+                                                   "color":"blue"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Link para versão anterior",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"a",
+                                                   "value":"previousPayloadUri",
+                                                   "font-weight":"600",
+                                                   "color":"blue",
+                                                   "render_if_present":"true"
                                                 }
                                              ]
                                           }
