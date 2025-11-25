@@ -487,7 +487,7 @@
                                        "sections":[
                                           {
                                              "display":"grid",
-                                             "grid-template-columns":"10rem 15rem",
+                                             "grid-template-columns":"13rem 15rem",
                                              "gap":"0.75rem 1.5rem",
                                              "align-items":"start",
                                              "padding":"2rem 2.5rem",
@@ -502,6 +502,18 @@
                                                 {
                                                    "type":"a",
                                                    "value":"image",
+                                                   "font-weight":"600",
+                                                   "color":"blue"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Link para Conteudo Externo",
+                                                   "font-weight":"700",
+                                                   "text-wrap":"nowrap"
+                                                },
+                                                {
+                                                   "type":"a",
+                                                   "value":"external_url",
                                                    "font-weight":"600",
                                                    "color":"blue"
                                                 }
@@ -562,6 +574,46 @@
                                                 },
                                                 {
                                                    "type":"p",
+                                                   "literal_value":"Endereço do Contrato",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"contract",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Rede do Contrato",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"network",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Versão do Contrato",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"version",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Classe do Contrato",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"class",
+                                                   "font-weight":"600"
+                                                },
+                                                {
+                                                   "type":"p",
                                                    "literal_value":"Link para versão anterior",
                                                    "font-weight":"700"
                                                 },
@@ -571,6 +623,16 @@
                                                    "font-weight":"600",
                                                    "color":"blue",
                                                    "render_if_present":"true"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "literal_value":"Versão do Token",
+                                                   "font-weight":"700"
+                                                },
+                                                {
+                                                   "type":"p",
+                                                   "value":"version",
+                                                   "font-weight":"600"
                                                 }
                                              ]
                                           }
