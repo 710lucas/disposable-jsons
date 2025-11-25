@@ -47,7 +47,7 @@
                      "data":[
                         {
                            "type":"img",
-                           "value":"attributes.brasao_url",
+                           "value":"image",
                            "border-radius":"0.85rem",
                            "aspect-ratio" : "4/3",
                            "box-shadow" : "0px 0px 25px #c0c0c0a0"
@@ -77,6 +77,15 @@
                                     {
                                        "type":"p",
                                        "literal_value":"Ensino Médio",
+                                       "background" : "#e0e0e0",
+                                       "padding" : "0.25rem 0.5rem",
+                                       "border-radius" : "0.25rem",
+                                       "font-size" : "0.85rem",
+                                       "font-weight" : "600"
+                                    },
+                                    {
+                                       "type":"p",
+                                       "value":"attributes.modalidade_conclusao",
                                        "background" : "#e0e0e0",
                                        "padding" : "0.25rem 0.5rem",
                                        "border-radius" : "0.25rem",
@@ -141,7 +150,7 @@
                         },
                         {
                            "type":"p",
-                           "value":"attributes.nome_escola",
+                           "value":"attributes.entidade_emissora",
                            "text-decoration":"underline"
                         }
                      ]
@@ -192,7 +201,7 @@
                      "data":[
                         {
                            "type":"p",
-                           "value" : "attributes.descricao_curso",
+                           "value" : "attributes.descricao",
                            "font-weight":"400",
                            "margin-bottom" : "0rem"
                         }
@@ -324,7 +333,7 @@
                                                 },
                                                 {
                                                    "type":"p",
-                                                   "value":"attributes.data_nascimento_aluno",
+                                                   "value":"attributes.data_nascimento",
                                                    "font-weight":"600"
                                                 }
                                              ]
@@ -365,19 +374,19 @@
                                        "sections":[
                                           {
                                              "display":"grid",
-                                             "grid-template-columns":"7rem 15rem",
+                                             "grid-template-columns":"10rem 15rem",
                                              "gap":"0.75rem 1.5rem",
                                              "align-items":"start",
                                              "padding":"2rem 2.5rem",
                                              "data":[
                                                 {
                                                    "type":"p",
-                                                   "literal_value":"Nome da Escola",
+                                                   "literal_value":"Entidade Emissora",
                                                    "font-weight":"700"
                                                 },
                                                 {
                                                    "type":"p",
-                                                   "value":"attributes.nome_escola",
+                                                   "value":"attributes.entidade_emissora",
                                                    "font-weight":"600"
                                                 },
                                                 {
@@ -412,12 +421,12 @@
                                                 },
                                                 {
                                                    "type":"p",
-                                                   "literal_value":"Nome do Curso",
+                                                   "literal_value":"Modalidade de Conclusão",
                                                    "font-weight":"700"
                                                 },
                                                 {
                                                    "type":"p",
-                                                   "value":"attributes.nome_curso",
+                                                   "value":"attributes.modalidade_conclusao",
                                                    "font-weight":"600"
                                                 },
                                                 {
@@ -437,7 +446,7 @@
                                                 },
                                                 {
                                                    "type":"p",
-                                                   "value":"attributes.descricao_curso",
+                                                   "value":"attributes.descricao",
                                                    "font-weight":"600"
                                                 }
                                              ]
