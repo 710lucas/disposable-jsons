@@ -36,22 +36,72 @@
                      "width":"250px",
                      "height":"250px",
                      "display":"flex",
-                     "justify-content":"start",
-                     "align-items":"start",
+                     "flex-direction" : "column",
+                     "justify-content":"center",
+                     "align-items":"center",
                      "background-size":"contain",
                      "background-repeat":"no-repeat",
                      "background-position":"center",
                      "border-radius":"0.5rem",
                      "flex-direction" : "column",
                      "gap" : "0.5rem",
+                     "background-image" : "url('https://i.imgur.com/F6yHT1e.png')",
+                     "position" : "relative",
                      "data":[
                         {
-                           "type":"img",
-                           "value":"image",
-                           "border-radius":"0.85rem",
-                           "aspect-ratio" : "4/3",
-                           "box-shadow" : "0px 0px 25px #c0c0c0a0"
-                        }
+                           "type" : "img",
+                           "value" : "image",
+                           "width" : "35px",
+                           "height" : "auto",
+                           "position" : "absolute",
+                           "top" : "20px",
+                           "left" : "20px",
+                           "z-index" : "0"
+                        },
+                        {
+                           "type":"p",
+                           "literal_value":"Ensino Médio",
+                           "color" : "#EFBF04",
+                           "background" : "linear-gradient(135deg, #FFD700 0%, #FFED4E 25%, #C5A028 50%, #FFD700 75%, #FFED4E 100%)",
+                           "background-clip" : "text",
+                           "-webkit-text-fill-color" : "transparent",
+                           "font-weight" : "800",
+                           "font-size" : "1.85rem",
+                           "position" : "relative",
+                           "z-index" : "1",
+                           "margin-top" : "2rem"
+                        },
+                        {
+                           "type":"p",
+                           "literal_value":"Certificado de Conclusão",
+                           "color" : "#EFBF04",
+                           "background" : "linear-gradient(135deg, #FFD700 0%, #FFED4E 25%, #C5A028 50%, #FFD700 75%, #FFED4E 100%)",
+                           "background-clip" : "text",
+                           "-webkit-text-fill-color" : "transparent",
+                           "font-weight" : "700",
+                           "font-size" : "0.85rem"
+                        },
+                        {
+                           "type":"p",
+                           "value":"attributes.entidade_emissora",
+                           "color" : "lightgray",
+                           "font-weight" : "500",
+                           "font-size" : "0.85rem",
+                           "max-width" : "85%",
+                           "text-align" : "center",
+                           "justify-self" : "end",
+                           "margin-top" : "2rem"
+                        },
+                        {
+                           "type":"p",
+                           "value":"attributes.data_emissao",
+                           "color" : "lightgray",
+                           "font-weight" : "500",
+                           "font-size" : "0.85rem",
+                           "max-width" : "85%",
+                           "text-align" : "center",
+                           "justify-self" : "end"
+                        }                        
                      ]
                   },
                   {
