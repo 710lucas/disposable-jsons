@@ -47,6 +47,7 @@
                      "gap" : "0.5rem",
                      "background-image" : "url('https://i.imgur.com/F6yHT1e.png')",
                      "position" : "relative",
+                     "font-family" : "serif",
                      "data":[
                         {
                            "type" : "img",
@@ -61,10 +62,7 @@
                         {
                            "type":"p",
                            "literal_value":"Ensino Médio",
-                           "color" : "#EFBF04",
-                           "background" : "linear-gradient(135deg, #FFD700 0%, #FFED4E 25%, #C5A028 50%, #FFD700 75%, #FFED4E 100%)",
-                           "background-clip" : "text",
-                           "-webkit-text-fill-color" : "transparent",
+                           "color" : "white",
                            "font-weight" : "800",
                            "font-size" : "1.85rem",
                            "position" : "relative",
@@ -74,10 +72,7 @@
                         {
                            "type":"p",
                            "literal_value":"Certificado de Conclusão",
-                           "color" : "#EFBF04",
-                           "background" : "linear-gradient(135deg, #FFD700 0%, #FFED4E 25%, #C5A028 50%, #FFD700 75%, #FFED4E 100%)",
-                           "background-clip" : "text",
-                           "-webkit-text-fill-color" : "transparent",
+                           "color" : "white",
                            "font-weight" : "700",
                            "font-size" : "0.85rem"
                         },
