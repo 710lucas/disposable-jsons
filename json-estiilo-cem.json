@@ -236,6 +236,18 @@
                      ]
                   },
                   {
+                     "display":"flex",
+                     "flex-direction":"row",
+                     "gap":"0.5rem",
+                     "data":[
+                        {
+                           "type":"p",
+                           "literal_value":"Secretária da Educação do Estado",
+                           "text-decoration" : "underline"
+                        }
+                     ]
+                  },
+                  {
                      "display" : "flex",
                      "width" : "100%",
                      "height" : "1px",
@@ -249,7 +261,7 @@
                      "data":[
                         {
                            "type":"p",
-                           "value" : "attributes.descricao",
+                           "literal_value" : "Este documento comprova a conclusão integral do Ensino Médio, atestando que o titular cumpriu satisfatoriamente todos os componentes curriculares e a carga horária exigida pela legislação educacional vigente. Ele certifica o encerramento do ciclo de Educação Básica, conferindo ao estudante a habilitação necessária para o ingresso em cursos de nível superior e técnico, bem como o atendimento aos requisitos de escolaridade para o mercado de trabalho.",
                            "font-weight":"400",
                            "margin-bottom" : "0rem"
                         }
@@ -277,7 +289,7 @@
             {
                "title":{
                   "type":"h3",
-                  "literal_value":"Mais Detalhes",
+                  "literal_value":"Detalhes do Certificado",
                   "color":"black",
                   "font-weight":"600",
                   "font-size":"0.95rem",
