@@ -307,7 +307,7 @@
         {
           "title": {
             "type": "h3",
-            "literal_value": "Mais Detalhes",
+            "literal_value": "Detalhes do CRM",
             "color": "black",
             "font-weight": "600",
             "font-size": "0.95rem",
