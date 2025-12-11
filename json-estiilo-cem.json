@@ -33,8 +33,10 @@
                "sections":[
                   {
                      "comment":"--- LADO ESQUERDO: A ARTE DO BADGE ---",
-                     "width":"250px",
-                     "height":"250px",
+                     "min-width":"250px",
+                     "min-height":"250px",
+                     "max-width":"250px",
+                     "max-height":"250px",
                      "display":"flex",
                      "flex-direction" : "column",
                      "justify-content":"center",
@@ -48,6 +50,7 @@
                      "background-image" : "url('https://i.imgur.com/YKjsdVD.png')",
                      "position" : "relative",
                      "font-family" : "serif",
+                     "convertToImage" : true,
                      "data":[
                         {
                            "type" : "img",
