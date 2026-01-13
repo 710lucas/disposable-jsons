@@ -1,0 +1,1287 @@
+{
+  "display": "flex",
+  "justify-content": "center",
+  "align-items": "flex-start",
+  "align-content": "center",
+  "padding": "2rem",
+  "flex-direction": "column",
+  "font-family": "Inter",
+  "gap": "2rem",
+  "flex-wrap": "wrap",
+  "overflow": "auto",
+  "width": "85%",
+  "margin": "auto",
+  "sections": [
+    {
+      "width": "100%",
+      "max-width": "90%",
+      "display": "flex",
+      "flex-direction": "row",
+      "justify-content": "center",
+      "gap": "2rem",
+      "background": "transparent",
+      "margin": "auto",
+      "sections": [
+        {
+          "comment": "--- SEÇÃO SUPERIOR: O VISUAL DO BADGE ---",
+          "height": "100%",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "start",
+          "justify-content": "start",
+          "flex-wrap": "wrap",
+          "gap": "0.5rem",
+          "sections": [
+            {
+              "comment": "--- LADO ESQUERDO: A ARTE DO BADGE ---",
+              "min-width": "250px",
+              "min-height": "250px",
+              "max-width": "250px",
+              "max-height": "250px",
+              "display": "flex",
+              "justify-content": "center",
+              "align-items": "center",
+              "background-size": "contain",
+              "background-repeat": "no-repeat",
+              "background-position": "center",
+              "border-radius": "0.5rem",
+              "flex-direction": "column",
+              "background-color": "#001F3F",
+              "gap": "0.5rem",
+              "position": "relative",
+              "font-family": "serif",
+              "convertToImage": true,
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "CRM",
+                  "color": "white",
+                  "font-size": "2rem",
+                  "font-weight": 800
+                },
+                {
+                  "type": "div",
+                  "width": "95%",
+                  "height": "95%",
+                  "position": "absolute",
+                  "border": "5px solid silver",
+                  "border-radius": "0.25rem",
+                  "color": "silver",
+                  "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Cfilter%20id='noiseFilter'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.7'%20numOctaves='3'%20stitchTiles='stitch'%20/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23noiseFilter)'%20opacity='0.1'%20/%3E%3C/svg%3E\")",
+                  "z-index": 0
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.categoria",
+                  "color": "white",
+                  "font-size": "1.5rem",
+                  "z-index": 1
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.situacao",
+                  "color": "white",
+                  "font-size": "1rem",
+                  "z-index": 1,
+                  "margin-top": "-1rem"
+                },
+                {
+                  "type": "div",
+                  "literal_value": "",
+                  "border-top": "1px solid white",
+                  "width": "85%",
+                  "z-index": 1
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.numero_crm",
+                  "color": "white",
+                  "font-size": "1.25rem",
+                  "font-weight": 300,
+                  "z-index": 1
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_orgao_emissor",
+                  "color": "white",
+                  "font-size": "0.75rem",
+                  "font-weight": 300,
+                  "max-width": "85%",
+                  "text-align": "center",
+                  "z-index": 1
+                },
+                {
+                  "type": "img",
+                  "literal_value": "https://i.imgur.com/AGI09YV.png",
+                  "position": "absolute",
+                  "top": "18px",
+                  "left": "18px",
+                  "width": "50px",
+                  "height": "auto",
+                  "z-index": 1
+                }
+              ]
+            },
+            {
+              "width": "100%",
+              "sections": [
+                {
+                  "display": "flex",
+                  "flex-direction": "row",
+                  "jsutify-content": "space-between",
+                  "width": "100%",
+                  "flex-wrap": "wrap",
+                  "gap": "0.5rem",
+                  "data": [
+                    {
+                      "type": "p",
+                      "value": "attributes.situacao",
+                      "background": "#e0e0e0",
+                      "padding": "0.25rem 0.5rem",
+                      "border-radius": "0.25rem",
+                      "font-size": "0.85rem",
+                      "font-weight": "600"
+                    },
+                    {
+                      "type": "p",
+                      "value": "attributes.categoria",
+                      "background": "#e0e0e0",
+                      "padding": "0.25rem 0.5rem",
+                      "border-radius": "0.25rem",
+                      "font-size": "0.85rem",
+                      "font-weight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "comment": "--- SEÇÃO INFERIOR: ABAS E DADOS (Estilo CRM) ---",
+          "overflow": "hidden",
+          "display": "flex",
+          "flex-direction": "column",
+          "gap": "0.15rem",
+          "max-width" : "60%",
+          "sections": [
+            {
+              "comment": "--- LADO DIREITO: TÍTULO E EMISSOR ---",
+              "min-width": "300px",
+              "display": "flex",
+              "flex-direction": "column",
+              "justify-content": "center",
+              "max-width" : "fit-content",
+              "data": [
+                {
+                  "type": "text",
+                  "literal_value": "Certificado CRM Digital",
+                  "color": "black",
+                  "font-size": "2.5rem",
+                  "font-weight": "bold",
+                  "max-width" : "fit-content"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "max-width" : "fit-content",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Emitido Por: ",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_orgao_emissor",
+                  "text-decoration": "underline"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "max-width" : "fit-content",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Nome: ",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_completo"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "max-width" : "fit-content",
+              "data": [
+                {
+                  "type": "p",
+                  "font-weight": "600",
+                  "literal_value": "CRM: "
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.numero_crm"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "max-width" : "fit-content",
+              "data": [
+                {
+                  "type": "p",
+                  "font-weight": "600",
+                  "literal_value": "Estado: "
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.uf"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "0rem",
+              "max-width" : "fit-content",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Filiação: ",
+                  "font-weight": "600",
+                  "margin-bottom": "0rem"
+                },
+                {
+                  "type": "span",
+                  "value": "attributes.nome_pai",
+                  "margin-left": "1rem"
+                },
+                {
+                  "type": "span",
+                  "value": "attributes.nome_mae",
+                  "margin-left": "1rem",
+                  "margin-bottom": "0.5rem"
+                }
+              ]
+            },
+            {
+              "display" : "flex",
+              "width" : "100%",
+              "height" : "1px",
+              "background" : "lightgray"
+            },
+            {
+              "max-width" : "100%",
+              "text-align" : "justify",
+              "margin-top" : "0.5rem",
+              "data" : [
+                {
+                  "type" : "p",
+                  "literal_value" : "Este documento comprova a inscrição regular e a situação ativa do profissional junto ao Conselho Regional de Medicina (CRM), atestando sua habilitação legal para o exercício da medicina. O certificado demonstra o cumprimento dos requisitos estatutários exigidos pelo Conselho Federal de Medicina (CFM), garantindo que o portador detém as prerrogativas necessárias para atuar na área de saúde e assumir responsabilidade técnica, conforme a legislação vigente."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "box-shadow": "0px 0px 10px #e0e0e0f0",
+      "overflow": "auto",
+      "width": "95%",
+      "border-radius": "0.25rem",
+      "collapsible_sections": [
+        {
+          "title": {
+            "type": "h3",
+            "literal_value": "Detalhes do CRM",
+            "color": "black",
+            "font-weight": "600",
+            "font-size": "0.95rem",
+            "text-transform": "none",
+            "letter-spacing": "0.02em"
+          },
+          "expanded_style": {
+            "background": "#f9fafb",
+            "border-bottom": "2px solid #e0e0e0",
+            "border-radius": "0.25rem"
+          },
+          "expand_indicator": " ",
+          "collapsed": true,
+          "border": "none",
+          "border-bottom": "3px solid transparent",
+          "border-radius": "0.25rem",
+          "padding": "1.1rem 2rem 0.9rem 2rem",
+          "transition": "all 0.3s ease",
+          "background": "white",
+          "sections": [
+            {
+              "display": "flex",
+              "flex-direction": "column",
+              "width": "100%",
+              "padding": "0",
+              "border-top": "2px solid #34d399",
+              "min-width": "fit-content",
+              "sections": [
+                {
+                  "display": "flex",
+                  "flex-direction": "row",
+                  "min-width": "fit-content",
+                  "width": "100%",
+                  "gap": "0",
+                  "background": "white",
+                  "border-bottom": "1px solid #e8e8e8",
+                  "sections": [
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Dados Pessoais",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "min-width": "fit-content",
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "10rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Nome Completo",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.nome_completo",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Nome Pai",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.nome_pai",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Nome Mãe",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.nome_mae",
+                                  "font-weight": "600",
+                                  "text-align": "justify"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "RG",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.rg",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "CPF",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.cpf",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Data de Nascimento",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.data_nascimento",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Nacionalidade",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.nacionalidade",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Naturalidade",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.naturalidade",
+                                  "font-weight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Dados do CRM",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "7rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Número CRM",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.numero_crm",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Orgão Emissor",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.nome_orgao_emissor",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Local de Emissão",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.local_emissao",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Categoria",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.categoria",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Situação",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.situacao",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Data de Inscrição",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.data_inscricao",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Data de Validade",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.data_validade",
+                                  "font-weight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Imagens",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "10rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "overflow": "auto",
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Link para imagem",
+                                  "font-weight": "700",
+                                  "text-wrap": "nowrap"
+                                },
+                                {
+                                  "type": "a",
+                                  "value": "image",
+                                  "font-weight": "600",
+                                  "color": "blue"
+                                }
+                              ]
+                            },
+                            {
+                              "collapsible_sections": [
+                                {
+                                  "title": {
+                                    "type": "h4",
+                                    "literal_value": "Frente",
+                                    "color": "#6c757d",
+                                    "font-weight": "600",
+                                    "font-size": "0.875rem",
+                                    "text-transform": "none",
+                                    "letter-spacing": "0.01em",
+                                    "expanded_style": {
+                                      "color": "#34d399"
+                                    }
+                                  },
+                                  "collapsed": "true",
+                                  "sections": [
+                                    {
+                                      "convertToImage": true,
+                                      "imageType" : "jpg",
+                                      "width" : "fit-content",
+                                      "height" : "auto",
+                                      "border-radius" : "1rem",
+                                      "overflow" : "hidden",
+                                      "sections": [
+                                        {
+                                          "comment": "IMAGEM FRENTE",
+                                          "max-width": "100%",
+                                          "height": "560px",
+                                          "width" : "fit-content",
+                                          "background-image": "url('https://i.imgur.com/1XQNai3.png')",
+                                          "background-size": "100% 100%",
+                                          "background-position": "center",
+                                          "border-radius": "1rem",
+                                          "overflow": "hidden",
+                                          "padding": "2.25rem",
+                                          "display": "flex",
+                                          "flex-direction": "column",
+                                          "gap": "0.25rem",
+                                          "aspect-ratio": "3/2",
+                                          "margin" : 0,
+                                          "overflow" : "hidden",
+                                          "sections": [
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "space-between",
+                                              "align-items": "center",
+                                              "background": "transparent",
+                                              "data": [
+                                                {
+                                                  "type": "img",
+                                                  "value": "attributes.brasao",
+                                                  "width": "84px",
+                                                  "height": "84px",
+                                                  "object-fit": "contain",
+                                                  "border-radius": "8px"
+                                                },
+                                                {
+                                                  "type": "h1",
+                                                  "literal_value": "Conselho Federal de Medicina",
+                                                  "color": "#00193b",
+                                                  "font-weight": "800",
+                                                  "font-size": "1.8rem",
+                                                  "text-align": "center",
+                                                  "margin": "0"
+                                                },
+                                                {
+                                                  "type": "div",
+                                                  "literal_value": "",
+                                                  "width": "84px"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "center",
+                                              "font-size": "1.25rem",
+                                              "font-weight": 700,
+                                              "font-family": "Arial",
+                                              "margin-top": "-1.25rem",
+                                              "data": [
+                                                {
+                                                  "type": "h1",
+                                                  "literal_value": "Conselho Regional de Medicina do Estado ",
+                                                  "padding-right": "0.25rem"
+                                                },
+                                                {
+                                                  "type": "h2",
+                                                  "value": "attributes.uf"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "center",
+                                              "align-items": "center",
+                                              "background": "transparent",
+                                              "padding": "0.5rem 1rem",
+                                              "flex-direction": "row",
+                                              "sections": [
+                                                {
+                                                  "width": "100%",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "Nome",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.nome_completo",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "width": "100%",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "CRM",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.numero_crm",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "center",
+                                              "align-items": "center",
+                                              "background": "transparent",
+                                              "padding": "0.5rem 1rem",
+                                              "flex-direction": "row",
+                                              "sections": [
+                                                {
+                                                  "width": "100%",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "Filiação",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.nome_pai",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.nome_mae",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "Data_inscricao",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600,
+                                                      "margin-top": "1rem"
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.Data_inscricao",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "width": "100%",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "align-items": "end",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "img",
+                                                      "value": "image",
+                                                      "width": "10rem",
+                                                      "overflow": "hidden",
+                                                      "aspect-ratio": "3/4",
+                                                      "border": "10px #ffffff60 solid",
+                                                      "border-radius": "0.2rem"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "collapsible_sections": [
+                                {
+                                  "title": {
+                                    "type": "h4",
+                                    "literal_value": "Verso",
+                                    "color": "#6c757d",
+                                    "font-weight": "600",
+                                    "font-size": "0.875rem",
+                                    "text-transform": "none",
+                                    "letter-spacing": "0.01em",
+                                    "expanded_style": {
+                                      "color": "#34d399"
+                                    }
+                                  },
+                                  "collapsed": "true",
+                                  "sections": [
+                                    {
+                                      "convertToImage": true,
+                                      "imageType" : "jpeg",
+                                      "width" : "fit-content",
+                                      "sections": [
+                                        {
+                                          "width": "fit-content",
+                                          "min-height": "fit-content",
+                                          "max-width": "100%",
+                                          "width" : "fit-content",
+                                          "height": "560px",
+                                          "background-image": "url('https://i.imgur.com/CNPSzMW.png')",
+                                          "background-size": "cover",
+                                          "background-position": "center",
+                                          "border-radius": "1rem",
+                                          "overflow": "hidden",
+                                          "padding": "2.25rem",
+                                          "display": "flex",
+                                          "flex-direction": "column",
+                                          "gap": "0.25rem",
+                                          "aspect-ratio": "3/2",
+                                          "sections": [
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "flex-start",
+                                              "align-items": "center",
+                                              "padding-bottom": "0.5rem",
+                                              "background": "transparent",
+                                              "data": [
+                                                {
+                                                  "type": "h4",
+                                                  "literal_value": "Verso",
+                                                  "color": "black",
+                                                  "font-weight": "700",
+                                                  "font-size": "1rem",
+                                                  "background": "rgba(255,255,255,0.8)",
+                                                  "padding": "0.25rem 0.75rem",
+                                                  "border-radius": "0.4rem"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "space-between",
+                                              "align-items": "center",
+                                              "background": "transparent",
+                                              "padding": "0.5rem 1rem",
+                                              "flex-direction": "row",
+                                              "sections": [
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "CPF",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.cpf",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "RG / ORGÃO EMISSOR",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.rg",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "space-between",
+                                              "align-items": "center",
+                                              "background": "transparent",
+                                              "padding": "0.5rem 1rem",
+                                              "flex-direction": "row",
+                                              "width": "100%",
+                                              "sections": [
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "align-items": "start",
+                                                  "align-content": "center",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "TITULO DE ELEITOR",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.titulo_eleitor",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "SEÇÃO",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.secao",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "ZONA",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.zona",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "space-between",
+                                              "align-items": "center",
+                                              "background": "transparent",
+                                              "padding": "0.5rem 1rem",
+                                              "flex-direction": "row",
+                                              "width": "100%",
+                                              "sections": [
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "DATA DE NASCIMENTO",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.data_nascimento",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "NATURALIDADE",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.naturalidade",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "space-between",
+                                              "align-items": "center",
+                                              "background": "transparent",
+                                              "padding": "0.5rem 1rem",
+                                              "flex-direction": "row",
+                                              "sections": [
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "p",
+                                                      "literal_value": "LOCAL E DATA DE EXPEDIÇÃO",
+                                                      "color": "darkblue",
+                                                      "font-weight": 600,
+                                                      "margin-top": "1rem"
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.local_emissao",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    },
+                                                    {
+                                                      "type": "p",
+                                                      "value": "attributes.data_emissao",
+                                                      "font-weight": 500,
+                                                      "font-size": "1.25rem"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "width": "fit-content",
+                                                  "max-width": "840px",
+                                                  "background": "transparent",
+                                                  "padding": "1.25rem 1.5rem",
+                                                  "border-radius": "0.6rem",
+                                                  "display": "flex",
+                                                  "flex-direction": "column",
+                                                  "gap": "0rem",
+                                                  "data": [
+                                                    {
+                                                      "type": "img",
+                                                      "value": "attributes.logo_crm_estadual",
+                                                      "width": "10rem",
+                                                      "height": "auto",
+                                                      "object-fit": "contain",
+                                                      "filter": "drop-shadow(2px 4px 6px black)"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "display": "flex",
+                                              "justify-content": "center",
+                                              "align-items": "center",
+                                              "gap": "0.5rem",
+                                              "background": "transparent"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Token",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "10rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "overflow": "auto",
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Link para Contrato",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "a",
+                                  "contract_value": "a.link_block_scanner",
+                                  "font-weight": "600",
+                                  "color": "blue"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Link para versão anterior",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "a",
+                                  "value": "previousPayloadUri",
+                                  "font-weight": "600",
+                                  "color": "blue",
+                                  "render_if_present": "true"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
