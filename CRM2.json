@@ -850,7 +850,7 @@
                                   "sections": [
                                     {
                                       "convertToImage": true,
-                                      "imageType" : "jpeg",
+                                      "imageType" : "jpg",
                                       "width" : "fit-content",
                                       "sections": [
                                         {
@@ -870,25 +870,6 @@
                                           "gap": "0.25rem",
                                           "aspect-ratio": "3/2",
                                           "sections": [
-                                            {
-                                              "display": "flex",
-                                              "justify-content": "flex-start",
-                                              "align-items": "center",
-                                              "padding-bottom": "0.5rem",
-                                              "background": "transparent",
-                                              "data": [
-                                                {
-                                                  "type": "h4",
-                                                  "literal_value": "Verso",
-                                                  "color": "black",
-                                                  "font-weight": "700",
-                                                  "font-size": "1rem",
-                                                  "background": "rgba(255,255,255,0.8)",
-                                                  "padding": "0.25rem 0.75rem",
-                                                  "border-radius": "0.4rem"
-                                                }
-                                              ]
-                                            },
                                             {
                                               "display": "flex",
                                               "justify-content": "space-between",
@@ -1006,7 +987,7 @@
                                                     },
                                                     {
                                                       "type": "p",
-                                                      "value": "attributes.secao",
+                                                      "value": "attributes.secao_titulo_eleitor",
                                                       "font-weight": 500,
                                                       "font-size": "1.25rem"
                                                     }
@@ -1030,7 +1011,7 @@
                                                     },
                                                     {
                                                       "type": "p",
-                                                      "value": "attributes.zona",
+                                                      "value": "attributes.zona_titulo_eleitor",
                                                       "font-weight": 500,
                                                       "font-size": "1.25rem"
                                                     }
@@ -1092,67 +1073,6 @@
                                                       "value": "attributes.naturalidade",
                                                       "font-weight": 500,
                                                       "font-size": "1.25rem"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "display": "flex",
-                                              "justify-content": "space-between",
-                                              "align-items": "center",
-                                              "background": "transparent",
-                                              "padding": "0.5rem 1rem",
-                                              "flex-direction": "row",
-                                              "sections": [
-                                                {
-                                                  "width": "fit-content",
-                                                  "max-width": "840px",
-                                                  "background": "transparent",
-                                                  "padding": "1.25rem 1.5rem",
-                                                  "border-radius": "0.6rem",
-                                                  "display": "flex",
-                                                  "flex-direction": "column",
-                                                  "gap": "0rem",
-                                                  "data": [
-                                                    {
-                                                      "type": "p",
-                                                      "literal_value": "LOCAL E DATA DE EXPEDIÇÃO",
-                                                      "color": "darkblue",
-                                                      "font-weight": 600,
-                                                      "margin-top": "1rem"
-                                                    },
-                                                    {
-                                                      "type": "p",
-                                                      "value": "attributes.local_emissao",
-                                                      "font-weight": 500,
-                                                      "font-size": "1.25rem"
-                                                    },
-                                                    {
-                                                      "type": "p",
-                                                      "value": "attributes.data_emissao",
-                                                      "font-weight": 500,
-                                                      "font-size": "1.25rem"
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "width": "fit-content",
-                                                  "max-width": "840px",
-                                                  "background": "transparent",
-                                                  "padding": "1.25rem 1.5rem",
-                                                  "border-radius": "0.6rem",
-                                                  "display": "flex",
-                                                  "flex-direction": "column",
-                                                  "gap": "0rem",
-                                                  "data": [
-                                                    {
-                                                      "type": "img",
-                                                      "value": "attributes.logo_crm_estadual",
-                                                      "width": "10rem",
-                                                      "height": "auto",
-                                                      "object-fit": "contain",
-                                                      "filter": "drop-shadow(2px 4px 6px black)"
                                                     }
                                                   ]
                                                 }
