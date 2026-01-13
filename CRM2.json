@@ -616,7 +616,7 @@
                                   "collapsed": "true",
                                   "sections": [
                                     {
-                                      "convertToImage": false,
+                                      "convertToImage": true,
                                       "imageType" : "jpg",
                                       "width" : "fit-content",
                                       "height" : "auto",
