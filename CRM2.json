@@ -50,69 +50,15 @@
               "gap": "0.5rem",
               "position": "relative",
               "font-family": "serif",
-              "convertToImage": true,
               "data": [
                 {
-                  "type": "p",
-                  "literal_value": "CRM",
-                  "color": "white",
-                  "font-size": "2rem",
-                  "font-weight": 800
-                },
-                {
-                  "type": "div",
-                  "width": "95%",
-                  "height": "95%",
-                  "position": "absolute",
-                  "border": "5px solid silver",
-                  "border-radius": "0.25rem",
-                  "color": "silver",
-                  "background-image": "url(\"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Cfilter%20id='noiseFilter'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.7'%20numOctaves='3'%20stitchTiles='stitch'%20/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23noiseFilter)'%20opacity='0.1'%20/%3E%3C/svg%3E\")",
-                  "z-index": 0
-                },
-                {
-                  "type": "div",
-                  "literal_value": "",
-                  "border-top": "1px solid white",
-                  "width": "85%",
-                  "z-index": 1
-                },
-                {
-                  "type": "p",
-                  "value": "attributes.numero_crm",
-                  "color": "white",
-                  "font-size": "1.25rem",
-                  "font-weight": 300,
-                  "z-index": 1
-                },
-                {
-                  "type": "p",
-                  "value": "emissor",
-                  "color": "white",
-                  "font-size": "0.75rem",
-                  "font-weight": 300,
-                  "max-width": "85%",
-                  "text-align": "center",
-                  "z-index": 1
-                },
-                {
-                  "type": "p",
-                  "value": "attributes.data_incricao",
-                  "color": "white",
-                  "font-size": "0.75rem",
-                  "font-weight": 300,
-                  "z-index": 1
-                },
-                {
-                  "type": "img",
-                  "literal_value": "https://i.imgur.com/AGI09YV.png",
-                  "position": "absolute",
-                  "top": "18px",
-                  "left": "18px",
-                  "width": "50px",
-                  "height": "auto",
-                  "z-index": 1
+                "type" : "img",
+                "value" : "image",
+                "width" : "250px",
+                "height" : "250px",
+                "border-radius" : "0.5rem"
                 }
+                
               ]
             },
             {
@@ -814,12 +760,13 @@
                                                   "data": [
                                                     {
                                                       "type": "img",
-                                                      "value": "image",
+                                                      "value": "attributes.imagem_medico",
                                                       "width": "10rem",
                                                       "overflow": "hidden",
                                                       "aspect-ratio": "3/4",
                                                       "border": "10px #ffffff60 solid",
-                                                      "border-radius": "0.2rem"
+                                                      "border-radius": "0.2rem",
+                                                      "render_if_present": "true"
                                                     }
                                                   ]
                                                 }
