@@ -87,7 +87,7 @@
                 },
                 {
                   "type": "p",
-                  "literal_value": "Conselho Regional de Medicina do Estado",
+                  "value": "emissor",
                   "color": "white",
                   "font-size": "0.75rem",
                   "font-weight": 300,
@@ -189,7 +189,7 @@
                 },
                 {
                   "type": "p",
-                  "literal_value" : "Conselho Regional de Medicina do Estado",
+                  "value" : "attributes.emissor",
                   "text-decoration": "underline"
                 }
               ]
