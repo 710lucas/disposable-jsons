@@ -127,8 +127,9 @@
                   "gap": "0.5rem",
                   "data": [
                     {
-                      "type": "p",
-                      "value": "attributes.especialidade_medica1",
+                      "type": "a",
+                      "href_value": "attributes.especialidade_medica1",
+                      "literal_value": "Especialidade 1",
                       "background": "#e0e0e0",
                       "padding": "0.25rem 0.5rem",
                       "border-radius": "0.25rem",
@@ -136,8 +137,9 @@
                       "font-weight": "600"
                     },
                     {
-                      "type": "p",
-                      "value": "attributes.especialidade_medica2",
+                      "type": "a",
+                      "href_value": "attributes.especialidade_medica2",
+                      "literal_value": "Especialidade 2",
                       "background": "#e0e0e0",
                       "padding": "0.25rem 0.5rem",
                       "border-radius": "0.25rem",
