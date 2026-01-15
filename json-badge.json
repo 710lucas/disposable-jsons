@@ -259,8 +259,9 @@
                       "type": "text",
                       "value": "attributes.ganhador",
                       "font-size": "0.95rem",
-                      "color": "#666",
-                      "font-style": "italic"
+                      "color": "black",
+                      "font-style": "italic",
+                      "text-decoration" : "underline"
                     },
                     {
                       "type": "p",
