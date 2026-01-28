@@ -67,6 +67,8 @@
               "background-repeat": "no-repeat",
               "background-position": "center",
               "filter": "drop-shadow(0px 10px 15px rgba(0,0,0,0.3))",
+              "border-radius": "2rem",
+              "overflow": "hidden",
               "responsive_styles": [
                 {
                   "max_width": 768,
@@ -261,7 +263,7 @@
                       "font-size": "0.95rem",
                       "color": "black",
                       "font-style": "italic",
-                      "text-decoration" : "underline"
+                      "text-decoration": "underline"
                     },
                     {
                       "type": "p",
@@ -559,7 +561,70 @@
                                   "type": "a",
                                   "value": "attributes.badge",
                                   "font-weight": "600",
-                                  "color": "blue"
+                                  "color": "blue",
+                                  "overflow": "hidden",
+                                  "text-overflow": "ellipsis",
+                                  "max-width": "20ch",
+                                  "white-space": "nowrap"
+                                }
+                              ]
+                            },
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "10rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "0rem 2.5rem",
+                              "overflow": "auto",
+                              "margin-top": "-2rem",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "0rem 1.5rem",
+                                    "margin-top": "-1rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "is_hash_valid": {
+                                "file_value": "image",
+                                "hash_value": "hash.hash_imagem",
+                                "hash_algorithm": "SHA256"
+                              },
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": ""
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "VÁLIDO",
+                                  "background": "oklch(72.3% 0.219 149.579)",
+                                  "width": "fit-content",
+                                  "border-radius": "0.5rem",
+                                  "padding": "0.25rem 0.5rem",
+                                  "color": "white",
+                                  "font-size": "0.75rem",
+                                  "font-weight": 700
+                                }
+                              ],
+                              "data_hash_invalid": [
+                                {
+                                  "type": "p",
+                                  "literal_value": ""
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "INVÁLIDO",
+                                  "background": "oklch(63.7% 0.237 25.331)",
+                                  "width": "fit-content",
+                                  "border-radius": "0.5rem",
+                                  "padding": "0.25rem 0.5rem",
+                                  "color": "white",
+                                  "font-size": "0.75rem",
+                                  "font-weight": 700
                                 }
                               ]
                             }
@@ -627,14 +692,17 @@
                                 {
                                   "type": "p",
                                   "literal_value": "Link para imagem",
-                                  "font-weight": "700",
-                                  "text-wrap": "nowrap"
+                                  "font-weight": "700"
                                 },
                                 {
                                   "type": "a",
                                   "value": "image",
                                   "font-weight": "600",
-                                  "color": "blue"
+                                  "color": "blue",
+                                  "white-space": "nowrap",
+                                  "overflow": "hidden",
+                                  "text-overflow": "ellipsis",
+                                  "max-width": "20ch"
                                 },
                                 {
                                   "type": "p",
@@ -645,7 +713,11 @@
                                   "type": "a",
                                   "contract_value": "a.link_block_scanner",
                                   "font-weight": "600",
-                                  "color": "blue"
+                                  "color": "blue",
+                                  "white-space": "nowrap",
+                                  "overflow": "hidden",
+                                  "text-overflow": "ellipsis",
+                                  "max-width": "20ch"
                                 },
                                 {
                                   "type": "p",
@@ -656,8 +728,16 @@
                                   "type": "a",
                                   "value": "previousPayloadUri",
                                   "font-weight": "600",
-                                  "color": "blue",
-                                  "render_if_present": "true"
+                                  "color": "blue"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "QR Code para compartilhamento",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "qrcode",
+                                  "contract_value": "contract.link_block_scanner"
                                 }
                               ]
                             }
