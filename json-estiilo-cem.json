@@ -1,940 +1,1091 @@
 {
-   "display":"flex",
-   "justify-content":"center",
-   "align-items":"flex-start",
-   "align-content":"center",
-   "padding":"2rem",
-   "flex-direction":"column",
-   "font-family":"Inter",
-   "gap":"2rem",
-   "flex-wrap":"wrap",
-   "overflow":"auto",
-   "width":"85%",
-   "margin":"auto",
-   "responsive_styles":[
-      {
-         "max_width":768,
-         "styles":{
-            "padding":"1rem",
-            "gap":"1rem",
-            "width":"95%"
-         }
+  "display": "flex",
+  "justify-content": "center",
+  "align-items": "flex-start",
+  "align-content": "center",
+  "padding": "2rem",
+  "flex-direction": "column",
+  "font-family": "Inter",
+  "gap": "2rem",
+  "flex-wrap": "wrap",
+  "overflow": "auto",
+  "width": "85%",
+  "margin": "auto",
+  "responsive_styles": [
+    {
+      "max_width": 768,
+      "styles": {
+        "padding": "1rem",
+        "gap": "1rem",
+        "width": "95%"
       }
-   ],
-   "sections":[
-      {
-         "width":"100%",
-         "max-width":"65%",
-         "display":"flex",
-         "flex-direction":"row",
-         "gap":"2rem",
-         "background":"transparent",
-         "margin":"auto",
-         "responsive_styles":[
+    }
+  ],
+  "sections": [
+    {
+      "width": "100%",
+      "max-width": "65%",
+      "display": "flex",
+      "flex-direction": "row",
+      "gap": "2rem",
+      "background": "transparent",
+      "margin": "auto",
+      "responsive_styles": [
+        {
+          "max_width": 1024,
+          "styles": {
+            "max-width": "85%"
+          }
+        },
+        {
+          "max_width": 768,
+          "styles": {
+            "flex-direction": "column",
+            "gap": "1rem",
+            "max-width": "100%"
+          }
+        }
+      ],
+      "sections": [
+        {
+          "comment": "--- SEÇÃO SUPERIOR: O VISUAL DO BADGE ---",
+          "height": "100%",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "justify-content": "center",
+          "flex-wrap": "wrap",
+          "gap": "0.5rem",
+          "responsive_styles": [
             {
-               "max_width":1024,
-               "styles":{
-                  "max-width":"85%"
-               }
+              "max_width": 768,
+              "styles": {
+                "align-items": "center",
+                "justify-content": "center"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "comment": "--- LADO ESQUERDO: A ARTE DO BADGE ---",
+              "min-width": "250px",
+              "min-height": "250px",
+              "max-width": "250px",
+              "max-height": "250px",
+              "display": "flex",
+              "flex-direction": "column",
+              "justify-content": "center",
+              "align-items": "center",
+              "background-size": "contain",
+              "background-repeat": "no-repeat",
+              "background-position": "center",
+              "border-radius": "0.5rem",
+              "gap": "0.5rem",
+              "background-image": "url('https://i.imgur.com/YKjsdVD.png')",
+              "position": "relative",
+              "font-family": "serif",
+              "convertToImage": false,
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "width": "250px",
+                    "height": "250px",
+                    "min-width": "250px",
+                    "max-width": "250px",
+                    "min-height": "250px",
+                    "max-height": "250px",
+                    "margin": "auto"
+                  }
+                }
+              ],
+              "data": [
+                {
+                  "type": "img",
+                  "value": "image",
+                  "width": "250px",
+                  "height": "250px"
+                }
+              ]
             },
             {
-               "max_width":768,
-               "styles":{
-                  "flex-direction":"column",
-                  "gap":"1rem",
-                  "max-width":"100%"
-               }
+              "width": "100%",
+              "sections": [
+                {
+                  "display": "flex",
+                  "flex-direction": "row",
+                  "jsutify-content": "space-between",
+                  "width": "100%",
+                  "flex-wrap": "wrap",
+                  "gap": "0.5rem",
+                  "responsive_styles": [
+                    {
+                      "max_width": 768,
+                      "styles": {
+                        "justify-content": "center"
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "type": "p",
+                      "literal_value": "Concluído",
+                      "background": "#d0ffd0",
+                      "padding": "0.25rem 0.5rem",
+                      "border-radius": "0.25rem",
+                      "font-size": "0.85rem",
+                      "font-weight": "600"
+                    },
+                    {
+                      "type": "p",
+                      "literal_value": "Ensino Médio",
+                      "background": "#e0e0e0",
+                      "padding": "0.25rem 0.5rem",
+                      "border-radius": "0.25rem",
+                      "font-size": "0.85rem",
+                      "font-weight": "600"
+                    },
+                    {
+                      "type": "p",
+                      "value": "attributes.modalidade_conclusao",
+                      "background": "#e0e0e0",
+                      "padding": "0.25rem 0.5rem",
+                      "border-radius": "0.25rem",
+                      "font-size": "0.85rem",
+                      "font-weight": "600"
+                    }
+                  ]
+                }
+              ]
             }
-         ],
-         "sections":[
+          ]
+        },
+        {
+          "comment": "--- SEÇÃO INFERIOR: ABAS E DADOS (Estilo CRM) ---",
+          "width": "100%",
+          "overflow": "hidden",
+          "display": "flex",
+          "flex-direction": "column",
+          "gap": "0.15rem",
+          "responsive_styles": [
             {
-               "comment":"--- SEÇÃO SUPERIOR: O VISUAL DO BADGE ---",
-               "height":"100%",
-               "display":"flex",
-               "flex-direction":"column",
-               "align-items":"center",
-               "justify-content":"center",
-               "flex-wrap":"wrap",
-               "gap" : "0.5rem",
-               "responsive_styles":[
-                  {
-                     "max_width": 768,
-                     "styles":{
-                        "align-items":"center",
-                        "justify-content" : "center"
-                     }
+              "max_width": 768,
+              "styles": {
+                "gap": "0.5rem"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "comment": "--- LADO DIREITO: TÍTULO E EMISSOR ---",
+              "min-width": "300px",
+              "display": "flex",
+              "flex-direction": "column",
+              "justify-content": "center",
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "min-width": "100%",
+                    "text-align": "center"
                   }
-               ],
-               "sections":[
-                  {
-                     "comment":"--- LADO ESQUERDO: A ARTE DO BADGE ---",
-                     "min-width":"250px",
-                     "min-height":"250px",
-                     "max-width":"250px",
-                     "max-height":"250px",
-                     "display":"flex",
-                     "flex-direction" : "column",
-                     "justify-content":"center",
-                     "align-items":"center",
-                     "background-size":"contain",
-                     "background-repeat":"no-repeat",
-                     "background-position":"center",
-                     "border-radius":"0.5rem",
-                     "gap" : "0.5rem",
-                     "background-image" : "url('https://i.imgur.com/YKjsdVD.png')",
-                     "position" : "relative",
-                     "font-family" : "serif",
-                     "convertToImage" : false,
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "width":"250px",
-                              "height":"250px",
-                              "min-width":"250px",
-                              "max-width":"250px",
-                              "min-height":"250px",
-                              "max-height":"250px",
-                              "margin":"auto"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type" : "img",
-                           "value" : "image",
-                           "width" : "250px",
-                           "height" : "250px"
-                        }
-                     ]
-                  },
-                  {
-                     "width" : "100%",
-                           "sections" : [
-                              {
-                                 "display" : "flex",
-                                 "flex-direction" : "row",
-                                 "jsutify-content" : "space-between",
-                                 "width" : "100%",
-                                 "flex-wrap" : "wrap",
-                                 "gap" : "0.5rem",
-                                 "responsive_styles":[
-                                    {
-                                       "max_width":768,
-                                       "styles":{
-                                          "justify-content":"center"
-                                       }
-                                    }
-                                 ],
-                                 "data" : [
-                                    {
-                                       "type":"p",
-                                       "literal_value":"Concluído",
-                                       "background" : "#d0ffd0",
-                                       "padding" : "0.25rem 0.5rem",
-                                       "border-radius" : "0.25rem",
-                                       "font-size" : "0.85rem",
-                                       "font-weight" : "600"
-                                    },
-                                    {
-                                       "type":"p",
-                                       "literal_value":"Ensino Médio",
-                                       "background" : "#e0e0e0",
-                                       "padding" : "0.25rem 0.5rem",
-                                       "border-radius" : "0.25rem",
-                                       "font-size" : "0.85rem",
-                                       "font-weight" : "600"
-                                    },
-                                    {
-                                       "type":"p",
-                                       "value":"attributes.modalidade_conclusao",
-                                       "background" : "#e0e0e0",
-                                       "padding" : "0.25rem 0.5rem",
-                                       "border-radius" : "0.25rem",
-                                       "font-size" : "0.85rem",
-                                       "font-weight" : "600"
-                                    }
-                                 ]
-                              }
-                           ]
-                        }
-               ]
+                }
+              ],
+              "data": [
+                {
+                  "type": "text",
+                  "literal_value": "Certificado de Conclusão de Ensino Médio",
+                  "color": "black",
+                  "font-size": "2.5rem",
+                  "font-weight": "bold",
+                  "responsive_styles": [
+                    {
+                      "max_width": 768,
+                      "styles": {
+                        "font-size": "1.75rem",
+                        "text-align": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
-               "comment":"--- SEÇÃO INFERIOR: ABAS E DADOS (Estilo CRM) ---",
-               "width":"100%",
-               "overflow":"hidden",
-               "display":"flex",
-               "flex-direction":"column",
-               "gap" : "0.15rem",
-               "responsive_styles":[
-                  {
-                     "max_width":768,
-                     "styles":{
-                        "gap":"0.5rem"
-                     }
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "flex-direction": "column",
+                    "gap": "0.25rem",
+                    "text-align": "center"
                   }
-               ],
-               "sections":[
-                  {
-                     "comment":"--- LADO DIREITO: TÍTULO E EMISSOR ---",
-                     "min-width":"300px",
-                     "display":"flex",
-                     "flex-direction":"column",
-                     "justify-content":"center",
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "min-width":"100%",
-                              "text-align":"center"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type":"text",
-                           "literal_value":"Certificado de Conclusão de Ensino Médio",
-                           "color":"black",
-                           "font-size":"2.5rem",
-                           "font-weight":"bold",
-                           "responsive_styles":[
-                              {
-                                 "max_width":768,
-                                 "styles":{
-                                    "font-size":"1.75rem",
-                                    "text-align":"center"
-                                 }
-                              }
-                           ]
-                        }
-                     ]
-                  },
-                  {
-                     "display":"flex",
-                     "flex-direction":"row",
-                     "gap":"0.5rem",
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "flex-direction":"column",
-                              "gap":"0.25rem",
-                              "text-align":"center"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type":"p",
-                           "literal_value":"Nome: ",
-                           "font-weight":"600"
-                        },
-                        {
-                           "type":"p",
-                           "value":"attributes.nome_aluno"
-                        }
-                     ]
-                  },
-                  {
-                     "display":"flex",
-                     "flex-direction":"row",
-                     "gap":"0.5rem",
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "flex-direction":"column",
-                              "gap":"0.25rem",
-                              "text-align":"center"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type":"p",
-                           "literal_value":"Emitido Por: ",
-                           "font-weight":"600"
-                        },
-                        {
-                           "type":"p",
-                           "value":"attributes.entidade_emissora",
-                           "text-decoration":"underline"
-                        }
-                     ]
-                  },
-                  {
-                     "display":"flex",
-                     "flex-direction":"row",
-                     "gap":"0.5rem",
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "flex-direction":"column",
-                              "gap":"0.25rem",
-                              "text-align":"center"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type":"p",
-                           "literal_value":"Emitido Em: ",
-                           "font-weight":"600"
-                        },
-                        {
-                           "type":"p",
-                           "value":"attributes.data_emissao"
-                        }
-                     ]
-                  },
-                  {
-                     "display":"flex",
-                     "flex-direction":"row",
-                     "gap":"0.5rem",
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "flex-direction":"column",
-                              "gap":"0.25rem",
-                              "text-align":"center"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type":"p",
-                           "font-weight":"600",
-                           "literal_value":"INEP: "
-                        },
-                        {
-                           "type":"p",
-                           "value":"attributes.inep"
-                        }
-                     ]
-                  },
-                  {
-                     "display":"flex",
-                     "flex-direction":"row",
-                     "gap":"0.5rem",
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "flex-direction":"column",
-                              "gap":"0.25rem",
-                              "text-align":"center"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type":"p",
-                           "font-weight":"600",
-                           "literal_value":"Nota do ENEM: "
-                        },
-                        {
-                           "type":"p",
-                           "value":"attributes.nota_enem"
-                        }
-                     ]
-                  },
-                  {
-                     "display":"flex",
-                     "flex-direction":"row",
-                     "gap":"0.5rem",
-                     "responsive_styles":[
-                        {
-                           "max_width":768,
-                           "styles":{
-                              "justify-content":"center",
-                              "text-align":"center"
-                           }
-                        }
-                     ],
-                     "data":[
-                        {
-                           "type":"p",
-                           "literal_value":"Secretária da Educação do Estado",
-                           "text-decoration" : "underline"
-                        }
-                     ]
-                  },
-                  {
-                     "display" : "flex",
-                     "width" : "100%",
-                     "height" : "1px",
-                     "background" : "lightgray",
-                     "margin" : "1rem 0rem"
-                  },
-                  {
-                     "display":"flex",
-                     "flex-direction":"column",
-                     "gap":"0rem",
-                     "data":[
-                        {
-                           "type":"p",
-                           "literal_value" : "Este documento comprova a conclusão integral do Ensino Médio, atestando que o titular cumpriu satisfatoriamente todos os componentes curriculares e a carga horária exigida pela legislação educacional vigente. Ele certifica o encerramento do ciclo de Educação Básica, conferindo ao estudante a habilitação necessária para o ingresso em cursos de nível superior e técnico, bem como o atendimento aos requisitos de escolaridade para o mercado de trabalho.",
-                           "font-weight":"400",
-                           "margin-bottom" : "0rem"
-                        }
-                     ]
-                  },
-                  {
-                     "comment":"--- CONTEÚDO DAS ABAS ---",
-                     "display":"flex",
-                     "flex-direction":"column",
-                     "gap":"2rem",
-                     "sections":[
-                        
-                     ]
-                  }
-               ]
-            }
-         ]
-      },
-      {
-         "box-shadow":"0px 0px 10px #e0e0e0f0",
-         "overflow":"auto",
-         "width":"95%",
-         "border-radius" : "0.25rem",
-         "responsive_styles":[
+                }
+              ],
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Nome: ",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nome_aluno"
+                }
+              ]
+            },
             {
-               "max_width":768,
-               "styles":{
-                  "width":"100%"
-               }
-            }
-         ],
-         "collapsible_sections":[
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "flex-direction": "column",
+                    "gap": "0.25rem",
+                    "text-align": "center"
+                  }
+                }
+              ],
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Emitido Por: ",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.entidade_emissora",
+                  "text-decoration": "underline"
+                }
+              ]
+            },
             {
-               "title":{
-                  "type":"h3",
-                  "literal_value":"Detalhes do Certificado",
-                  "color":"black",
-                  "font-weight":"600",
-                  "font-size":"0.95rem",
-                  "text-transform":"none",
-                  "letter-spacing":"0.02em"
-               },
-               "expanded_style":{
-                  "background":"#f9fafb",
-                  "border-bottom":"2px solid #e0e0e0",
-                  "border-radius" : "0.25rem"
-               },
-               "expand_indicator":" ",
-               "collapsed":true,
-               "border":"none",
-               "border-bottom":"3px solid transparent",
-               "border-radius":"0.25rem",
-               "padding":"1.1rem 2rem 0.9rem 2rem",
-               "transition":"all 0.3s ease",
-               "background" : "white",
-               "responsive_styles":[
-                  {
-                     "max_width":768,
-                     "styles":{
-                        "padding":"0.9rem 1rem 0.7rem 1rem"
-                     }
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "flex-direction": "column",
+                    "gap": "0.25rem",
+                    "text-align": "center"
                   }
-               ],
-               "sections":[
-                  {
-                     "display":"flex",
-                     "flex-direction":"column",
-                     "width":"100%",
-                     "padding":"0",
-                     "border-top":"2px solid #34d399",
-                     "min-width" : "fit-content",
-                     "sections":[
-                        {
-                           "display":"flex",
-                           "flex-direction":"row",
-                           "min-width" : "fit-content",
-                           "width":"100%",
-                           "gap":"0",
-                           "background":"white",
-                           "border-bottom":"1px solid #e8e8e8",
-                           "responsive_styles":[
-                              {
-                                 "max_width":1024,
-                                 "styles":{
-                                    "flex-wrap":"wrap"
-                                 }
-                              },
-                              {
-                                 "max_width":768,
-                                 "styles":{
-                                    "flex-direction":"column",
-                                    "min-width":"100%"
-                                 }
-                              }
-                           ],
-                           "sections":[
-                              {
-                                 "flex":"1",
-                                 "font-family":"sans-serif",
-                                 "collapsible_sections":[
-                                    {
-                                       "title":{
-                                          "type":"h4",
-                                          "literal_value":"Dados Pessoais",
-                                          "color":"#6c757d",
-                                          "font-weight":"600",
-                                          "font-size":"0.875rem",
-                                          "text-transform":"none",
-                                          "letter-spacing":"0.01em",
-                                          "expanded_style":{
-                                             "color":"#34d399"
-                                          }
-                                       },
-                                       "expand_indicator":" ",
-                                       "collapsed":true,
-                                       "background":"white",
-                                       "border":"none",
-                                       "border-bottom":"3px solid transparent",
-                                       "border-radius":"0",
-                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                       "box-shadow":"none",
-                                       "transition":"all 0.3s ease",
-                                       "min-width":"fit-content",
-                                       "expanded_style":{
-                                          "background":"rgba(0,0,0,0.05)"
-                                       },
-                                       "responsive_styles":[
-                                          {
-                                             "max_width":768,
-                                             "styles":{
-                                                "padding":"0.75rem 1rem",
-                                                "min-width":"100%"
-                                             }
-                                          }
-                                       ],
-                                       "sections":[
-                                          {
-                                             "display":"grid",
-                                             "grid-template-columns":"10rem 15rem",
-                                             "gap":"0.75rem 1.5rem",
-                                             "align-items":"start",
-                                             "padding":"2rem 2.5rem",
-                                             "responsive_styles":[
-                                                {
-                                                   "max_width":768,
-                                                   "styles":{
-                                                      "grid-template-columns":"1fr",
-                                                      "padding":"1rem 1.5rem",
-                                                      "gap":"0.5rem"
-                                                   }
-                                                }
-                                             ],
-                                             "data":[
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Nome Completo",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.nome_aluno",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"CPF",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.cpf_aluno",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Data de Nascimento",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.data_nascimento",
-                                                   "font-weight":"600"
-                                                }
-                                             ]
-                                          }
-                                       ]
-                                    }
-                                 ]
-                              },
-                              {
-                                 "flex":"1",
-                                 "font-family":"sans-serif",
-                                 "collapsible_sections":[
-                                    {
-                                       "title":{
-                                          "type":"h4",
-                                          "literal_value":"Dados do Certificado",
-                                          "color":"#6c757d",
-                                          "font-weight":"600",
-                                          "font-size":"0.875rem",
-                                          "text-transform":"none",
-                                          "letter-spacing":"0.01em",
-                                          "expanded_style":{
-                                             "color":"#34d399"
-                                          }
-                                       },
-                                       "expanded_style":{
-                                          "background":"rgba(0,0,0,0.05)"
-                                       },
-                                       "expand_indicator":" ",
-                                       "collapsed":true,
-                                       "background":"white",
-                                       "border":"none",
-                                       "border-bottom":"3px solid transparent",
-                                       "border-radius":"0",
-                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                       "box-shadow":"none",
-                                       "transition":"all 0.3s ease",
-                                       "responsive_styles":[
-                                          {
-                                             "max_width":768,
-                                             "styles":{
-                                                "padding":"0.75rem 1rem"
-                                             }
-                                          }
-                                       ],
-                                       "sections":[
-                                          {
-                                             "display":"grid",
-                                             "grid-template-columns":"10rem 15rem",
-                                             "gap":"0.75rem 1.5rem",
-                                             "align-items":"start",
-                                             "padding":"2rem 2.5rem",
-                                             "responsive_styles":[
-                                                {
-                                                   "max_width":768,
-                                                   "styles":{
-                                                      "grid-template-columns":"1fr",
-                                                      "padding":"1rem 1.5rem",
-                                                      "gap":"0.5rem"
-                                                   }
-                                                }
-                                             ],
-                                             "data":[
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Entidade Emissora",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.entidade_emissora",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"INEP",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.inep",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Nota do ENEM",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.nota_enem",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Endereço da Escola",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.endereco_escola",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Estado da Escola",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.UF",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Modalidade de Conclusão",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.modalidade_conclusao",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Data de Emissão",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.data_emissao",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Descrição",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"attributes.descricao",
-                                                   "font-weight":"600"
-                                                }
-                                             ]
-                                          }
-                                       ]
-                                    }
-                                 ]
-                              },
-                              {
-                                 "flex":"1",
-                                 "font-family":"sans-serif",
-                                 "collapsible_sections":[
-                                    {
-                                       "title":{
-                                          "type":"h4",
-                                          "literal_value":"Recursos",
-                                          "color":"#6c757d",
-                                          "font-weight":"600",
-                                          "font-size":"0.875rem",
-                                          "text-transform":"none",
-                                          "letter-spacing":"0.01em",
-                                          "expanded_style":{
-                                             "color":"#34d399"
-                                          }
-                                       },
-                                       "expand_indicator":" ",
-                                       "collapsed":true,
-                                       "background":"white",
-                                       "border":"none",
-                                       "border-bottom":"3px solid transparent",
-                                       "border-radius":"0",
-                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                       "box-shadow":"none",
-                                       "transition":"all 0.3s ease",
-                                       "expanded_style":{
-                                          "background":"rgba(0,0,0,0.05)"
-                                       },
-                                       "responsive_styles":[
-                                          {
-                                             "max_width":768,
-                                             "styles":{
-                                                "padding":"0.75rem 1rem"
-                                             }
-                                          }
-                                       ],
-                                       "sections":[
-                                          {
-                                             "display":"grid",
-                                             "grid-template-columns":"13rem 15rem",
-                                             "gap":"0.75rem 1.5rem",
-                                             "align-items":"start",
-                                             "padding":"2rem 2.5rem",
-                                             "overflow":"auto",
-                                             "responsive_styles":[
-                                                {
-                                                   "max_width":768,
-                                                   "styles":{
-                                                      "grid-template-columns":"1fr",
-                                                      "padding":"1rem 1.5rem",
-                                                      "gap":"0.5rem"
-                                                   }
-                                                }
-                                             ],
-                                             "data":[
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Link para imagem",
-                                                   "font-weight":"700",
-                                                   "text-wrap":"nowrap"
-                                                },
-                                                {
-                                                   "type":"a",
-                                                   "value":"image",
-                                                   "font-weight":"600",
-                                                   "color":"blue"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Link para Conteudo Externo",
-                                                   "font-weight":"700",
-                                                   "text-wrap":"nowrap"
-                                                },
-                                                {
-                                                   "type":"a",
-                                                   "value":"external_url",
-                                                   "font-weight":"600",
-                                                   "color":"blue"
-                                                }
-                                             ]
-                                          }
-                                       ]
-                                    }
-                                 ]
-                              },
-                              {
-                                 "flex":"1",
-                                 "font-family":"sans-serif",
-                                 "collapsible_sections":[
-                                    {
-                                       "title":{
-                                          "type":"h4",
-                                          "literal_value":"Token",
-                                          "color":"#6c757d",
-                                          "font-weight":"600",
-                                          "font-size":"0.875rem",
-                                          "text-transform":"none",
-                                          "letter-spacing":"0.01em",
-                                          "expanded_style":{
-                                             "color":"#34d399"
-                                          }
-                                       },
-                                       "expand_indicator":" ",
-                                       "collapsed":true,
-                                       "background":"white",
-                                       "border":"none",
-                                       "border-bottom":"3px solid transparent",
-                                       "border-radius":"0",
-                                       "padding":"0.85rem 1.5rem 0.75rem 1.5rem",
-                                       "box-shadow":"none",
-                                       "transition":"all 0.3s ease",
-                                       "expanded_style":{
-                                          "background":"rgba(0,0,0,0.05)"
-                                       },
-                                       "responsive_styles":[
-                                          {
-                                             "max_width":768,
-                                             "styles":{
-                                                "padding":"0.75rem 1rem"
-                                             }
-                                          }
-                                       ],
-                                       "sections":[
-                                          {
-                                             "display":"grid",
-                                             "grid-template-columns":"10rem 15rem",
-                                             "gap":"0.75rem 1.5rem",
-                                             "align-items":"start",
-                                             "padding":"2rem 2.5rem",
-                                             "overflow":"auto",
-                                             "responsive_styles":[
-                                                {
-                                                   "max_width":768,
-                                                   "styles":{
-                                                      "grid-template-columns":"1fr",
-                                                      "padding":"1rem 1.5rem",
-                                                      "gap":"0.5rem"
-                                                   }
-                                                }
-                                             ],
-                                             "data":[
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Link para Contrato",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"a",
-                                                   "contract_value":"a.link_block_scanner",
-                                                   "font-weight":"600",
-                                                   "color":"blue"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Endereço do Contrato",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"contract",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Rede do Contrato",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"network",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Versão do Contrato",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"version",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Classe do Contrato",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"class",
-                                                   "font-weight":"600"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Link para versão anterior",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"a",
-                                                   "value":"previousPayloadUri",
-                                                   "font-weight":"600",
-                                                   "color":"blue",
-                                                   "render_if_present":"true"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "literal_value":"Versão do Token",
-                                                   "font-weight":"700"
-                                                },
-                                                {
-                                                   "type":"p",
-                                                   "value":"version",
-                                                   "font-weight":"600"
-                                                }
-                                             ]
-                                          }
-                                       ]
-                                    }
-                                 ]
-                              }
-                           ]
-                        }
-                     ]
+                }
+              ],
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Emitido Em: ",
+                  "font-weight": "600"
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.data_emissao"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "flex-direction": "column",
+                    "gap": "0.25rem",
+                    "text-align": "center"
                   }
-               ]
+                }
+              ],
+              "data": [
+                {
+                  "type": "p",
+                  "font-weight": "600",
+                  "literal_value": "INEP: "
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.inep"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "flex-direction": "column",
+                    "gap": "0.25rem",
+                    "text-align": "center"
+                  }
+                }
+              ],
+              "data": [
+                {
+                  "type": "p",
+                  "font-weight": "600",
+                  "literal_value": "Nota do ENEM: "
+                },
+                {
+                  "type": "p",
+                  "value": "attributes.nota_enem"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "flex-direction": "row",
+              "gap": "0.5rem",
+              "responsive_styles": [
+                {
+                  "max_width": 768,
+                  "styles": {
+                    "justify-content": "center",
+                    "text-align": "center"
+                  }
+                }
+              ],
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Secretária da Educação do Estado",
+                  "text-decoration": "underline"
+                }
+              ]
+            },
+            {
+              "display": "flex",
+              "width": "100%",
+              "height": "1px",
+              "background": "lightgray",
+              "margin": "1rem 0rem"
+            },
+            {
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "0rem",
+              "data": [
+                {
+                  "type": "p",
+                  "literal_value": "Este documento comprova a conclusão integral do Ensino Médio, atestando que o titular cumpriu satisfatoriamente todos os componentes curriculares e a carga horária exigida pela legislação educacional vigente. Ele certifica o encerramento do ciclo de Educação Básica, conferindo ao estudante a habilitação necessária para o ingresso em cursos de nível superior e técnico, bem como o atendimento aos requisitos de escolaridade para o mercado de trabalho.",
+                  "font-weight": "400",
+                  "margin-bottom": "0rem"
+                }
+              ]
+            },
+            {
+              "comment": "--- CONTEÚDO DAS ABAS ---",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "2rem",
+              "sections": []
             }
-         ]
-      }
-   ]
+          ]
+        }
+      ]
+    },
+    {
+      "box-shadow": "0px 0px 10px #e0e0e0f0",
+      "overflow": "auto",
+      "width": "95%",
+      "border-radius": "0.25rem",
+      "responsive_styles": [
+        {
+          "max_width": 768,
+          "styles": {
+            "width": "100%"
+          }
+        }
+      ],
+      "collapsible_sections": [
+        {
+          "title": {
+            "type": "h3",
+            "literal_value": "Detalhes do Certificado",
+            "color": "black",
+            "font-weight": "600",
+            "font-size": "0.95rem",
+            "text-transform": "none",
+            "letter-spacing": "0.02em"
+          },
+          "expanded_style": {
+            "background": "#f9fafb",
+            "border-bottom": "2px solid #e0e0e0",
+            "border-radius": "0.25rem"
+          },
+          "expand_indicator": " ",
+          "collapsed": true,
+          "border": "none",
+          "border-bottom": "3px solid transparent",
+          "border-radius": "0.25rem",
+          "padding": "1.1rem 2rem 0.9rem 2rem",
+          "transition": "all 0.3s ease",
+          "background": "white",
+          "responsive_styles": [
+            {
+              "max_width": 768,
+              "styles": {
+                "padding": "0.9rem 1rem 0.7rem 1rem"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "display": "flex",
+              "flex-direction": "column",
+              "width": "100%",
+              "padding": "0",
+              "border-top": "2px solid #34d399",
+              "min-width": "fit-content",
+              "sections": [
+                {
+                  "display": "flex",
+                  "flex-direction": "row",
+                  "min-width": "fit-content",
+                  "width": "100%",
+                  "gap": "0",
+                  "background": "white",
+                  "border-bottom": "1px solid #e8e8e8",
+                  "responsive_styles": [
+                    {
+                      "max_width": 1024,
+                      "styles": {
+                        "flex-wrap": "wrap"
+                      }
+                    },
+                    {
+                      "max_width": 768,
+                      "styles": {
+                        "flex-direction": "column",
+                        "min-width": "100%"
+                      }
+                    }
+                  ],
+                  "sections": [
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Dados Pessoais",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "min-width": "fit-content",
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "responsive_styles": [
+                            {
+                              "max_width": 768,
+                              "styles": {
+                                "padding": "0.75rem 1rem",
+                                "min-width": "100%"
+                              }
+                            }
+                          ],
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "10rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "1rem 1.5rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Nome Completo",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.nome_aluno",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "CPF",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.cpf_aluno",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Data de Nascimento",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.data_nascimento",
+                                  "font-weight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Dados do Certificado",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "responsive_styles": [
+                            {
+                              "max_width": 768,
+                              "styles": {
+                                "padding": "0.75rem 1rem"
+                              }
+                            }
+                          ],
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "10rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "1rem 1.5rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Entidade Emissora",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.entidade_emissora",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "INEP",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.inep",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Nota do ENEM",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.nota_enem",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Endereço da Escola",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.endereco_escola",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Estado da Escola",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.UF",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Modalidade de Conclusão",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.modalidade_conclusao",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Data de Emissão",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.data_emissao",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Descrição",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "attributes.descricao",
+                                  "font-weight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Recursos",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "responsive_styles": [
+                            {
+                              "max_width": 768,
+                              "styles": {
+                                "padding": "0.75rem 1rem"
+                              }
+                            }
+                          ],
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "13rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "overflow": "auto",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "1rem 1.5rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Link para imagem",
+                                  "font-weight": "700",
+                                  "text-wrap": "nowrap"
+                                },
+                                {
+                                  "type": "a",
+                                  "value": "image",
+                                  "font-weight": "600",
+                                  "color": "blue"
+                                }
+                              ]
+                            },
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "13rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "0rem 2.5rem",
+                              "overflow": "auto",
+                              "margin-top": "-2rem",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "0rem 1.5rem",
+                                    "margin-top": "-1rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "is_hash_valid": {
+                                "file_value": "image",
+                                "hash_value": "hash.hash_imagem",
+                                "hash_algorithm": "SHA256"
+                              },
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": ""
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "VÁLIDO",
+                                  "background": "oklch(72.3% 0.219 149.579)",
+                                  "width": "fit-content",
+                                  "border-radius": "0.5rem",
+                                  "padding": "0.25rem 0.5rem",
+                                  "color": "white",
+                                  "font-size": "0.75rem",
+                                  "font-weight": 700
+                                }
+                              ],
+                              "data_hash_invalid": [
+                                {
+                                  "type": "p",
+                                  "literal_value": ""
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "INVÁLIDO",
+                                  "background": "oklch(63.7% 0.237 25.331)",
+                                  "width": "fit-content",
+                                  "border-radius": "0.5rem",
+                                  "padding": "0.25rem 0.5rem",
+                                  "color": "white",
+                                  "font-size": "0.75rem",
+                                  "font-weight": 700
+                                }
+                              ]
+                            },
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "13rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "overflow": "auto",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "1rem 1.5rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Link para Conteudo Externo",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "a",
+                                  "value": "external_url",
+                                  "font-weight": "600",
+                                  "color": "blue",
+                                  "text-wrap": "nowrap",
+                                  "overflow": "hidden",
+                                  "max-width": "15ch",
+                                  "text-overflow": "ellipsis"
+                                }
+                              ]
+                            },
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "13rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "0rem 2.5rem",
+                              "overflow": "auto",
+                              "margin-top": "-2rem",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "0rem 1.5rem",
+                                    "margin-top": "-1rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "is_hash_valid": {
+                                "file_value": "external_url",
+                                "hash_value": "hash.hash_conteudo_externo",
+                                "hash_algorithm": "SHA256"
+                              },
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": ""
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "VÁLIDO",
+                                  "background": "oklch(72.3% 0.219 149.579)",
+                                  "width": "fit-content",
+                                  "border-radius": "0.5rem",
+                                  "padding": "0.25rem 0.5rem",
+                                  "color": "white",
+                                  "font-size": "0.75rem",
+                                  "font-weight": 700
+                                }
+                              ],
+                              "data_hash_invalid": [
+                                {
+                                  "type": "p",
+                                  "literal_value": ""
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "INVÁLIDO",
+                                  "background": "oklch(63.7% 0.237 25.331)",
+                                  "width": "fit-content",
+                                  "border-radius": "0.5rem",
+                                  "padding": "0.25rem 0.5rem",
+                                  "color": "white",
+                                  "font-size": "0.75rem",
+                                  "font-weight": 700
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "flex": "1",
+                      "font-family": "sans-serif",
+                      "collapsible_sections": [
+                        {
+                          "title": {
+                            "type": "h4",
+                            "literal_value": "Token",
+                            "color": "#6c757d",
+                            "font-weight": "600",
+                            "font-size": "0.875rem",
+                            "text-transform": "none",
+                            "letter-spacing": "0.01em",
+                            "expanded_style": {
+                              "color": "#34d399"
+                            }
+                          },
+                          "expand_indicator": " ",
+                          "collapsed": true,
+                          "background": "white",
+                          "border": "none",
+                          "border-bottom": "3px solid transparent",
+                          "border-radius": "0",
+                          "padding": "0.85rem 1.5rem 0.75rem 1.5rem",
+                          "box-shadow": "none",
+                          "transition": "all 0.3s ease",
+                          "expanded_style": {
+                            "background": "rgba(0,0,0,0.05)"
+                          },
+                          "responsive_styles": [
+                            {
+                              "max_width": 768,
+                              "styles": {
+                                "padding": "0.75rem 1rem"
+                              }
+                            }
+                          ],
+                          "sections": [
+                            {
+                              "display": "grid",
+                              "grid-template-columns": "10rem 15rem",
+                              "gap": "0.75rem 1.5rem",
+                              "align-items": "start",
+                              "padding": "2rem 2.5rem",
+                              "overflow": "auto",
+                              "responsive_styles": [
+                                {
+                                  "max_width": 768,
+                                  "styles": {
+                                    "grid-template-columns": "1fr",
+                                    "padding": "1rem 1.5rem",
+                                    "gap": "0.5rem"
+                                  }
+                                }
+                              ],
+                              "data": [
+                                {
+                                  "type": "p",
+                                  "literal_value": "Link para Contrato",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "a",
+                                  "contract_value": "a.link_block_scanner",
+                                  "font-weight": "600",
+                                  "color": "blue",
+                                  "overflow": "hidden",
+                                  "text-overflow": "ellipsis",
+                                  "whitespace": "no-wrap",
+                                  "max-width": "20ch"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Endereço do Contrato",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "contract",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Rede do Contrato",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "network",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Versão do Contrato",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "version",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Classe do Contrato",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "class",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Link para versão anterior",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "a",
+                                  "value": "previousPayloadUri",
+                                  "font-weight": "600",
+                                  "color": "blue"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "Versão do Token",
+                                  "font-weight": "700"
+                                },
+                                {
+                                  "type": "p",
+                                  "value": "version",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "p",
+                                  "literal_value": "QR Code para compartilhamento",
+                                  "font-weight": "600"
+                                },
+                                {
+                                  "type": "qrcode",
+                                  "contract_value": "contract.link_block_scanner"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
