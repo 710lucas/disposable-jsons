@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker</title>
+</head>
+<body>
+
+
+    <p>Cadastrar ficha</p>
+    <p>Indique o valor da ficha</p>
+    <input type="number" placeholder="50" id="valor-add">
+    <p>Indique a quantidade de ficha</p>
+    <input type="number" placeholder="10 fichas" id="qtd-add">
+    <p>valor minimo de aposta</p>
+    <input type="number" placeholder="10 reais" id="valor-aposta">
+    <p>QUantidade de jogadores</p>
+    <input type="number" placeholder="10 jogadores" id="qtd-jogadores">
+    <br>
+    <button onclick="adicionar()">adicionar</button>
+
+    <hr>
+
+    <div class="fichas-container" id="fichas-container">
+
+    </div>
+
+    <div class="total">
+
+    </div>
+
+    <script>
+
+        let fichas = []
+
+        const valorAdd = document.getElementById("valor-add")
+        const qtdAdd = document.getElementById("qtd-add")
+        const fichasContainer = document.getElementById('fichas-container')
+        const totalContainer = document.getElementById('total')
+        const qtdJogadores = document.getElementById('qtd-jogadores')
+        const valorAposta = document.getElementById('valor-aposta')
+
+        function adicionar(){
+            const valor = Number(valorAdd.value)
+            const qtd = Number(qtdAdd.value)
+
+            let valorTotal = 0;
+
+            if (!Number.isFinite(valor) || !Number.isFinite(qtd) || valor <= 0 || qtd <= 0) {
+                return
+            }
+
+            fichas.push({
+                valor: valor,
+                qtd: qtd
+            })
+
+            fichasContainer.innerHTML += `
+            <div id='ficha-${valor}'>
+                ${qtd} fichas de ${valor}
+            </div>
+            `
+            
+            const jogadores = Number(qtdJogadores.value)
+
+            if (!Number.isFinite(jogadores) || jogadores <= 0) {
+                return
+            }
+
+            const total = fichas.map(ficha => ({
+                valor: ficha.valor,
+                quantidade: Math.floor(ficha.qtd / jogadores)
+            }))
+
+            const totalPorJogador = total.reduce(
+                (acc, item) => acc + item.valor * item.quantidade,
+                0
+            )
+
+            let valor_unidade = Math.floor(valorAposta.value*100/totalPorJogador)/100
+
+            const totalEl = document.querySelector(".total")
+            totalEl.innerHTML = `
+                <p>Fichas por jogador:</p>
+                ${total.map(item => `<div>${item.quantidade} ficha(s) de ${item.valor}</div>`).join("")}
+                <p>Total por jogador: ${totalPorJogador}</p>
+                <p>VAlor unitario: ${valor_unidade}</p>
+            `
+
+        }
+
+    </script>
+    
+</body>
+</html>
