@@ -4,30 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poker</title>
+    <style>
+        body {
+            background: #23272f;
+            color: #f5f6fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 420px;
+            margin: 40px auto;
+            background: #2c313a;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+            padding: 32px 28px 24px 28px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #ffb347;
+            letter-spacing: 1px;
+        }
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: #23272f;
+            color: #f5f6fa;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            box-sizing: border-box;
+            transition: border 0.2s;
+        }
+        input[type="number"]:focus {
+            border: 1.5px solid #ffb347;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
+            color: #23272f;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 18px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #ffcc80 0%, #ffb347 100%);
+            color: #1a1a1a;
+        }
+        .fichas-container {
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        .fichas-container > div {
+            background: #353b48;
+            border-radius: 5px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            color: #ffe082;
+            font-size: 1rem;
+        }
+        .total {
+            background: #23272f;
+            border-radius: 8px;
+            padding: 16px 12px;
+            margin-top: 18px;
+            color: #b2bec3;
+            font-size: 1.05rem;
+        }
+        .total p {
+            color: #ffb347;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        @media (max-width: 500px) {
+            .container {
+                padding: 16px 6vw 12px 6vw;
+            }
+        }
+    </style>
 </head>
 <body>
 
+    <div class="container">
+        <h1>Gerenciador de Fichas de Poker</h1>
+        <label for="valor-add">Valor da ficha</label>
+        <input type="number" placeholder="Ex: 50" id="valor-add" min="1">
 
-    <p>Cadastrar ficha</p>
-    <p>Indique o valor da ficha</p>
-    <input type="number" placeholder="50" id="valor-add">
-    <p>Indique a quantidade de ficha</p>
-    <input type="number" placeholder="10 fichas" id="qtd-add">
-    <p>valor minimo de aposta</p>
-    <input type="number" placeholder="10 reais" id="valor-aposta">
-    <p>QUantidade de jogadores</p>
-    <input type="number" placeholder="10 jogadores" id="qtd-jogadores">
-    <br>
-    <button onclick="adicionar()">adicionar</button>
+        <label for="qtd-add">Quantidade de fichas</label>
+        <input type="number" placeholder="Ex: 10" id="qtd-add" min="1">
 
-    <hr>
+        <label for="valor-aposta">Valor mínimo de aposta</label>
+        <input type="number" placeholder="Ex: 10" id="valor-aposta" min="1">
 
-    <div class="fichas-container" id="fichas-container">
+        <label for="qtd-jogadores">Quantidade de jogadores</label>
+        <input type="number" placeholder="Ex: 10" id="qtd-jogadores" min="1">
 
-    </div>
+        <button onclick="adicionar()">Adicionar ficha</button>
 
-    <div class="total">
-
+        <div class="fichas-container" id="fichas-container"></div>
+        <div class="total" id="total"></div>
     </div>
 
     <script>
@@ -45,9 +135,8 @@
             const valor = Number(valorAdd.value)
             const qtd = Number(qtdAdd.value)
 
-            let valorTotal = 0;
-
             if (!Number.isFinite(valor) || !Number.isFinite(qtd) || valor <= 0 || qtd <= 0) {
+                alert('Preencha corretamente o valor e a quantidade da ficha!')
                 return
             }
 
@@ -56,15 +145,31 @@
                 qtd: qtd
             })
 
-            fichasContainer.innerHTML += `
-            <div id='ficha-${valor}'>
-                ${qtd} fichas de ${valor}
-            </div>
-            `
-            
+            renderFichas()
+            calcularDistribuicao()
+        }
+
+        function renderFichas() {
+            fichasContainer.innerHTML = ''
+            fichas.forEach(ficha => {
+                fichasContainer.innerHTML += `
+                    <div>
+                        ${ficha.qtd} ficha(s) de ${ficha.valor}
+                    </div>
+                `
+            })
+        }
+
+        function calcularDistribuicao() {
             const jogadores = Number(qtdJogadores.value)
+            const aposta = Number(valorAposta.value)
 
             if (!Number.isFinite(jogadores) || jogadores <= 0) {
+                totalContainer.innerHTML = '<p style="color:#ff7675">Informe a quantidade de jogadores!</p>'
+                return
+            }
+            if (!Number.isFinite(aposta) || aposta <= 0) {
+                totalContainer.innerHTML = '<p style="color:#ff7675">Informe o valor mínimo de aposta!</p>'
                 return
             }
 
@@ -78,16 +183,14 @@
                 0
             )
 
-            let valor_unidade = Math.floor(valorAposta.value*100/totalPorJogador)/100
+            let valor_unidade = totalPorJogador > 0 ? Math.floor(aposta*1000000/totalPorJogador)/1000000 : 0
 
-            const totalEl = document.querySelector(".total")
-            totalEl.innerHTML = `
+            totalContainer.innerHTML = `
                 <p>Fichas por jogador:</p>
                 ${total.map(item => `<div>${item.quantidade} ficha(s) de ${item.valor}</div>`).join("")}
-                <p>Total por jogador: ${totalPorJogador}</p>
-                <p>VAlor unitario: ${valor_unidade}</p>
+                <p>Total por jogador: <b style="color:#ffe082">${totalPorJogador}</b></p>
+                <p>Valor unitário da ficha: <b style="color:#ffe082">${valor_unidade}</b></p>
             `
-
         }
 
     </script>
