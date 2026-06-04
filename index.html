@@ -27,13 +27,22 @@
             color: #ffb347;
             letter-spacing: 1px;
         }
+        h2 {
+            color: #ffcc80;
+            font-size: 1rem;
+            margin-top: 28px;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #353b48;
+            padding-bottom: 6px;
+        }
         label {
             display: block;
-            margin-top: 18px;
+            margin-top: 14px;
             margin-bottom: 6px;
             font-weight: 500;
         }
-        input[type="number"] {
+        input[type="number"], input[type="text"] {
             width: 100%;
             padding: 10px;
             border-radius: 6px;
@@ -45,7 +54,7 @@
             box-sizing: border-box;
             transition: border 0.2s;
         }
-        input[type="number"]:focus {
+        input[type="number"]:focus, input[type="text"]:focus {
             border: 1.5px solid #ffb347;
             outline: none;
         }
@@ -67,7 +76,7 @@
             color: #1a1a1a;
         }
         .fichas-container {
-            margin-top: 24px;
+            margin-top: 16px;
             margin-bottom: 12px;
         }
         .fichas-container > div {
@@ -77,6 +86,28 @@
             margin-bottom: 6px;
             color: #ffe082;
             font-size: 1rem;
+        }
+        .jogadores-lista {
+            margin-top: 12px;
+        }
+        .jogador-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .jogador-row input[type="text"] {
+            flex: 1.2;
+            margin-bottom: 0;
+        }
+        .jogador-row input[type="number"] {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .jogador-row .jogador-label {
+            font-size: 0.85rem;
+            color: #b2bec3;
+            white-space: nowrap;
         }
         .total {
             background: #23272f;
@@ -91,6 +122,21 @@
             margin-bottom: 8px;
             font-weight: 600;
         }
+        .total .jogador-resultado {
+            background: #2c313a;
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+        }
+        .total .jogador-resultado .nome {
+            color: #ffcc80;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .total .jogador-resultado .detalhe {
+            color: #b2bec3;
+            font-size: 0.95rem;
+        }
         @media (max-width: 500px) {
             .container {
                 padding: 16px 6vw 12px 6vw;
@@ -102,21 +148,26 @@
 
     <div class="container">
         <h1>Gerenciador de Fichas de Poker</h1>
+
+        <h2>Fichas disponíveis</h2>
         <label for="valor-add">Valor da ficha</label>
         <input type="number" placeholder="Ex: 50" id="valor-add" min="1">
 
         <label for="qtd-add">Quantidade de fichas</label>
         <input type="number" placeholder="Ex: 10" id="qtd-add" min="1">
 
-        <label for="valor-aposta">Valor mínimo de aposta</label>
-        <input type="number" placeholder="Ex: 10" id="valor-aposta" min="1">
-
-        <label for="qtd-jogadores">Quantidade de jogadores</label>
-        <input type="number" placeholder="Ex: 10" id="qtd-jogadores" min="1">
-
         <button onclick="adicionar()">Adicionar ficha</button>
 
         <div class="fichas-container" id="fichas-container"></div>
+
+        <h2>Jogadores</h2>
+        <label for="qtd-jogadores">Quantidade de jogadores</label>
+        <input type="number" placeholder="Ex: 4" id="qtd-jogadores" min="1" oninput="renderJogadores()">
+
+        <div class="jogadores-lista" id="jogadores-lista"></div>
+
+        <button onclick="calcularDistribuicao()" style="margin-top:22px">Calcular distribuição</button>
+
         <div class="total" id="total"></div>
     </div>
 
@@ -129,7 +180,7 @@
         const fichasContainer = document.getElementById('fichas-container')
         const totalContainer = document.getElementById('total')
         const qtdJogadores = document.getElementById('qtd-jogadores')
-        const valorAposta = document.getElementById('valor-aposta')
+        const jogadoresLista = document.getElementById('jogadores-lista')
 
         function adicionar(){
             const valor = Number(valorAdd.value)
@@ -140,60 +191,121 @@
                 return
             }
 
-            fichas.push({
-                valor: valor,
-                qtd: qtd
-            })
-
+            fichas.push({ valor, qtd })
             renderFichas()
-            calcularDistribuicao()
         }
 
         function renderFichas() {
             fichasContainer.innerHTML = ''
             fichas.forEach(ficha => {
-                fichasContainer.innerHTML += `
-                    <div>
-                        ${ficha.qtd} ficha(s) de ${ficha.valor}
-                    </div>
-                `
+                fichasContainer.innerHTML += `<div>${ficha.qtd} ficha(s) de ${ficha.valor}</div>`
             })
         }
 
-        function calcularDistribuicao() {
-            const jogadores = Number(qtdJogadores.value)
-            const aposta = Number(valorAposta.value)
+        function renderJogadores() {
+            const n = parseInt(qtdJogadores.value)
+            if (!n || n <= 0) {
+                jogadoresLista.innerHTML = ''
+                return
+            }
 
-            if (!Number.isFinite(jogadores) || jogadores <= 0) {
+            const atual = jogadoresLista.querySelectorAll('.jogador-row')
+            const qtdAtual = atual.length
+
+            if (n > qtdAtual) {
+                for (let i = qtdAtual + 1; i <= n; i++) {
+                    const row = document.createElement('div')
+                    row.className = 'jogador-row'
+                    row.innerHTML = `
+                        <span class="jogador-label">J${i}</span>
+                        <input type="text" placeholder="Nome (opcional)" id="nome-j${i}">
+                        <input type="number" placeholder="Aposta (R$)" id="aposta-j${i}" min="1">
+                    `
+                    jogadoresLista.appendChild(row)
+                }
+            } else {
+                for (let i = qtdAtual; i > n; i--) {
+                    jogadoresLista.removeChild(jogadoresLista.lastChild)
+                }
+            }
+        }
+
+        function calcularDistribuicao() {
+            const n = parseInt(qtdJogadores.value)
+
+            if (!n || n <= 0) {
                 totalContainer.innerHTML = '<p style="color:#ff7675">Informe a quantidade de jogadores!</p>'
                 return
             }
-            if (!Number.isFinite(aposta) || aposta <= 0) {
-                totalContainer.innerHTML = '<p style="color:#ff7675">Informe o valor mínimo de aposta!</p>'
+
+            if (fichas.length === 0) {
+                totalContainer.innerHTML = '<p style="color:#ff7675">Adicione ao menos um tipo de ficha!</p>'
                 return
             }
 
-            const total = fichas.map(ficha => ({
+            const jogadores = []
+            for (let i = 1; i <= n; i++) {
+                const nomeInput = document.getElementById(`nome-j${i}`)
+                const apostaInput = document.getElementById(`aposta-j${i}`)
+                const nome = nomeInput?.value.trim() || `Jogador ${i}`
+                const aposta = Number(apostaInput?.value)
+
+                if (!aposta || aposta <= 0) {
+                    totalContainer.innerHTML = `<p style="color:#ff7675">Informe o valor de aposta do ${nome}!</p>`
+                    return
+                }
+
+                jogadores.push({ nome, aposta })
+            }
+
+            const maiorAposta = Math.max(...jogadores.map(j => j.aposta))
+
+            const fichasPorJogador = fichas.map(ficha => ({
                 valor: ficha.valor,
-                quantidade: Math.floor(ficha.qtd / jogadores)
+                quantidade: Math.floor(ficha.qtd / n)
             }))
 
-            const totalPorJogador = total.reduce(
-                (acc, item) => acc + item.valor * item.quantidade,
-                0
+            const totalFichasPorJogador = fichasPorJogador.reduce(
+                (acc, item) => acc + item.valor * item.quantidade, 0
             )
 
-            let valor_unidade = totalPorJogador > 0 ? Math.floor(aposta*1000000/totalPorJogador)/1000000 : 0
+            if (totalFichasPorJogador <= 0) {
+                totalContainer.innerHTML = '<p style="color:#ff7675">Fichas insuficientes para distribuir!</p>'
+                return
+            }
 
-            totalContainer.innerHTML = `
+            const valorUnidade = Math.floor(maiorAposta * 1000000 / totalFichasPorJogador) / 1000000
+
+            const fichasHtml = fichasPorJogador
+                .map(item => `<span>${item.quantidade}x ficha ${item.valor}</span>`)
+                .join(' &nbsp;|&nbsp; ')
+
+            let html = `
                 <p>Fichas por jogador:</p>
-                ${total.map(item => `<div>${item.quantidade} ficha(s) de ${item.valor}</div>`).join("")}
-                <p>Total por jogador: <b style="color:#ffe082">${totalPorJogador}</b></p>
-                <p>Valor unitário da ficha: <b style="color:#ffe082">${valor_unidade}</b></p>
+                <div style="color:#ffe082; margin-bottom:12px; font-size:0.95rem">${fichasHtml}</div>
+                <p>Valor unitário da ficha (baseado na maior aposta — R$ ${maiorAposta}):</p>
+                <div style="color:#ffe082; font-size:1.2rem; font-weight:bold; margin-bottom:16px">R$ ${valorUnidade}</div>
+                <p>Detalhes por jogador:</p>
             `
+
+            jogadores.forEach(j => {
+                const fichasEquivalentes = j.aposta / valorUnidade
+                html += `
+                    <div class="jogador-resultado">
+                        <div class="nome">${j.nome}</div>
+                        <div class="detalhe">
+                            Aposta: <b style="color:#ffe082">R$ ${j.aposta}</b>
+                            &nbsp;→&nbsp;
+                            equivale a <b style="color:#ffe082">${fichasEquivalentes.toFixed(2)}</b> fichas unitárias
+                        </div>
+                    </div>
+                `
+            })
+
+            totalContainer.innerHTML = html
         }
 
     </script>
-    
+
 </body>
 </html>
