@@ -461,49 +461,80 @@
             jogadores.push({ nome, aposta })
         }
 
-        const maiorAposta = Math.max(...jogadores.map(j => j.aposta))
+        const totalValorMaleta = fichas.reduce((acc, f) => acc + f.valor * f.qtd, 0)
+        const totalApostas = jogadores.reduce((acc, j) => acc + j.aposta, 0)
 
-        const fichasPorJogador = fichas.map(ficha => ({
-            valor: ficha.valor,
-            quantidade: Math.floor(ficha.qtd / n)
-        }))
-
-        const totalFichasPorJogador = fichasPorJogador.reduce(
-            (acc, item) => acc + item.valor * item.quantidade, 0
-        )
-
-        if (totalFichasPorJogador <= 0) {
+        if (totalValorMaleta <= 0) {
             totalContainer.innerHTML = '<p style="color:#ff7675">Fichas insuficientes para distribuir!</p>'
             return
         }
 
-        const valorUnidade = Math.floor(maiorAposta * 1000000 / totalFichasPorJogador) / 1000000
+        // Valor real de cada unidade de denominação de ficha
+        const valorUnidade = totalApostas / totalValorMaleta
 
-        const fichasHtml = fichasPorJogador
-            .map(item => `<span>${item.quantidade}x ficha ${item.valor}</span>`)
-            .join(' &nbsp;|&nbsp; ')
+        // Estoque de fichas disponível (do maior para o menor, para greedy)
+        const estoque = fichas
+            .map(f => ({ valor: f.valor, qtd: f.qtd }))
+            .sort((a, b) => b.valor - a.valor)
 
+        // Aloca fichas por jogador, do maior apostador para o menor
+        const ordem = jogadores
+            .map((j, idx) => ({ ...j, idx }))
+            .sort((a, b) => b.aposta - a.aposta)
+
+        const alocacoes = new Array(n)
+
+        ordem.forEach(j => {
+            let cota = Math.round(j.aposta / valorUnidade) // valor de denominação que este jogador deve receber
+            const chips = {}
+
+            estoque.forEach(f => {
+                const qtd = Math.min(Math.floor(cota / f.valor), f.qtd)
+                if (qtd > 0) {
+                    chips[f.valor] = qtd
+                    f.qtd -= qtd
+                    cota -= qtd * f.valor
+                }
+            })
+
+            const totalDenominacao = Object.entries(chips).reduce((acc, [v, q]) => acc + Number(v) * q, 0)
+            alocacoes[j.idx] = { chips, totalReal: totalDenominacao * valorUnidade }
+        })
+
+        const maiorAposta = Math.max(...jogadores.map(j => j.aposta))
         let html = `
+            <p>Valor unitário da ficha <span style="color:#b2bec3;font-weight:400;font-size:0.9rem">(maior aposta R$ ${maiorAposta})</span></p>
+            <div style="color:#ffe082; font-size:1.2rem; font-weight:bold; margin-bottom:16px">R$ ${valorUnidade.toFixed(4)}</div>
             <p>Fichas por jogador:</p>
-            <div style="color:#ffe082; margin-bottom:12px; font-size:0.95rem">${fichasHtml}</div>
-            <p>Valor unitário da ficha (baseado na maior aposta — R$ ${maiorAposta}):</p>
-            <div style="color:#ffe082; font-size:1.2rem; font-weight:bold; margin-bottom:16px">R$ ${valorUnidade}</div>
-            <p>Detalhes por jogador:</p>
         `
 
-        jogadores.forEach(j => {
-            const fichasEquivalentes = j.aposta / valorUnidade
+        jogadores.forEach((j, idx) => {
+            const { chips, totalReal } = alocacoes[idx]
+
+            const fichasHtml = fichas
+                .slice()
+                .sort((a, b) => b.valor - a.valor)
+                .map(f => {
+                    const qtd = chips[f.valor] || 0
+                    return `<span style="color:${qtd > 0 ? '#ffe082' : '#636e72'}">${qtd}x <b>${f.valor}</b></span>`
+                })
+                .join(' &nbsp;|&nbsp; ')
+
             html += `
                 <div class="jogador-resultado">
-                    <div class="nome">${j.nome}</div>
-                    <div class="detalhe">
-                        Aposta: <b style="color:#ffe082">R$ ${j.aposta}</b>
-                        &nbsp;→&nbsp;
-                        equivale a <b style="color:#ffe082">${fichasEquivalentes.toFixed(2)}</b> fichas unitárias
-                    </div>
+                    <div class="nome">${j.nome} <span style="color:#b2bec3;font-weight:400">— aposta R$ ${j.aposta}</span></div>
+                    <div class="detalhe" style="margin:6px 0;font-size:1rem;line-height:1.8">${fichasHtml}</div>
+                    <div class="detalhe">Valor das fichas: <b style="color:#ffe082">R$ ${totalReal.toFixed(2)}</b></div>
                 </div>
             `
         })
+
+        // Fichas que sobraram na maleta
+        const sobras = estoque.filter(f => f.qtd > 0)
+        if (sobras.length > 0) {
+            const sobrasHtml = sobras.map(f => `${f.qtd}x ${f.valor}`).join(', ')
+            html += `<div style="margin-top:10px;color:#636e72;font-size:0.85rem">Fichas não distribuídas: ${sobrasHtml}</div>`
+        }
 
         totalContainer.innerHTML = html
     }
