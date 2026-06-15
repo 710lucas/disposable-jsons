@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENADE 2021 · Programação Linear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #fafafa;
+    --paper: #ffffff;
+    --text: #171717;
+    --muted: #8a8a8a;
+    --line: #e8e8e8;
+    --accent: #ff5a36;
+    --accent-soft: #fff1ed;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 24px 100px; }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding: 100px 24px 64px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 22px;
+  }
+  h1{
+    font-weight: 600;
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+  }
+  .hero p.lead{
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 0 28px;
+  }
+  .hero-eq{
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--text);
+    padding: 14px 18px;
+    background: var(--accent-soft);
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  /* ---------- TOGGLE ---------- */
+  .toggle-row{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .toggle-btn{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    padding: 9px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .toggle-btn:hover{ border-color: var(--text); color: var(--text); }
+  .toggle-btn.active{
+    background: var(--text);
+    color: var(--paper);
+    border-color: var(--text);
+  }
+  .restore-btn{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 9px 4px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: none;
+  }
+  .mode-note{
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 32px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding: 56px 0; border-top: 1px solid var(--line); }
+  section:first-of-type{ border-top: none; padding-top: 0; }
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .section-num{
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  h2{
+    font-weight: 600;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  p{ margin: 0 0 16px; }
+  p:last-child{ margin-bottom: 0; }
+
+  /* ---------- DATA TABLE ---------- */
+  table{
+    width:100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  th, td{
+    padding: 12px 0;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  th{
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  td.num, th.num{ font-family: var(--mono); text-align: right; }
+  tr:last-child td{ border-bottom: none; }
+
+  /* inputs dentro da tabela */
+  td.num input{
+    width: 92px;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--line);
+    padding: 2px 0;
+    -moz-appearance: textfield;
+  }
+  td.num input::-webkit-outer-spin-button,
+  td.num input::-webkit-inner-spin-button{ -webkit-appearance: none; margin:0; }
+  td.num input:focus{ outline: none; border-bottom-color: var(--accent); }
+  td.num input:disabled{
+    border-bottom-color: transparent;
+    color: var(--text);
+    opacity: 1;
+  }
+
+  /* ---------- MODEL ---------- */
+  .model-list{ display: flex; flex-direction: column; gap: 22px; }
+  .model-item{
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 600px){
+    .model-item{ grid-template-columns: 1fr; gap: 6px; }
+  }
+  .model-item .label{
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 4px;
+  }
+  .model-item .eq{
+    font-family: var(--mono);
+    font-size: 0.98rem;
+  }
+  .model-item .eq .small{
+    color: var(--muted);
+    font-size: 0.85rem;
+    display:block;
+    margin-top: 4px;
+  }
+  .objective-box{
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    padding: 16px 18px;
+    background: var(--accent-soft);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+  }
+
+  /* ---------- SOLVER ---------- */
+  .solver{ display: flex; flex-direction: column; gap: 32px; }
+  .plot-card svg{ width: 100%; height: auto; display:block; }
+  .legend{
+    display:flex; flex-wrap: wrap; gap: 18px;
+    font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+    margin-top: 14px;
+  }
+  .legend span{ display:flex; align-items:center; gap:6px; }
+  .legend i{ width: 12px; height: 2px; display:inline-block; border-radius: 2px; }
+
+  .vtable td, .vtable th{ font-size: 0.85rem; }
+  .vtable tr.optimal td{
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ---------- RESULT ---------- */
+  .result-answer{
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+  .result-answer strong{ color: var(--accent); }
+  .check-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  @media (max-width: 500px){ .check-grid{ grid-template-columns: 1fr; } }
+  .check-item{
+    background: var(--paper);
+    padding: 16px 18px;
+  }
+  .check-item .label{ color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--mono); }
+  .check-item .val{ font-size: 1rem; margin-top: 6px; font-family: var(--mono); }
+  .check-item .note{ font-size: 0.75rem; margin-top: 4px; font-family: var(--mono); color: var(--muted); }
+  .check-item.warn .val{ color: var(--accent); }
+  .result-answer .sub{
+    display:block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .infeasible{
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 16px 18px;
+    border-radius: 6px;
+  }
+
+  footer{
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-family: var(--mono);
+    padding: 40px 0 0;
+    border-top: 1px solid var(--line);
+    margin-top: 56px;
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <p class="eyebrow">ENADE 2021 — Programação Linear</p>
+  <h1>Mix de produção ótimo para a montadora de Manaus e da Região Sul</h1>
+  <p class="lead">Modelagem do problema — função objetivo, restrições e solução pelo método gráfico,
+    com cálculo automático do ponto ótimo.</p>
+  <div class="hero-eq">min Z = custo<sub>Manaus</sub>·x + custo<sub>Sul</sub>·y</div>
+</header>
+
+<div class="wrap">
+
+  <!-- TOGGLE -->
+  <section style="padding-top:0; padding-bottom:32px;">
+    <div class="toggle-row">
+      <button class="toggle-btn active" id="btn-resposta">Resposta da questão</button>
+      <button class="toggle-btn" id="btn-interativo">Modo interativo</button>
+      <button class="restore-btn" id="btn-restore">Restaurar valores originais</button>
+    </div>
+    <p class="mode-note" id="mode-note">
+      Valores originais do enunciado do ENADE 2021. Clique em "Modo interativo" para editar a produção,
+      os custos e as demandas e ver a solução recalculada em tempo real.
+    </p>
+  </section>
+
+  <!-- DADOS -->
+  <section id="dados">
+    <div class="section-head">
+      <h2>Dados do problema</h2>
+      <span class="section-num">01</span>
+    </div>
+    <p>A empresa precisa entregar as quantidades mínimas abaixo. A produção diária de cada fábrica e o
+      custo correspondente são:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Fábrica</th>
+          <th class="num">Desktops/dia</th>
+          <th class="num">Notebooks/dia</th>
+          <th class="num">Netbooks/dia</th>
+          <th class="num">Custo/dia (R$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Manaus (x dias)</td>
+          <td class="num"><input type="number" id="in-m-desktop" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-m-notebook" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-m-netbook" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-m-cost" min="0" step="1"></td>
+        </tr>
+        <tr>
+          <td>Região Sul (y dias)</td>
+          <td class="num"><input type="number" id="in-s-desktop" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-s-notebook" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-s-netbook" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-s-cost" min="0" step="1"></td>
+        </tr>
+        <tr>
+          <td>Demanda mínima</td>
+          <td class="num"><input type="number" id="in-d-desktop" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-d-notebook" min="0" step="1"></td>
+          <td class="num"><input type="number" id="in-d-netbook" min="0" step="1"></td>
+          <td class="num">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- MODELO -->
+  <section id="modelo">
+    <div class="section-head">
+      <h2>Modelagem matemática</h2>
+      <span class="section-num">02</span>
+    </div>
+
+    <div class="model-list">
+      <div class="model-item">
+        <div class="label">Variáveis</div>
+        <div class="eq">
+          x = dias de operação · Manaus<br>
+          y = dias de operação · Região Sul
+        </div>
+      </div>
+
+      <div class="model-item">
+        <div class="label">Objetivo</div>
+        <div class="objective-box" id="eq-objective">Z = … → min</div>
+      </div>
+
+      <div class="model-item">
+        <div class="label">Desktops</div>
+        <div class="eq" id="eq-desktop"></div>
+      </div>
+
+      <div class="model-item">
+        <div class="label">Notebooks</div>
+        <div class="eq" id="eq-notebook"></div>
+      </div>
+
+      <div class="model-item">
+        <div class="label">Netbooks</div>
+        <div class="eq" id="eq-netbook"></div>
+      </div>
+
+      <div class="model-item">
+        <div class="label">Não negatividade</div>
+        <div class="eq">x ≥ 0, y ≥ 0</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FERRAMENTA -->
+  <section id="ferramenta">
+    <div class="section-head">
+      <h2>Solução pelo método gráfico</h2>
+      <span class="section-num">03</span>
+    </div>
+    <p>A região viável é a interseção dos semiplanos das três restrições, no primeiro quadrante.
+      Como Z é linear, o mínimo ocorre em um vértice dessa região — calculado abaixo em JavaScript.</p>
+
+    <div class="solver">
+      <div class="plot-card">
+        <svg id="plot" viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="legend">
+          <span><i style="background:#171717"></i>Desktops</span>
+          <span><i style="background:#a8a8a8"></i>Notebooks</span>
+          <span><i style="background:#d8d8d8"></i>Netbooks</span>
+          <span><i style="background:#ff5a36"></i>Região viável / Ótimo</span>
+        </div>
+      </div>
+
+      <div id="vtable-wrap">
+        <table class="vtable">
+          <thead>
+            <tr><th>Vértice (x, y)</th><th class="num">Z = custo</th></tr>
+          </thead>
+          <tbody id="vtbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="resultado">
+    <div class="section-head">
+      <h2>Solução ótima</h2>
+      <span class="section-num">04</span>
+    </div>
+    <div id="result-content">
+      <div class="result-answer" id="result-answer">calculando…</div>
+      <div class="check-grid" id="result-grid"></div>
+    </div>
+  </section>
+
+  <footer>
+    Modelagem e ferramenta computacional — ENADE 2021 · Programação Linear · material de estudo.
+  </footer>
+</div>
+
+<script>
+// ---------- VALORES ORIGINAIS ----------
+const DEFAULTS = {
+  mDesktop: 8000, mNotebook: 1000, mNetbook: 2000, mCost: 150000,
+  sDesktop: 2000, sNotebook: 1000, sNetbook: 7000, sCost: 210000,
+  dDesktop: 16000, dNotebook: 6000, dNetbook: 28000
+};
+
+const ids = {
+  mDesktop:'in-m-desktop', mNotebook:'in-m-notebook', mNetbook:'in-m-netbook', mCost:'in-m-cost',
+  sDesktop:'in-s-desktop', sNotebook:'in-s-notebook', sNetbook:'in-s-netbook', sCost:'in-s-cost',
+  dDesktop:'in-d-desktop', dNotebook:'in-d-notebook', dNetbook:'in-d-netbook'
+};
+const inputs = {};
+Object.keys(ids).forEach(k => inputs[k] = document.getElementById(ids[k]));
+
+function setValues(vals){
+  Object.keys(ids).forEach(k => inputs[k].value = vals[k]);
+}
+function getValues(){
+  const v = {};
+  Object.keys(ids).forEach(k => v[k] = Number(inputs[k].value) || 0);
+  return v;
+}
+function setDisabled(disabled){
+  Object.keys(ids).forEach(k => inputs[k].disabled = disabled);
+}
+
+// ---------- MODO ----------
+const btnResposta = document.getElementById('btn-resposta');
+const btnInterativo = document.getElementById('btn-interativo');
+const btnRestore = document.getElementById('btn-restore');
+const modeNote = document.getElementById('mode-note');
+
+function setMode(mode){
+  if (mode === 'resposta'){
+    btnResposta.classList.add('active');
+    btnInterativo.classList.remove('active');
+    btnRestore.style.display = 'none';
+    setValues(DEFAULTS);
+    setDisabled(true);
+    modeNote.textContent = 'Valores originais do enunciado do ENADE 2021. Clique em "Modo interativo" para editar a produção, os custos e as demandas e ver a solução recalculada em tempo real.';
+  } else {
+    btnResposta.classList.remove('active');
+    btnInterativo.classList.add('active');
+    btnRestore.style.display = 'inline-block';
+    setDisabled(false);
+    modeNote.textContent = 'Edite a produção diária, os custos e as demandas mínimas: a modelagem, o gráfico e a solução ótima são recalculados automaticamente.';
+  }
+  update();
+}
+btnResposta.addEventListener('click', () => setMode('resposta'));
+btnInterativo.addEventListener('click', () => setMode('interativo'));
+btnRestore.addEventListener('click', () => { setValues(DEFAULTS); update(); });
+Object.values(inputs).forEach(inp => inp.addEventListener('input', update));
+
+// ---------- UTILS ----------
+function fmt(n){ return n.toLocaleString('pt-BR', {maximumFractionDigits:2}); }
+function fmtMoney(n){ return 'R$ ' + n.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function gcd(a,b){ a=Math.abs(Math.round(a)); b=Math.abs(Math.round(b)); while(b){ [a,b]=[b,a%b]; } return a; }
+function gcd3(a,b,c){ return gcd(gcd(a,b),c); }
+function allInt(...nums){ return nums.every(n => Number.isInteger(n)); }
+
+// converte dias fracionários em "X dias e Yh" quando faz sentido
+function formatDays(d){
+  if (Math.abs(d - Math.round(d)) < 1e-6){
+    const r = Math.round(d);
+    return `${r} ${r===1?'dia':'dias'}`;
+  }
+  let days = Math.floor(d);
+  let hours = Math.round((d - days) * 24);
+  if (hours === 24){ hours = 0; days += 1; }
+  if (hours === 0) return `${days} ${days===1?'dia':'dias'}`;
+  if (days === 0) return `${hours}h`;
+  return `${days} ${days===1?'dia':'dias'} e ${hours}h`;
+}
+
+// quantidade de unidades (computadores) — sempre um número inteiro de itens;
+// se o modelo contínuo deu um valor fracionário, arredonda e mostra o valor exato como nota
+function displayCount(n){
+  const r = Math.round(n);
+  if (Math.abs(n - r) < 1e-6){
+    return { main: `${fmt(r)} unidades`, note: null };
+  }
+  return {
+    main: `${fmt(r)} unidades`,
+    note: `valor do modelo: ${fmt(n)} — arredondado, pois não há fração de computador`
+  };
+}
+
+// ---------- SOLVER ----------
+function intersect(l1, l2){
+  const det = l1.a*l2.b - l2.a*l1.b;
+  if (Math.abs(det) < 1e-9) return null;
+  return {
+    x: (l1.c*l2.b - l2.c*l1.b)/det,
+    y: (l1.a*l2.c - l2.a*l1.c)/det
+  };
+}
+function findVertices(constraints){
+  const lines = [...constraints, {a:1,b:0,c:0}, {a:0,b:1,c:0}];
+  function isFeasible(p, eps=1e-6){
+    if (p.x < -eps || p.y < -eps) return false;
+    for (const c of constraints){
+      if (c.a*p.x + c.b*p.y < c.c - eps) return false;
+    }
+    return true;
+  }
+  let vertices = [];
+  for (let i=0;i<lines.length;i++){
+    for (let j=i+1;j<lines.length;j++){
+      const p = intersect(lines[i], lines[j]);
+      if (!p) continue;
+      if (!isFeasible(p)) continue;
+      if (vertices.some(v => Math.abs(v.x-p.x)<1e-6 && Math.abs(v.y-p.y)<1e-6)) continue;
+      vertices.push(p);
+    }
+  }
+  return vertices;
+}
+
+// segmento de uma reta a·x + b·y = c dentro da caixa [0,xmax] x [0,ymax]
+function segmentInBox(a,b,c,xmax,ymax){
+  const pts = [];
+  const push = (x,y) => {
+    if (x>=-1e-6 && x<=xmax+1e-6 && y>=-1e-6 && y<=ymax+1e-6){
+      if (!pts.some(p=>Math.abs(p.x-x)<1e-6 && Math.abs(p.y-y)<1e-6)) pts.push({x,y});
+    }
+  };
+  if (Math.abs(b) > 1e-9){ push(0, c/b); push(xmax, (c-a*xmax)/b); }
+  if (Math.abs(a) > 1e-9){ push(c/a, 0); push((c-b*ymax)/a, ymax); }
+  if (pts.length < 2) return null;
+  return [pts[0], pts[1]];
+}
+
+// ---------- ATUALIZAÇÃO PRINCIPAL ----------
+function update(){
+  const v = getValues();
+
+  // ----- equações do modelo -----
+  document.getElementById('eq-objective').innerHTML =
+    `Z = ${fmt(v.mCost)}x + ${fmt(v.sCost)}y → min`;
+
+  function constraintEq(label, am, as, demand){
+    let html = `${fmt(am)}x + ${fmt(as)}y ≥ ${fmt(demand)}`;
+    const g = gcd3(am, as, demand);
+    if (allInt(am,as,demand) && g > 1 && g !== am && g !== 0){
+      html += `<span class="small">⇔ ${fmt(am/g)}x + ${fmt(as/g)}y ≥ ${fmt(demand/g)}</span>`;
+    }
+    return html;
+  }
+  document.getElementById('eq-desktop').innerHTML  = constraintEq('Desktops', v.mDesktop, v.sDesktop, v.dDesktop);
+  document.getElementById('eq-notebook').innerHTML = constraintEq('Notebooks', v.mNotebook, v.sNotebook, v.dNotebook);
+  document.getElementById('eq-netbook').innerHTML  = constraintEq('Netbooks', v.mNetbook, v.sNetbook, v.dNetbook);
+
+  // ----- restrições para o solver -----
+  const constraints = [
+    {a:v.mDesktop,  b:v.sDesktop,  c:v.dDesktop,  name:'Desktops'},
+    {a:v.mNotebook, b:v.sNotebook, c:v.dNotebook, name:'Notebooks'},
+    {a:v.mNetbook,  b:v.sNetbook,  c:v.dNetbook,  name:'Netbooks'}
+  ];
+  const cost = {x: v.mCost, y: v.sCost};
+
+  let vertices = findVertices(constraints);
+  vertices.forEach(p => p.z = cost.x*p.x + cost.y*p.y);
+  vertices.sort((a,b)=>a.z-b.z);
+
+  const vtbody = document.getElementById('vtbody');
+  vtbody.innerHTML = '';
+  const resultContent = document.getElementById('result-content');
+
+  if (vertices.length === 0){
+    vtbody.innerHTML = `<tr><td colspan="2" style="color:var(--muted)">Sem vértices viáveis</td></tr>`;
+    resultContent.innerHTML = `<div class="infeasible">Não há combinação de x e y (≥ 0) que satisfaça todas as restrições com os valores informados — o problema é inviável. Ajuste a produção ou as demandas.</div>`;
+    drawPlot(constraints, vertices, null);
+    return;
+  }
+
+  const optimal = vertices[0];
+
+  vertices.forEach(p=>{
+    const tr = document.createElement('tr');
+    if (p === optimal) tr.classList.add('optimal');
+    tr.innerHTML = `<td>(${p.x.toFixed(3)}, ${p.y.toFixed(3)})</td><td class="num">${fmtMoney(p.z)}</td>`;
+    vtbody.appendChild(tr);
+  });
+
+  // ----- resultado -----
+  resultContent.innerHTML = `
+    <div class="result-answer" id="result-answer"></div>
+    <div class="check-grid" id="result-grid"></div>
+  `;
+  document.getElementById('result-answer').innerHTML =
+    `x* = <strong>${optimal.x.toFixed(2)}</strong> dias (Manaus) &nbsp;·&nbsp; `+
+    `y* = <strong>${optimal.y.toFixed(2)}</strong> dias (Região Sul) &nbsp;·&nbsp; `+
+    `Z* = <strong>${fmtMoney(optimal.z)}</strong>` +
+    `<span class="sub">Em outras palavras: Manaus opera por ${formatDays(optimal.x)} e a fábrica da Região Sul por ${formatDays(optimal.y)}.</span>`;
+
+  const prod = {
+    desktop:  v.mDesktop*optimal.x  + v.sDesktop*optimal.y,
+    notebook: v.mNotebook*optimal.x + v.sNotebook*optimal.y,
+    netbook:  v.mNetbook*optimal.x  + v.sNetbook*optimal.y
+  };
+  const grid = document.getElementById('result-grid');
+  const items = [
+    ['Desktops produzidos', prod.desktop, v.dDesktop],
+    ['Notebooks produzidos', prod.notebook, v.dNotebook],
+    ['Netbooks produzidos', prod.netbook, v.dNetbook]
+  ];
+  items.forEach(([label, produced, min])=>{
+    const div = document.createElement('div');
+    div.className = 'check-item';
+    const d = displayCount(produced);
+    let html = `<div class="label">${label}</div><div class="val">${d.main} (mín. ${fmt(min)})</div>`;
+    if (d.note) html += `<div class="note">${d.note}</div>`;
+    div.innerHTML = html;
+    grid.appendChild(div);
+  });
+  const totalDiv = document.createElement('div');
+  totalDiv.className = 'check-item';
+  totalDiv.innerHTML = `<div class="label">Custo mínimo total</div><div class="val">${fmtMoney(optimal.z)}</div>`;
+  grid.appendChild(totalDiv);
+
+  drawPlot(constraints, vertices, optimal);
+}
+
+// ---------- PLOT SVG ----------
+function el(tag, attrs){
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+}
+
+function drawPlot(constraints, vertices, optimal){
+  const svg = document.getElementById('plot');
+  svg.innerHTML = '';
+  const W=600, H=380, M=44;
+
+  // escala dinâmica com base nos vértices viáveis
+  let xmax = 10, ymax = 10;
+  vertices.forEach(p => { xmax = Math.max(xmax, p.x); ymax = Math.max(ymax, p.y); });
+  xmax = Math.ceil(xmax * 1.25);
+  ymax = Math.ceil(ymax * 1.25);
+
+  const sx = x => M + (x/xmax) * (W - 2*M);
+  const sy = y => (H-M) - (y/ymax) * (H - 2*M);
+
+  // grade de fundo
+  const stepX = Math.max(1, Math.round(xmax/8));
+  const stepY = Math.max(1, Math.round(ymax/8));
+  for (let i=0;i<=xmax;i+=stepX){
+    svg.appendChild(el('line',{x1:sx(i),y1:sy(0),x2:sx(i),y2:sy(ymax),stroke:'#f0f0f0','stroke-width':1}));
+  }
+  for (let j=0;j<=ymax;j+=stepY){
+    svg.appendChild(el('line',{x1:sx(0),y1:sy(j),x2:sx(xmax),y2:sy(j),stroke:'#f0f0f0','stroke-width':1}));
+  }
+
+  // região viável
+  if (vertices.length){
+    let hullPts = vertices.map(v=>({x:v.x,y:v.y}));
+    const corners = [{x:xmax,y:0},{x:xmax,y:ymax},{x:0,y:ymax}];
+    function feasibleCorner(p){
+      const eps=1e-6;
+      if (p.x < -eps || p.y < -eps) return false;
+      for (const c of constraints){ if (c.a*p.x + c.b*p.y < c.c - eps) return false; }
+      return true;
+    }
+    corners.forEach(p=>{ if(feasibleCorner(p)) hullPts.push(p); });
+    const cx = hullPts.reduce((s,p)=>s+p.x,0)/hullPts.length;
+    const cy = hullPts.reduce((s,p)=>s+p.y,0)/hullPts.length;
+    hullPts.sort((a,b)=>Math.atan2(a.y-cy,a.x-cx) - Math.atan2(b.y-cy,b.x-cx));
+    const polyPts = hullPts.map(p=>`${sx(p.x)},${sy(p.y)}`).join(' ');
+    svg.appendChild(el('polygon',{points:polyPts, fill:'#fff1ed', stroke:'none'}));
+  }
+
+  // eixos
+  svg.appendChild(el('line',{x1:sx(0),y1:sy(0),x2:sx(xmax),y2:sy(0),stroke:'#d8d8d8','stroke-width':1}));
+  svg.appendChild(el('line',{x1:sx(0),y1:sy(0),x2:sx(0),y2:sy(ymax),stroke:'#d8d8d8','stroke-width':1}));
+  for (let i=0;i<=xmax;i+=stepX){
+    const t = el('text',{x:sx(i),y:sy(0)+18,'font-size':10,fill:'#8a8a8a','text-anchor':'middle','font-family':'Space Mono'});
+    t.textContent = i; svg.appendChild(t);
+  }
+  for (let j=0;j<=ymax;j+=stepY){
+    const t = el('text',{x:sx(0)-10,y:sy(j)+3,'font-size':10,fill:'#8a8a8a','text-anchor':'end','font-family':'Space Mono'});
+    t.textContent = j; svg.appendChild(t);
+  }
+  const xlab = el('text',{x:sx(xmax),y:sy(0)+34,'font-size':10,fill:'#8a8a8a','text-anchor':'end','font-family':'Space Mono'});
+  xlab.textContent='x — dias (Manaus)'; svg.appendChild(xlab);
+  const ylab = el('text',{x:sx(0)-30,y:sy(ymax)-8,'font-size':10,fill:'#8a8a8a','text-anchor':'start','font-family':'Space Mono'});
+  ylab.textContent='y — dias (Sul)'; svg.appendChild(ylab);
+
+  // retas das restrições
+  const colors = ['#171717', '#a8a8a8', '#d8d8d8'];
+  constraints.forEach((c, i)=>{
+    const seg = segmentInBox(c.a, c.b, c.c, xmax, ymax);
+    if (!seg) return;
+    svg.appendChild(el('line',{x1:sx(seg[0].x),y1:sy(seg[0].y),x2:sx(seg[1].x),y2:sy(seg[1].y),
+      stroke:colors[i],'stroke-width':1.8}));
+  });
+
+  // vértices
+  vertices.forEach(p=>{
+    const isOpt = p===optimal;
+    svg.appendChild(el('circle',{cx:sx(p.x),cy:sy(p.y),r:isOpt?5.5:3,
+      fill: isOpt?'#ff5a36':'#ffffff', stroke: isOpt?'#ff5a36':'#a8a8a8','stroke-width':1.5}));
+    if (isOpt){
+      const lbl = el('text',{x:sx(p.x)+10,y:sy(p.y)-10,'font-size':11,fill:'#ff5a36','font-family':'Space Mono','font-weight':700});
+      lbl.textContent = `Ótimo (${p.x.toFixed(2)}, ${p.y.toFixed(2)})`;
+      svg.appendChild(lbl);
+    }
+  });
+}
+
+// ---------- INICIALIZAÇÃO ----------
+setMode('resposta');
+</script>
+</body>
+</html>
