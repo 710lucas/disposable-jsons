@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programação Dinâmica · exemplos visuais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─── tokens ──────────────────────────────────────────────── */
+:root {
+  --bg:       #F3F1ED;
+  --surface:  #FFFFFF;
+  --ink:      #18171A;
+  --soft:     #6D6861;
+  --ghost:    #B0ABA4;
+  --rule:     #E3E0D9;
+
+  --accent:   #3B55E6;
+  --acc-light:#ECF0FD;
+  --acc-mid:  #9BAAF0;
+
+  --heat:     #C4390B;
+  --heat-light:#FDF0EB;
+
+  --leaf:     #1A7A4C;
+  --leaf-light:#EBFAF2;
+
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+
+  /* backwards-compat aliases used by inline HTML attrs & JS */
+  --text:         var(--ink);
+  --muted:        var(--soft);
+  --faint:        var(--ghost);
+  --panel:        var(--surface);
+  --panel-border: var(--rule);
+  --border:       var(--rule);
+  --dp:           var(--accent);
+  --dp-dim:       var(--acc-light);
+  --dp-border:    var(--acc-mid);
+  --waste:        var(--heat);
+  --waste-dim:    var(--heat-light);
+  --waste-border: #F5A898;
+  --base:         var(--leaf);
+  --base-dim:     var(--leaf-light);
+  --line:         var(--rule);
+  --acc-bg:       var(--acc-light);
+  --code-bg:      var(--bg);
+}
+
+/* ─── reset & base ────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+  padding: 64px 32px 120px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+
+/* ─── header ──────────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ghost);
+  letter-spacing: .06em;
+  margin: 0 0 18px;
+}
+
+/* AESTHETIC RISK: monospace as display face */
+h1 {
+  font-family: var(--mono);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+
+.lede {
+  font-size: 15px;
+  color: var(--soft);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 0 48px;
+}
+
+/* ─── tabs ────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 40px;
+}
+.tab-btn {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ghost);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 8px 16px 12px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+}
+.tab-btn:first-child { padding-left: 0; }
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ─── formula / code ─────────────────────────────────────── */
+.formula {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 11px 16px;
+  width: fit-content;
+  margin: 14px 0 30px;
+}
+code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--ink);
+}
+
+/* ─── controls ────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.controls label { font-size: 13px; color: var(--soft); }
+.n-group { display: flex; align-items: center; gap: 10px; }
+input[type=range] { width: 130px; accent-color: var(--accent); cursor: pointer; }
+#n-val {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  min-width: 20px;
+  text-align: center;
+}
+
+button {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  letter-spacing: .01em;
+  transition: background .12s;
+}
+button:hover { background: #2D42C4; }
+button:disabled { opacity: .3; cursor: not-allowed; }
+button.ghost {
+  background: transparent;
+  color: var(--soft);
+  border: 1px solid var(--rule);
+}
+button.ghost:hover { background: var(--bg); color: var(--ink); }
+
+/* ─── two-column panels ───────────────────────────────────── */
+.panels { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media(min-width: 900px) { .panels { grid-template-columns: 1.45fr 1fr; } }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 20px 22px 22px;
+  overflow: hidden;
+}
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.panel-title { font-size: 14px; font-weight: 600; }
+.panel-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ghost);
+  font-style: italic;
+}
+.panel-sub { font-size: 13px; color: var(--soft); margin: 0 0 16px; line-height: 1.6; }
+
+/* ─── stats ───────────────────────────────────────────────── */
+.stat-row { display: flex; gap: 32px; margin: 16px 0 6px; flex-wrap: wrap; }
+.stat {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ghost);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.stat b {
+  display: block;
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  margin-top: 3px;
+}
+.stat.waste b { color: var(--heat); }
+.stat.dp    b { color: var(--accent); }
+
+/* ─── SVG tree — SIGNATURE: dot-grid canvas ──────────────── */
+#tree-scroll {
+  margin-top: 10px;
+  padding: 16px 12px 12px;
+  overflow-x: auto;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background-color: var(--surface);
+  background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+svg text { font-family: var(--mono); }
+.node-circle {
+  fill: var(--surface);
+  stroke: var(--rule);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity .25s, stroke .2s, fill .2s;
+}
+.node-circle.visible { opacity: 1; }
+.node-circle.repeat  { fill: var(--heat-light); stroke: var(--heat); }
+.node-circle.base    { fill: var(--leaf-light); stroke: var(--leaf); }
+.node-label {
+  font-size: 11px; fill: var(--ink);
+  text-anchor: middle; dominant-baseline: central;
+  opacity: 0; transition: opacity .25s; pointer-events: none;
+}
+.node-label.visible { opacity: 1; }
+.node-value {
+  font-size: 10px; fill: var(--ghost); text-anchor: middle;
+  opacity: 0; transition: opacity .3s; pointer-events: none;
+}
+.node-value.visible { opacity: 1; fill: var(--accent); }
+.edge { stroke: var(--rule); stroke-width: 1.2; opacity: 0; transition: opacity .25s; }
+.edge.visible { opacity: 1; }
+
+/* ─── DP table ────────────────────────────────────────────── */
+.dp-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
+.dp-cell {
+  flex: 1 1 auto; min-width: 50px; text-align: center;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  padding: 10px 4px;
+  transition: background .22s, border-color .22s;
+}
+.dp-cell.filled { background: var(--acc-light); border-color: var(--acc-mid); }
+.dp-cell .idx { font-family: var(--mono); font-size: 9.5px; color: var(--ghost); margin-bottom: 5px; }
+.dp-cell .val { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--rule); min-height: 22px; transition: color .22s; }
+.dp-cell.filled .val { color: var(--accent); }
+.dp-note { font-size: 13px; color: var(--soft); margin-top: 12px; }
+.status { margin-top: 12px; font-size: 12.5px; color: var(--ghost); font-style: italic; min-height: 18px; }
+.status.done { color: var(--accent); font-style: normal; font-weight: 500; }
+
+/* ─── race bars ───────────────────────────────────────────── */
+.race { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--rule); }
+.race-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ghost);
+  margin: 0 0 22px;
+}
+.race-line { margin-bottom: 18px; }
+.race-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--soft); margin-bottom: 7px; }
+.race-label span:last-child { font-family: var(--mono); font-weight: 500; color: var(--ink); }
+.race-track { height: 8px; background: var(--bg); border-radius: 2px; overflow: hidden; }
+.race-fill { height: 100%; width: 0%; border-radius: 2px; transition: width .9s cubic-bezier(.2,.8,.2,1); }
+.race-fill.waste { background: var(--heat); }
+.race-fill.dp    { background: var(--accent); }
+
+/* ─── footer ──────────────────────────────────────────────── */
+footer {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-size: 13.5px;
+  color: var(--soft);
+  line-height: 1.8;
+  max-width: 640px;
+}
+
+/* ─── step labels ─────────────────────────────────────────── */
+.step-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ghost);
+  margin: 44px 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.step-label:first-of-type { margin-top: 0; }
+.step-num { display: none; }
+.step-explain { font-size: 14px; color: var(--soft); line-height: 1.75; margin: 0 0 16px; max-width: 680px; }
+.step-explain b { color: var(--ink); font-weight: 600; }
+
+/* ─── box stacking ────────────────────────────────────────── */
+.box-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; min-height: 90px; }
+.box-card {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding: 8px; min-width: 52px;
+  opacity: .3;
+  transition: opacity .3s, background .3s, border-color .3s;
+}
+.box-card.active { opacity: 1; background: var(--acc-light); border-color: var(--acc-mid); }
+.box-card .box-id { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent); }
+.box-card .box-dim { font-size: 10px; color: var(--ghost); margin-top: 2px; }
+
+/* ─── calc table ──────────────────────────────────────────── */
+.calc-table { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.calc-row {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 14px 16px;
+  opacity: 0; transform: translateY(5px);
+  transition: opacity .25s, transform .25s, border-color .2s;
+}
+.calc-row.visible { opacity: 1; transform: none; }
+.calc-row.complete { border-color: var(--acc-mid); }
+.calc-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.calc-head > span:first-child { font-size: 13.5px; font-weight: 600; }
+.calc-head .w { font-size: 11.5px; color: var(--ghost); font-weight: 400; }
+.calc-line { font-size: 13px; color: var(--soft); display: flex; flex-wrap: wrap; align-items: center; gap: 5px; line-height: 1.8; }
+.chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--soft);
+  opacity: 0;
+  transition: opacity .2s, background .2s, border-color .2s, color .2s;
+}
+.chip.visible { opacity: 1; }
+.chip.chosen { background: var(--acc-light); border-color: var(--acc-mid); color: var(--accent); font-weight: 500; }
+.calc-result { font-size: 13.5px; color: var(--ink); margin-top: 10px; opacity: 0; transition: opacity .25s; }
+.calc-result.visible { opacity: 1; }
+.calc-result b { color: var(--accent); }
+
+/* ─── box stack (final result) ────────────────────────────── */
+.stack-wrap {
+  display: flex; flex-direction: column-reverse; align-items: flex-start;
+  gap: 2px; margin-top: 16px; min-height: 40px;
+}
+.stack-box {
+  background: var(--acc-light);
+  border: 1px solid var(--acc-mid);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--accent);
+  opacity: 0; transform: translateY(-30px);
+  transition: opacity .4s cubic-bezier(.34,1.4,.64,1), transform .4s cubic-bezier(.34,1.4,.64,1);
+}
+.stack-box.visible { opacity: 1; transform: none; }
+
+.mini-stack-label {
+  font-family: var(--mono); font-size: 9.5px; color: var(--ghost);
+  margin-top: 12px; text-transform: uppercase; letter-spacing: .08em;
+}
+.mini-stack { display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 2px; margin-top: 5px; min-height: 18px; }
+.mini-box {
+  background: var(--acc-light); border: 1px solid var(--acc-mid); border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 9.5px; color: var(--accent);
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity .2s, transform .2s;
+}
+.mini-box.visible { opacity: 1; transform: none; }
+
+/* ─── production tab ──────────────────────────────────────── */
+.month-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.month-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 148px;
+}
+.month-card .m-title {
+  font-size: 13px; font-weight: 600; margin-bottom: 10px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+}
+.month-card .m-line { font-size: 13px; color: var(--soft); line-height: 1.9; }
+.month-card .m-line span { font-weight: 500; color: var(--ink); }
+
+.order-badge {
+  font-family: var(--mono);
+  font-size: 10px; color: var(--ghost);
+  margin-left: 8px; vertical-align: middle;
+}
+
+.timeline { display: flex; align-items: stretch; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.timeline-box {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 16px; min-width: 118px; text-align: center;
+  opacity: 0; transform: translateX(-16px);
+  transition: opacity .35s cubic-bezier(.34,1.4,.64,1), transform .35s cubic-bezier(.34,1.4,.64,1),
+              background .25s, border-color .25s;
+}
+.timeline-box.visible {
+  opacity: 1; transform: none;
+  background: var(--acc-light); border-color: var(--acc-mid);
+}
+.timeline-box .t-month {
+  font-family: var(--mono); font-size: 10px; color: var(--ghost);
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.timeline-box .t-qty {
+  font-family: var(--mono); font-size: 22px; font-weight: 500;
+  color: var(--accent); margin: 6px 0 3px; letter-spacing: -.02em;
+}
+.timeline-box .t-stock { font-size: 11.5px; color: var(--soft); }
+.timeline-arrow { color: var(--rule); font-size: 18px; align-self: center; }
+
+.total-cost {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 15px; font-weight: 500;
+  color: var(--accent);
+  opacity: 0; transition: opacity .3s;
+}
+.total-cost.visible { opacity: 1; }
+
+/* ── bellman tab ──────────────────────────────────────────── */
+.bellman-def {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--rule); border-radius: 8px;
+  overflow: hidden; margin: 12px 0 28px; max-width: 520px;
+  background: var(--surface);
+}
+.bdef-row {
+  display: grid; grid-template-columns: 170px 1fr;
+  gap: 0; padding: 11px 16px;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.bdef-row:last-child { border-bottom: none; }
+.bdef-key { font-size: 11px; color: var(--ghost); text-transform: uppercase; letter-spacing: .07em; font-weight: 500; }
+.bdef-val { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+
+.bellman-eq {
+  font-family: var(--mono);
+  font-size: 15px; line-height: 1.8;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 14px 20px;
+  margin: 12px 0 26px;
+  display: inline-block;
+}
+.bellman-eq em { color: var(--accent); font-style: normal; }
+
+#bell-svg-wrap {
+  overflow-x: auto;
+  background-color: var(--surface);
+  background-image: radial-gradient(circle, var(--rule) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 20px 16px 14px;
+  margin: 0 0 10px;
+}
+.bell-eq-live {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--accent);
+  min-height: 22px;
+  margin-bottom: 4px;
+  transition: opacity .2s;
+}
+.bellman-generalize {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 20px 22px;
+  margin-top: 4px; max-width: 680px;
+}
+.bellman-generalize table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+.bellman-generalize th {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--ghost); font-weight: 500;
+  text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule);
+}
+.bellman-generalize td {
+  font-size: 13px; color: var(--soft); padding: 9px 12px;
+  border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.5;
+}
+.bellman-generalize tr:last-child td { border-bottom: none; }
+.bellman-generalize td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.bellman-generalize td code { font-size: 11.5px; }
+
+/* ── knapsack ────────────────────────────────────────────── */
+.knap-items { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0 28px; }
+.knap-item-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 14px 16px; min-width: 86px; text-align: center;
+  transition: background .25s, border-color .25s;
+}
+.knap-item-card.chosen { background: var(--acc-light); border-color: var(--acc-mid); }
+.ki-id {
+  font-family: var(--mono); font-size: 22px; font-weight: 700;
+  color: var(--ink); display: block; margin-bottom: 6px;
+}
+.knap-item-card.chosen .ki-id { color: var(--accent); }
+.ki-row { font-size: 11px; color: var(--ghost); margin-top: 2px; }
+.ki-row span { color: var(--soft); font-weight: 500; }
+
+.knap-table-wrap { overflow-x: auto; margin: 12px 0 6px; }
+.knap-table { border-collapse: collapse; font-family: var(--mono); font-size: 12.5px; }
+.knap-table th {
+  font-size: 10px; font-weight: 500; letter-spacing: .04em;
+  color: var(--ghost); background: var(--bg);
+  border: 1px solid var(--rule); padding: 7px 12px;
+  text-align: center; white-space: nowrap;
+}
+.knap-table th.kh-row { text-align: left; min-width: 120px; }
+.knap-table td {
+  text-align: center; padding: 9px 12px;
+  border: 1px solid var(--rule); min-width: 42px;
+  color: var(--rule); background: var(--bg);
+  transition: background .18s, color .18s;
+}
+.knap-table td.kt-rowlabel {
+  text-align: left; color: var(--soft); font-size: 11.5px;
+  background: var(--bg); padding: 8px 12px; white-space: nowrap;
+}
+.knap-table td.kt-base  { color: var(--ghost); background: var(--surface); }
+.knap-table td.kt-skip  { color: var(--soft);  background: var(--surface); }
+.knap-table td.kt-take  { color: var(--accent); background: var(--acc-light); font-weight: 600; }
+.knap-table td.kt-src   { outline: 2px solid var(--heat); outline-offset: -2px; }
+.knap-table td.kt-optimal {
+  background: var(--acc-light); color: var(--accent);
+  outline: 2px solid var(--accent); outline-offset: -2px;
+}
+
+.knap-eq-live {
+  font-family: var(--mono); font-size: 12.5px; color: var(--soft);
+  min-height: 20px; margin: 10px 0 4px; line-height: 1.6;
+}
+
+.knap-bag-wrap { margin-top: 20px; max-width: 480px; }
+.knap-bag-title { font-size: 10.5px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--ghost); margin: 0 0 10px; }
+.knap-bag-items { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+.knap-bag-item {
+  background: var(--acc-light); border: 1px solid var(--acc-mid);
+  border-radius: 5px; padding: 7px 12px;
+  font-family: var(--mono); font-size: 11.5px; color: var(--accent);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.knap-bag-item.visible { opacity: 1; transform: none; }
+.knap-bag-cap { height: 10px; background: var(--bg); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+.knap-bag-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 2px; transition: width .8s cubic-bezier(.2,.8,.2,1); }
+.knap-bag-label { font-size: 12.5px; color: var(--soft); margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Programação Dinâmica · Exemplos Interativos</p>
+  <h1>Subproblemas, memoização e otimalidade</h1>
+  <p class="lede">
+    Três exemplos clássicos para entender o mesmo princípio: identificar subproblemas
+    que se repetem, resolver cada um uma única vez, e reaproveitar o resultado em vez
+    de recalculá-lo do zero.
+  </p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="fib">Fibonacci</button>
+    <button class="tab-btn" data-tab="boxes">Empilhar caixas</button>
+    <button class="tab-btn" data-tab="prod">Planejamento de produção</button>
+    <button class="tab-btn" data-tab="bellman">Equação de Bellman</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-fib">
+
+    <div class="formula">F(n) = F(n&minus;1) + F(n&minus;2), &nbsp; F(0)=0, &nbsp; F(1)=1</div>
+
+    <div class="controls">
+      <div class="n-group">
+        <label for="n-slider">n</label>
+        <input type="range" id="n-slider" min="3" max="7" value="6" step="1">
+        <span id="n-val">6</span>
+      </div>
+      <button id="run-btn">Executar comparação</button>
+      <button id="reset-btn" class="ghost">Reiniciar</button>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Recursão ingênua</span>
+          <span class="panel-tag">O(2&#8319;) chamadas</span>
+        </div>
+        <p class="panel-sub">
+          Cada círculo é uma chamada de função. Em amarelo, subproblemas que já
+          haviam sido calculados antes em outro ramo da árvore &mdash; e que estão
+          sendo recalculados do zero.
+        </p>
+        <div class="stat-row">
+          <div class="stat">chamadas totais<b id="call-count">0</b></div>
+          <div class="stat waste">recalculadas<b id="repeat-count">0</b></div>
+        </div>
+        <div id="tree-scroll">
+          <svg id="tree-svg" width="100" height="100"></svg>
+        </div>
+        <p class="status" id="tree-status">Pronto para rodar.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Bottom-up com memoização</span>
+          <span class="panel-tag">O(n) operações</span>
+        </div>
+        <p class="panel-sub">
+          Preenche um vetor da esquerda para a direita. Cada célula usa apenas as
+          duas anteriores &mdash; nenhum valor é calculado mais de uma vez.
+        </p>
+        <div class="stat-row">
+          <div class="stat dp">operações totais<b id="op-count">0</b></div>
+        </div>
+        <div class="dp-row" id="dp-row"></div>
+        <p class="dp-note"><code>dp[i] = dp[i-1] + dp[i-2]</code></p>
+        <p class="status" id="dp-status">Pronto para rodar.</p>
+      </div>
+    </div>
+
+    <div class="race">
+      <p class="race-title">Resultado da corrida</p>
+      <div class="race-line">
+        <div class="race-label"><span>Recursão ingênua</span><span id="race-call-val">0</span></div>
+        <div class="race-track"><div class="race-fill waste" id="race-call-bar"></div></div>
+      </div>
+      <div class="race-line">
+        <div class="race-label"><span>Programação dinâmica</span><span id="race-op-val">0</span></div>
+        <div class="race-track"><div class="race-fill dp" id="race-op-bar"></div></div>
+      </div>
+    </div>
+
+    <footer>
+      A ideia central da programação dinâmica é simples: identificar subproblemas
+      sobrepostos (aqui, os mesmos valores de F(k) aparecendo várias vezes na árvore)
+      e guardar o resultado de cada um na primeira vez em que é calculado. Isso troca
+      uma complexidade exponencial por uma linear &mdash; a diferença fica mais
+      evidente quanto maior o n.
+    </footer>
+  </div>
+
+  <div class="tab-panel" id="tab-boxes">
+
+    <p class="step-explain">
+      Problema: empilhar caixas para conseguir a maior altura possível. Uma caixa só
+      pode ficar em cima de outra se for estritamente mais estreita. A decisão em
+      cada caixa é: <b style="color:var(--text);font-weight:700">vale mais a pena ficar sozinha no
+      topo, ou apoiar em cima de alguma pilha já calculada?</b>
+    </p>
+
+    <div class="controls">
+      <button id="box-run-btn">Executar comparação</button>
+      <button id="box-reset-btn" class="ghost">Reiniciar</button>
+    </div>
+
+    <p class="step-label"><span class="step-num">1</span> Ordenar as caixas</p>
+    <p class="step-explain">
+      Sem ordenar, não dá pra saber quais caixas já são "candidatas válidas" para
+      apoiar uma nova caixa. Ordenando por largura decrescente, ao chegar em cada
+      caixa todas as que poderiam estar embaixo dela já foram processadas.
+    </p>
+    <p class="status" id="box-sort-status">Ordem original (aleatória).</p>
+    <div class="box-row" id="box-row-original"></div>
+
+    <p class="step-label"><span class="step-num">2</span> Definir o subproblema</p>
+    <p class="step-explain">
+      <code style="font-family:'JetBrains Mono',monospace;color:var(--dp);background:var(--dp-dim);padding:1px 6px;border-radius:4px;">melhor(i)</code>
+      = maior altura de pilha possível tendo a caixa <b style="color:var(--text);font-weight:700">i</b>
+      como base. Para calcular, olho todas as caixas mais largas que já viraram base
+      de alguma pilha calculada antes, pego a <b style="color:var(--text);font-weight:700">melhor</b>
+      delas e empilho a caixa i em cima.
+    </p>
+    <div class="formula" style="font-size:13px;">melhor(i) = altura(i) + max( melhor(j) | largura(j) &gt; largura(i), j já processado )</div>
+
+    <p class="step-label"><span class="step-num">3</span> Resolver reaproveitando subproblemas</p>
+    <p class="step-explain">
+      Cada caixa processada vira uma entrada no memo. Caixas seguintes consultam
+      esse memo em vez de recalcular a pilha inteira a partir do zero &mdash; é
+      por isso que o número de consultas cresce, mas o número de cálculos novos não.
+    </p>
+    <div class="stat-row">
+      <div class="stat">caixas processadas<b id="box-count">0</b></div>
+      <div class="stat dp">consultas ao memo<b id="box-lookup-count">0</b></div>
+    </div>
+    <div class="calc-table" id="calc-table"></div>
+    <p class="status" id="box-status">Pronto para rodar.</p>
+
+    <p class="step-label"><span class="step-num">✓</span> Resultado: a pilha mais alta</p>
+    <div class="stack-wrap" id="stack-wrap"></div>
+    <p class="status" id="stack-status"></p>
+
+    <footer>
+      Esse é o mesmo padrão do Fibonacci, só que aplicado a um problema de decisão:
+      em vez de somar dois valores anteriores, cada caixa escolhe o melhor entre
+      vários subproblemas já resolvidos. Sem memoização, recalcular "qual a melhor
+      pilha possível a partir daqui" para cada caixa, em cada chamada recursiva,
+      também cresceria exponencialmente &mdash; com a tabela, cada caixa é
+      processada uma única vez.
+    </footer>
+  </div>
+
+  <div class="tab-panel" id="tab-prod">
+
+    <p class="step-explain">
+      Uma fábrica precisa decidir quanto produzir a cada mês para atender a demanda
+      conhecida, considerando custo de produção, custo de manter estoque, e que é
+      sempre possível produzir antecipadamente para os meses seguintes. A decisão em
+      cada mês é: <b style="color:var(--text);font-weight:700">produzir só o necessário agora, ou
+      produzir mais e guardar em estoque para economizar no futuro?</b>
+    </p>
+
+    <div class="controls">
+      <button id="prod-run-btn">Executar comparação</button>
+      <button id="prod-reset-btn" class="ghost">Reiniciar</button>
+    </div>
+
+    <p class="step-label"><span class="step-num">1</span> Configurar os dados do problema</p>
+    <p class="step-explain">Demanda conhecida, custo de produção e custo de estoque variam mês a mês.</p>
+    <div class="month-row" id="month-row"></div>
+
+    <p class="step-label"><span class="step-num">2</span> Definir o subproblema</p>
+    <p class="step-explain">
+      <code style="font-family:'JetBrains Mono',monospace;color:var(--dp);background:var(--dp-dim);padding:1px 6px;border-radius:4px;">melhor(mês)</code>
+      = menor custo possível para atender toda a demanda do mês até o fim do
+      horizonte, partindo de estoque zero nesse mês.
+    </p>
+    <div class="formula" style="font-size:13px;">melhor(m) = mín. sobre k &ge; m de [ custo de produzir em m cobrindo m..k + estoque acumulado + melhor(k+1) ]</div>
+
+    <p class="step-label"><span class="step-num">3</span> Resolver de trás para frente, reaproveitando subproblemas</p>
+    <p class="step-explain">
+      Como a decisão de um mês depende do custo dos meses seguintes, calculamos
+      primeiro o último mês, depois o penúltimo, e assim por diante &mdash; cada mês
+      processado consulta o resultado já memoizado dos meses seguintes em vez de
+      recalculá-lo do zero.
+    </p>
+    <div class="stat-row">
+      <div class="stat">meses processados<b id="prod-count">0</b></div>
+      <div class="stat dp">consultas ao memo<b id="prod-lookup-count">0</b></div>
+    </div>
+    <div class="calc-table" id="prod-calc-table"></div>
+    <p class="status" id="prod-status">Pronto para rodar.</p>
+
+    <p class="step-label"><span class="step-num">✓</span> Resultado: política ótima de produção</p>
+    <div class="timeline" id="timeline"></div>
+    <p class="total-cost" id="total-cost"></p>
+
+    <footer>
+      Repare que "melhor(Mês 3)" é consultado tanto pelo cálculo de Mês 1 quanto
+      pelo de Mês 2 &mdash; ele é resolvido uma única vez e reaproveitado nos dois
+      lugares. Sem memoização, cada mês recalcularia do zero todo o planejamento
+      restante, repetindo o mesmo trabalho várias vezes ao longo do horizonte.
+    </footer>
+  </div>
+
+  <!-- ═══════════════════ TAB 4 — MOCHILA 0-1 / BELLMAN ═══════════════════ -->
+  <div class="tab-panel" id="tab-bellman">
+
+    <p class="step-explain">
+      O problema da <b>mochila 0-1</b> é o exemplo canônico da equação de Bellman:
+      dado um conjunto de itens com peso e valor, e uma mochila de capacidade W, quais
+      itens incluir para <b>maximizar o valor total</b> sem exceder a capacidade?
+      Cada item pode ser incluído (1) ou não (0) — daí o "0-1".
+      Ao contrário de Fibonacci (1D), o estado aqui é bidimensional: <em>(item, capacidade)</em>.
+    </p>
+
+    <p class="step-label"><span class="step-num"></span>Itens disponíveis &nbsp;·&nbsp; capacidade W = 8</p>
+    <div class="knap-items" id="knap-items"></div>
+
+    <p class="step-label"><span class="step-num"></span>Equação de Bellman</p>
+    <div class="bellman-def">
+      <div class="bdef-row">
+        <span class="bdef-key">Estado</span>
+        <span class="bdef-val">(i, c) — item i e capacidade restante c</span>
+      </div>
+      <div class="bdef-row">
+        <span class="bdef-key">Função valor</span>
+        <span class="bdef-val">V(i, c) = maior valor com itens 1..i e capacidade c</span>
+      </div>
+      <div class="bdef-row">
+        <span class="bdef-key">Base</span>
+        <span class="bdef-val">V(0, c) = 0 &nbsp;∀c</span>
+      </div>
+    </div>
+    <div class="bellman-eq" style="white-space:pre-line">V(i, c) = <em>V(i−1, c)</em>                                  se wᵢ &gt; c
+V(i, c) = max( <em>V(i−1, c)</em>,  vᵢ + <em>V(i−1, c−wᵢ)</em> )    se wᵢ ≤ c</div>
+    <p class="step-explain">
+      Dois casos: item muito pesado → só pular. Caso contrário, o melhor entre
+      <b>pular</b> (linha acima, mesma coluna) e <b>tomar</b> (valor do item + melhor
+      resultado com a capacidade restante).
+    </p>
+
+    <p class="step-label"><span class="step-num"></span>Preenchendo a tabela bottom-up</p>
+    <p class="step-explain">
+      <span style="color:var(--accent);font-weight:600">Azul</span> = item tomado (valor melhorou).
+      Cinza = item pulado.
+      Bordas <span style="color:var(--heat);font-weight:600">âmbar</span> = células consultadas para aquela decisão.
+    </p>
+    <div class="controls">
+      <button id="knap-run-btn">Preencher tabela</button>
+      <button id="knap-reset-btn" class="ghost">Reiniciar</button>
+    </div>
+    <div class="knap-table-wrap">
+      <table class="knap-table" id="knap-table"></table>
+    </div>
+    <p class="knap-eq-live" id="knap-eq-live"></p>
+    <p class="status" id="knap-status">Pronto para rodar.</p>
+
+    <p class="step-label" style="margin-top:40px"><span class="step-num"></span>Backtracking — quais itens foram escolhidos?</p>
+    <p class="step-explain">
+      A tabela guarda valores, não decisões. Para saber quais itens entraram, percorremos
+      de baixo para cima: se V(i, c) ≠ V(i−1, c), o item i foi tomado; subtraímos wᵢ
+      de c e continuamos.
+    </p>
+    <div class="knap-bag-wrap" id="knap-bag-wrap" style="display:none">
+      <p class="knap-bag-title">Itens na mochila</p>
+      <div class="knap-bag-items" id="knap-bag-items"></div>
+      <div class="knap-bag-cap"><div class="knap-bag-fill" id="knap-bag-fill"></div></div>
+      <p class="knap-bag-label" id="knap-bag-label"></p>
+    </div>
+
+    <footer>
+      O estado bidimensional (item, capacidade) é o que torna o knapsack mais rico
+      que Fibonacci: em vez de uma linha, a tabela é uma grade. A equação de Bellman
+      é a mesma abstração — V(estado) depende de V(estados menores) —
+      apenas a definição de "estado" e "transição" muda. Nos outros exemplos desta
+      página: Fibonacci tem estado 1D (índice n); pilha de caixas tem estado 1D
+      (caixa base); planejamento de produção tem estado 1D (mês). Knapsack é o
+      salto natural para estados 2D.
+    </footer>
+  </div>
+
+</div>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ================= FIBONACCI TAB ================= */
+const slider = document.getElementById('n-slider');
+const nVal = document.getElementById('n-val');
+const runBtn = document.getElementById('run-btn');
+const resetBtn = document.getElementById('reset-btn');
+const treeSvg = document.getElementById('tree-svg');
+const treeScroll = document.getElementById('tree-scroll');
+const treeStatus = document.getElementById('tree-status');
+const dpStatus = document.getElementById('dp-status');
+const dpRow = document.getElementById('dp-row');
+const callCountEl = document.getElementById('call-count');
+const repeatCountEl = document.getElementById('repeat-count');
+const opCountEl = document.getElementById('op-count');
+
+let n = parseInt(slider.value, 10);
+let running = false;
+let timers = [];
+
+function clearTimers(){ timers.forEach(t => clearTimeout(t)); timers = []; }
+
+function buildTreeData(n){
+  let idCounter = 0;
+  let leafX = 0;
+  const nodesById = {};
+  const events = [];
+  const seen = {};
+
+  function build(k, depth, parentId){
+    const id = idCounter++;
+    const isRepeat = seen[k] !== undefined;
+    if(seen[k] === undefined) seen[k] = 0;
+    seen[k]++;
+    events.push({type:'enter', id, k, depth, parentId, repeat: isRepeat});
+
+    let x, value;
+    if(k <= 1){
+      x = leafX; leafX += 1;
+      value = k;
+    } else {
+      const leftId = build(k-1, depth+1, id);
+      const rightId = build(k-2, depth+1, id);
+      x = (nodesById[leftId].x + nodesById[rightId].x) / 2;
+      value = nodesById[leftId].value + nodesById[rightId].value;
+    }
+    nodesById[id] = {id, k, depth, parentId, x, value, repeat: isRepeat};
+    events.push({type:'value', id, value});
+    return id;
+  }
+
+  build(n, 0, null);
+  return {nodes: nodesById, events, leafCount: leafX};
+}
+
+function renderTreeSkeleton(data){
+  const colW = 46, rowH = 68, padX = 30, padY = 26;
+  const width = data.leafCount * colW + padX * 2;
+  const height = n * rowH + padY * 2;
+
+  treeSvg.setAttribute('width', Math.max(width, 320));
+  treeSvg.setAttribute('height', height);
+  treeSvg.innerHTML = '';
+
+  const nodes = data.nodes;
+
+  Object.values(nodes).forEach(nd => {
+    if(nd.parentId === null) return;
+    const parent = nodes[nd.parentId];
+    const x1 = padX + parent.x * colW + colW/2;
+    const y1 = padY + parent.depth * rowH + 16;
+    const x2 = padX + nd.x * colW + colW/2;
+    const y2 = padY + nd.depth * rowH + 16;
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+    line.setAttribute('class', 'edge'); line.id = 'edge-' + nd.id;
+    treeSvg.appendChild(line);
+  });
+
+  Object.values(nodes).forEach(nd => {
+    const cx = padX + nd.x * colW + colW/2;
+    const cy = padY + nd.depth * rowH + 16;
+    const g = document.createElementNS(NS, 'g');
+
+    const circle = document.createElementNS(NS, 'circle');
+    circle.setAttribute('cx', cx); circle.setAttribute('cy', cy); circle.setAttribute('r', 15);
+    circle.setAttribute('class', 'node-circle' + (nd.k <= 1 ? ' base' : ''));
+    circle.id = 'circle-' + nd.id;
+    g.appendChild(circle);
+
+    const label = document.createElementNS(NS, 'text');
+    label.setAttribute('x', cx); label.setAttribute('y', cy);
+    label.setAttribute('class', 'node-label'); label.id = 'label-' + nd.id;
+    label.textContent = 'F(' + nd.k + ')';
+    g.appendChild(label);
+
+    const value = document.createElementNS(NS, 'text');
+    value.setAttribute('x', cx); value.setAttribute('y', cy + 28);
+    value.setAttribute('class', 'node-value'); value.id = 'value-' + nd.id;
+    value.textContent = '';
+    g.appendChild(value);
+
+    treeSvg.appendChild(g);
+  });
+}
+
+function buildDpSkeleton(n){
+  dpRow.innerHTML = '';
+  for(let i = 0; i <= n; i++){
+    const cell = document.createElement('div');
+    cell.className = 'dp-cell';
+    cell.id = 'dp-cell-' + i;
+    cell.innerHTML = '<div class="idx">dp[' + i + ']</div><div class="val" id="dp-val-' + i + '"></div>';
+    dpRow.appendChild(cell);
+  }
+}
+
+function resetAll(){
+  clearTimers();
+  running = false;
+  runBtn.disabled = false;
+  treeStatus.textContent = 'Pronto para rodar.'; treeStatus.classList.remove('done');
+  dpStatus.textContent = 'Pronto para rodar.'; dpStatus.classList.remove('done');
+  callCountEl.textContent = '0'; repeatCountEl.textContent = '0'; opCountEl.textContent = '0';
+  document.getElementById('race-call-val').textContent = '0';
+  document.getElementById('race-op-val').textContent = '0';
+  document.getElementById('race-call-bar').style.width = '0%';
+  document.getElementById('race-op-bar').style.width = '0%';
+
+  const data = buildTreeData(n);
+  renderTreeSkeleton(data);
+  buildDpSkeleton(n);
+  treeScroll.scrollLeft = 0;
+  return data;
+}
+
+let currentData = resetAll();
+
+function playTree(data){
+  const delay = n <= 5 ? 130 : (n === 6 ? 90 : 60);
+  let calls = 0, repeats = 0;
+
+  data.events.forEach((ev, i) => {
+    const t = setTimeout(() => {
+      if(ev.type === 'enter'){
+        calls++;
+        if(ev.repeat) repeats++;
+        callCountEl.textContent = calls;
+        repeatCountEl.textContent = repeats;
+
+        const circle = document.getElementById('circle-' + ev.id);
+        const label = document.getElementById('label-' + ev.id);
+        if(circle){ circle.classList.add('visible'); if(ev.repeat) circle.classList.add('repeat'); }
+        if(label) label.classList.add('visible');
+        if(ev.parentId !== null){
+          const edge = document.getElementById('edge-' + ev.id);
+          if(edge) edge.classList.add('visible');
+        }
+      } else if(ev.type === 'value'){
+        const valueEl = document.getElementById('value-' + ev.id);
+        if(valueEl){ valueEl.textContent = ev.value; valueEl.classList.add('visible'); }
+        if(i === data.events.length - 1){
+          treeStatus.textContent = 'Concluído: ' + calls + ' chamadas (' + repeats + ' recalculadas).';
+          treeStatus.classList.add('done');
+          updateRace(calls, null);
+        }
+      }
+    }, i * delay);
+    timers.push(t);
+  });
+}
+
+function playDp(n){
+  const delay = 420;
+  const values = [0, 1];
+  for(let i = 2; i <= n; i++) values.push(values[i-1] + values[i-2]);
+
+  for(let i = 0; i <= n; i++){
+    const t = setTimeout(() => {
+      const cell = document.getElementById('dp-cell-' + i);
+      const valEl = document.getElementById('dp-val-' + i);
+      cell.classList.add('filled');
+      valEl.textContent = values[i];
+      opCountEl.textContent = i + 1;
+      if(i === n){
+        dpStatus.textContent = 'Concluído: ' + (n + 1) + ' operações, resultado F(' + n + ') = ' + values[n] + '.';
+        dpStatus.classList.add('done');
+        updateRace(null, n + 1);
+      }
+    }, i * delay);
+    timers.push(t);
+  }
+}
+
+let raceCalls = null, raceOps = null;
+function updateRace(calls, ops){
+  if(calls !== null) raceCalls = calls;
+  if(ops !== null) raceOps = ops;
+  if(raceCalls === null && raceOps === null) return;
+  const maxVal = Math.max(raceCalls || 0, raceOps || 0, 1);
+  if(raceCalls !== null){
+    document.getElementById('race-call-val').textContent = raceCalls;
+    document.getElementById('race-call-bar').style.width = (raceCalls / maxVal * 100) + '%';
+  }
+  if(raceOps !== null){
+    document.getElementById('race-op-val').textContent = raceOps;
+    document.getElementById('race-op-bar').style.width = (raceOps / maxVal * 100) + '%';
+  }
+}
+
+runBtn.addEventListener('click', () => {
+  if(running) return;
+  running = true; runBtn.disabled = true;
+  raceCalls = null; raceOps = null;
+  currentData = resetAll();
+  running = true; runBtn.disabled = true;
+  treeStatus.textContent = 'Executando...'; dpStatus.textContent = 'Executando...';
+  playTree(currentData); playDp(n);
+  const totalDelay = Math.max(currentData.events.length * 130, (n + 1) * 420) + 300;
+  const t = setTimeout(() => { running = false; runBtn.disabled = false; }, totalDelay);
+  timers.push(t);
+});
+
+resetBtn.addEventListener('click', () => {
+  raceCalls = null; raceOps = null;
+  currentData = resetAll();
+});
+
+slider.addEventListener('input', () => {
+  n = parseInt(slider.value, 10);
+  nVal.textContent = n;
+  raceCalls = null; raceOps = null;
+  currentData = resetAll();
+});
+
+/* ================= BOX STACKING TAB ================= */
+const boxRunBtn = document.getElementById('box-run-btn');
+const boxResetBtn = document.getElementById('box-reset-btn');
+const boxRowOriginal = document.getElementById('box-row-original');
+const boxSortStatus = document.getElementById('box-sort-status');
+const calcTable = document.getElementById('calc-table');
+const boxStatus = document.getElementById('box-status');
+const boxCountEl = document.getElementById('box-count');
+const boxLookupCountEl = document.getElementById('box-lookup-count');
+const stackWrap = document.getElementById('stack-wrap');
+const stackStatus = document.getElementById('stack-status');
+
+const BOXES = [
+  {id:'D', w:6, h:5},
+  {id:'F', w:2, h:2},
+  {id:'B', w:7, h:2},
+  {id:'E', w:3, h:6},
+  {id:'A', w:5, h:3},
+  {id:'C', w:4, h:4}
+];
+
+let boxTimers = [];
+function clearBoxTimers(){ boxTimers.forEach(t => clearTimeout(t)); boxTimers = []; }
+
+function computeBoxDP(boxes){
+  const sorted = [...boxes].sort((a, b) => b.w - a.w);
+  const dp = [], choice = [], events = [];
+
+  for(let i = 0; i < sorted.length; i++){
+    events.push({type:'start', i});
+    let best = 0, bestJ = -1;
+    for(let j = 0; j < i; j++){
+      if(sorted[j].w > sorted[i].w){
+        events.push({type:'lookup', i, j, value: dp[j]});
+        if(dp[j] > best){ best = dp[j]; bestJ = j; }
+      }
+    }
+    dp[i] = sorted[i].h + best;
+    choice[i] = bestJ;
+    events.push({type:'set', i, value: dp[i], chosenJ: bestJ});
+  }
+
+  let maxI = 0;
+  for(let i = 1; i < dp.length; i++) if(dp[i] > dp[maxI]) maxI = i;
+
+  const path = [];
+  let cur = maxI;
+  while(cur !== -1){ path.unshift(cur); cur = choice[cur]; }
+
+  return {sorted, dp, choice, events, maxI, path};
+}
+
+function renderOriginalRow(boxes, sortedIds){
+  boxRowOriginal.innerHTML = '';
+  boxes.forEach(b => {
+    const card = document.createElement('div');
+    card.className = 'box-card';
+    card.id = 'box-card-' + b.id;
+    card.style.width = (30 + b.w * 12) + 'px';
+    card.style.height = (28 + b.h * 8) + 'px';
+    card.innerHTML = '<div class="box-id">' + b.id + '</div><div class="box-dim">L' + b.w + ' · A' + b.h + '</div>';
+    boxRowOriginal.appendChild(card);
+  });
+}
+
+function buildCalcSkeleton(data){
+  calcTable.innerHTML = '';
+  data.sorted.forEach((b, i) => {
+    const row = document.createElement('div');
+    row.className = 'calc-row';
+    row.id = 'calc-row-' + i;
+    row.innerHTML =
+      '<div class="calc-head"><span>melhor(' + b.id + ')</span><span class="w">largura ' + b.w + ' · altura própria ' + b.h + '</span></div>' +
+      '<div class="calc-line">candidatos válidos: <span id="calc-chips-' + i + '"></span><span id="calc-empty-' + i + '" style="display:none;color:var(--muted)">nenhum (caixa mais larga restante)</span></div>' +
+      '<div class="calc-result" id="calc-result-' + i + '"></div>' +
+      '<div class="mini-stack-label">pilha completa usando ' + b.id + ' como base:</div>' +
+      '<div class="mini-stack" id="mini-stack-' + i + '"></div>';
+    calcTable.appendChild(row);
+  });
+}
+
+function buildStackSkeleton(data){
+  stackWrap.innerHTML = '';
+  data.path.forEach(i => {
+    const b = data.sorted[i];
+    const box = document.createElement('div');
+    box.className = 'stack-box';
+    box.id = 'stack-box-' + i;
+    box.style.width = (40 + b.w * 14) + 'px';
+    box.style.height = (10 + b.h * 6) + 'px';
+    box.textContent = b.id + ' · A' + b.h;
+    stackWrap.appendChild(box);
+  });
+}
+
+function chainFor(data, i){
+  const chain = [];
+  let cur = i;
+  while(cur !== -1){ chain.unshift(cur); cur = data.choice[cur]; }
+  return chain;
+}
+
+function revealMiniStack(data, i){
+  const container = document.getElementById('mini-stack-' + i);
+  if(!container) return;
+  container.innerHTML = '';
+  const chain = chainFor(data, i);
+  chain.forEach((k, idx) => {
+    const b = data.sorted[k];
+    const box = document.createElement('div');
+    box.className = 'mini-box';
+    box.style.width = (24 + b.w * 8) + 'px';
+    box.style.height = (6 + b.h * 4) + 'px';
+    box.textContent = b.id;
+    container.appendChild(box);
+    const tt = setTimeout(() => { box.classList.add('visible'); }, idx * 90);
+    boxTimers.push(tt);
+  });
+}
+
+function resetBoxes(){
+  clearBoxTimers();
+  boxRunBtn.disabled = false;
+  boxSortStatus.textContent = 'Ordem original (aleatória).';
+  boxStatus.textContent = 'Pronto para rodar.'; boxStatus.classList.remove('done');
+  stackStatus.textContent = '';
+  boxCountEl.textContent = '0';
+  boxLookupCountEl.textContent = '0';
+
+  const data = computeBoxDP(BOXES);
+  renderOriginalRow(BOXES, data.sorted.map(b => b.id));
+  buildCalcSkeleton(data);
+  buildStackSkeleton(data);
+  return data;
+}
+
+let boxData = resetBoxes();
+
+function playBoxes(data){
+  let t = 0;
+  const sortDelay = 700;
+  let lookups = 0, processed = 0;
+
+  const tSort = setTimeout(() => {
+    const order = data.sorted.map(b => b.id);
+    order.forEach((id, idx) => {
+      const card = document.getElementById('box-card-' + id);
+      if(card){
+        card.style.order = idx;
+        boxRowOriginal.style.display = 'flex';
+      }
+    });
+    boxRowOriginal.style.display = 'flex';
+    Array.from(boxRowOriginal.children).forEach(c => c.classList.add('active'));
+    boxSortStatus.textContent = 'Ordenado por largura decrescente: ' + order.join(' → ') + '.';
+  }, sortDelay);
+  boxTimers.push(tSort);
+  t += sortDelay + 500;
+
+  boxStatus.textContent = 'Processando caixas em ordem...';
+
+  data.events.forEach(ev => {
+    const delay = ev.type === 'lookup' ? 260 : (ev.type === 'set' ? 320 : 180);
+    const tt = setTimeout(() => {
+      if(ev.type === 'start'){
+        const row = document.getElementById('calc-row-' + ev.i);
+        row.classList.add('visible');
+        const sortedBox = data.sorted[ev.i];
+        const card = document.getElementById('box-card-' + sortedBox.id);
+        if(card) card.style.boxShadow = '0 0 0 2px var(--dp)';
+      } else if(ev.type === 'lookup'){
+        lookups++;
+        boxLookupCountEl.textContent = lookups;
+        const jBox = data.sorted[ev.j];
+        const chipWrap = document.getElementById('calc-chips-' + ev.i);
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.id = 'chip-' + ev.i + '-' + ev.j;
+        chip.textContent = jBox.id + ': ' + ev.value;
+        chipWrap.appendChild(chip);
+        requestAnimationFrame(() => chip.classList.add('visible'));
+      } else if(ev.type === 'set'){
+        processed++;
+        boxCountEl.textContent = processed;
+        const box = data.sorted[ev.i];
+        const card = document.getElementById('box-card-' + box.id);
+        if(card) card.style.boxShadow = 'none';
+
+        const emptyTag = document.getElementById('calc-empty-' + ev.i);
+        if(ev.chosenJ === -1){
+          emptyTag.style.display = 'inline';
+        } else {
+          const chip = document.getElementById('chip-' + ev.i + '-' + ev.chosenJ);
+          if(chip) chip.classList.add('chosen');
+        }
+
+        const resultEl = document.getElementById('calc-result-' + ev.i);
+        resultEl.innerHTML = '= <b>' + ev.value + '</b>' + (ev.chosenJ === -1 ? ' (sozinha no topo)' : ' (apoiada em ' + data.sorted[ev.chosenJ].id + ')');
+        resultEl.classList.add('visible');
+        document.getElementById('calc-row-' + ev.i).classList.add('complete');
+        revealMiniStack(data, ev.i);
+
+        if(ev.i === data.sorted.length - 1){
+          boxStatus.textContent = 'Tabela concluída: ' + processed + ' caixas processadas, ' + lookups + ' consultas ao memo.';
+          boxStatus.classList.add('done');
+          revealStack(data);
+        }
+      }
+    }, t + delay);
+    boxTimers.push(tt);
+    t += delay;
+  });
+}
+
+function revealStack(data){
+  const stepDelay = 600;
+  let cumulative = 0;
+  stackStatus.textContent = 'Empilhando...';
+  data.path.forEach((i, idx) => {
+    const tt = setTimeout(() => {
+      const box = document.getElementById('stack-box-' + i);
+      if(box) box.classList.add('visible');
+      cumulative += data.sorted[i].h;
+      if(idx === data.path.length - 1){
+        stackStatus.textContent = 'Pilha ótima: ' + data.path.map(k => data.sorted[k].id).join(' → ') + ' · altura total ' + data.dp[data.maxI] + '.';
+        stackStatus.classList.add('done');
+      } else {
+        stackStatus.textContent = 'Empilhando ' + data.sorted[i].id + '... altura acumulada: ' + cumulative + '.';
+      }
+    }, stepDelay * (idx + 1));
+    boxTimers.push(tt);
+  });
+}
+
+boxRunBtn.addEventListener('click', () => {
+  boxRunBtn.disabled = true;
+  boxData = resetBoxes();
+  boxRunBtn.disabled = true;
+  playBoxes(boxData);
+  const totalDelay = 700 + 500 + boxData.events.length * 320 + boxData.path.length * 600 + 700;
+  const t = setTimeout(() => { boxRunBtn.disabled = false; }, totalDelay);
+  boxTimers.push(t);
+});
+
+boxResetBtn.addEventListener('click', () => {
+  boxData = resetBoxes();
+});
+
+/* ================= PRODUCTION PLANNING TAB ================= */
+function brl(n){ return 'R$' + Math.round(n).toLocaleString('pt-BR'); }
+
+const PROD_MONTHS = [
+  {label:'Mês 1', demand:50, prodCost:100, holdCost:10},
+  {label:'Mês 2', demand:70, prodCost:110, holdCost:12},
+  {label:'Mês 3', demand:40, prodCost:105, holdCost:11}
+];
+
+const prodRunBtn = document.getElementById('prod-run-btn');
+const prodResetBtn = document.getElementById('prod-reset-btn');
+let prodTimers = [];
+function clearProdTimers(){ prodTimers.forEach(t => clearTimeout(t)); prodTimers = []; }
+
+function computeProdDP(months){
+  const N = months.length;
+  const best = new Array(N + 1).fill(0);
+  const choice = new Array(N).fill(-1);
+  const events = [];
+
+  for(let m = N - 1; m >= 0; m--){
+    events.push({type:'start', m});
+    let bestCost = Infinity, bestK = -1;
+    let demandSum = 0;
+    for(let k = m; k < N; k++){
+      demandSum += months[k].demand;
+      const prodCost = months[m].prodCost * demandSum;
+      let holdCost = 0, remaining = 0;
+      for(let i = k - 1; i >= m; i--){
+        remaining += months[i + 1].demand;
+        holdCost += months[i].holdCost * remaining;
+      }
+      const future = best[k + 1];
+      const total = prodCost + holdCost + future;
+      events.push({type:'candidate', m, k, prodCost, holdCost, future, total});
+      if(total < bestCost - 1e-9){ bestCost = total; bestK = k; }
+    }
+    best[m] = bestCost;
+    choice[m] = bestK;
+    events.push({type:'set', m, value: bestCost, chosenK: bestK});
+  }
+
+  const path = [];
+  let cur = 0;
+  while(cur < N){
+    const k = choice[cur];
+    path.push({start: cur, end: k});
+    cur = k + 1;
+  }
+
+  return {months, best, choice, events, path, total: best[0]};
+}
+
+function renderMonths(){
+  const monthRow = document.getElementById('month-row');
+  monthRow.innerHTML = '';
+  PROD_MONTHS.forEach(mo => {
+    const card = document.createElement('div');
+    card.className = 'month-card';
+    card.innerHTML = '<div class="m-title">' + mo.label + '</div>' +
+      '<div class="m-line">demanda: ' + mo.demand + ' un</div>' +
+      '<div class="m-line">produção: ' + brl(mo.prodCost) + '/un</div>' +
+      '<div class="m-line">estoque: ' + brl(mo.holdCost) + '/un</div>';
+    monthRow.appendChild(card);
+  });
+}
+
+function buildProdCalcSkeleton(data){
+  const table = document.getElementById('prod-calc-table');
+  table.innerHTML = '';
+  const N = data.months.length;
+  for(let m = N - 1; m >= 0; m--){
+    const order = N - m;
+    const row = document.createElement('div');
+    row.className = 'calc-row';
+    row.id = 'prod-row-' + m;
+    row.innerHTML =
+      '<div class="calc-head"><span>melhor(' + data.months[m].label + ')<span class="order-badge">calculado ' + order + 'º</span></span></div>' +
+      '<div class="calc-line">opções de até onde antecipar: <span id="prod-chips-' + m + '"></span></div>' +
+      '<div class="calc-result" id="prod-result-' + m + '"></div>';
+    table.appendChild(row);
+  }
+}
+
+function buildTimelineSkeleton(data){
+  const wrap = document.getElementById('timeline');
+  wrap.innerHTML = '';
+  data.path.forEach((seg, idx) => {
+    const box = document.createElement('div');
+    box.className = 'timeline-box';
+    box.id = 'timeline-box-' + idx;
+    let qty = 0;
+    for(let t = seg.start; t <= seg.end; t++) qty += data.months[t].demand;
+    box.innerHTML = '<div class="t-month">' + data.months[seg.start].label + '</div>' +
+      '<div class="t-qty">produzir ' + qty + '</div>' +
+      '<div class="t-stock">cobre até ' + data.months[seg.end].label + '</div>';
+    wrap.appendChild(box);
+    if(idx < data.path.length - 1){
+      const arrow = document.createElement('div');
+      arrow.className = 'timeline-arrow';
+      arrow.textContent = '→';
+      wrap.appendChild(arrow);
+    }
+  });
+}
+
+function resetProd(){
+  clearProdTimers();
+  prodRunBtn.disabled = false;
+  document.getElementById('prod-status').textContent = 'Pronto para rodar.';
+  document.getElementById('prod-status').classList.remove('done');
+  document.getElementById('prod-count').textContent = '0';
+  document.getElementById('prod-lookup-count').textContent = '0';
+  const totalEl = document.getElementById('total-cost');
+  totalEl.textContent = '';
+  totalEl.classList.remove('visible');
+
+  const data = computeProdDP(PROD_MONTHS);
+  renderMonths();
+  buildProdCalcSkeleton(data);
+  buildTimelineSkeleton(data);
+  return data;
+}
+
+let prodData = resetProd();
+
+function revealTimeline(data){
+  const boxes = document.querySelectorAll('#timeline .timeline-box');
+  const stepDelay = 500;
+  boxes.forEach((box, idx) => {
+    const tt = setTimeout(() => {
+      box.classList.add('visible');
+      if(idx === boxes.length - 1){
+        const totalEl = document.getElementById('total-cost');
+        totalEl.textContent = 'Custo total ótimo: ' + brl(data.total);
+        totalEl.classList.add('visible');
+      }
+    }, stepDelay * (idx + 1));
+    prodTimers.push(tt);
+  });
+}
+
+function playProd(data){
+  let t = 0;
+  let lookups = 0, processed = 0;
+
+  data.events.forEach(ev => {
+    const delay = ev.type === 'candidate' ? 280 : (ev.type === 'set' ? 360 : 200);
+    const tt = setTimeout(() => {
+      if(ev.type === 'start'){
+        document.getElementById('prod-row-' + ev.m).classList.add('visible');
+      } else if(ev.type === 'candidate'){
+        lookups++;
+        document.getElementById('prod-lookup-count').textContent = lookups;
+        const chipWrap = document.getElementById('prod-chips-' + ev.m);
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.id = 'prod-chip-' + ev.m + '-' + ev.k;
+        chip.textContent = 'até ' + data.months[ev.k].label + ': ' + brl(ev.total);
+        chipWrap.appendChild(chip);
+        requestAnimationFrame(() => chip.classList.add('visible'));
+      } else if(ev.type === 'set'){
+        processed++;
+        document.getElementById('prod-count').textContent = processed;
+        const chip = document.getElementById('prod-chip-' + ev.m + '-' + ev.chosenK);
+        if(chip) chip.classList.add('chosen');
+        const resultEl = document.getElementById('prod-result-' + ev.m);
+        resultEl.innerHTML = '= <b>' + brl(ev.value) + '</b> (produzir em ' + data.months[ev.m].label + ' cobrindo até ' + data.months[ev.chosenK].label + ')';
+        resultEl.classList.add('visible');
+        document.getElementById('prod-row-' + ev.m).classList.add('complete');
+        if(ev.m === 0){
+          const statusEl = document.getElementById('prod-status');
+          statusEl.textContent = 'Concluído: ' + processed + ' meses processados, ' + lookups + ' consultas ao memo.';
+          statusEl.classList.add('done');
+          revealTimeline(data);
+        }
+      }
+    }, t + delay);
+    prodTimers.push(tt);
+    t += delay;
+  });
+}
+
+prodRunBtn.addEventListener('click', () => {
+  prodRunBtn.disabled = true;
+  prodData = resetProd();
+  prodRunBtn.disabled = true;
+  playProd(prodData);
+  const totalDelay = prodData.events.length * 360 + prodData.path.length * 500 + 700;
+  const t = setTimeout(() => { prodRunBtn.disabled = false; }, totalDelay);
+  prodTimers.push(t);
+});
+
+prodResetBtn.addEventListener('click', () => {
+  prodData = resetProd();
+});
+
+/* ═══════════════════════════════════════════════════════════
+   KNAPSACK / BELLMAN TAB
+   ═══════════════════════════════════════════════════════════ */
+const KITEMS = [
+  { id:'A', w:2, v:3 },
+  { id:'B', w:3, v:4 },
+  { id:'C', w:4, v:5 },
+  { id:'D', w:5, v:7 },
+];
+const KW = 8;
+
+const knapRunBtn   = document.getElementById('knap-run-btn');
+const knapResetBtn = document.getElementById('knap-reset-btn');
+const knapStatus   = document.getElementById('knap-status');
+const knapEqLive   = document.getElementById('knap-eq-live');
+const knapBagWrap  = document.getElementById('knap-bag-wrap');
+const knapBagItems = document.getElementById('knap-bag-items');
+const knapBagFill  = document.getElementById('knap-bag-fill');
+const knapBagLabel = document.getElementById('knap-bag-label');
+
+let kTimers = [];
+function clearKTimers(){ kTimers.forEach(t => clearTimeout(t)); kTimers = []; }
+
+/* ── compute DP + backtrack ─────────────────────────────── */
+function computeKnapsack(){
+  const n = KITEMS.length;
+  const dp  = Array.from({length:n+1}, () => new Array(KW+1).fill(0));
+  const dec = Array.from({length:n+1}, () => new Array(KW+1).fill('base'));
+
+  for(let i=1; i<=n; i++){
+    const {w,v} = KITEMS[i-1];
+    for(let c=0; c<=KW; c++){
+      const skip = dp[i-1][c];
+      const take = c >= w ? v + dp[i-1][c-w] : -Infinity;
+      if(take > skip){ dp[i][c] = take; dec[i][c] = 'take'; }
+      else           { dp[i][c] = skip; dec[i][c] = 'skip'; }
+    }
+  }
+  const chosen = [];
+  let rc = KW;
+  for(let i=n; i>=1; i--){
+    if(dec[i][rc] === 'take'){ chosen.push(i-1); rc -= KITEMS[i-1].w; }
+  }
+  chosen.reverse();
+  return { dp, dec, chosen, best: dp[n][KW] };
+}
+
+/* ── render item cards ──────────────────────────────────── */
+function renderKnapItems(chosen=[]){
+  const wrap = document.getElementById('knap-items');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  KITEMS.forEach((it, idx) => {
+    const card = document.createElement('div');
+    card.className = 'knap-item-card' + (chosen.includes(idx) ? ' chosen' : '');
+    card.id = `kcard-${idx}`;
+    card.innerHTML =
+      `<span class="ki-id">${it.id}</span>` +
+      `<div class="ki-row">peso <span>${it.w}</span></div>` +
+      `<div class="ki-row">valor <span>${it.v}</span></div>`;
+    wrap.appendChild(card);
+  });
+}
+
+/* ── render empty table ─────────────────────────────────── */
+function renderKnapTable(){
+  const tbl = document.getElementById('knap-table');
+  tbl.innerHTML = '';
+  const n = KITEMS.length;
+
+  // Header row
+  const thead = tbl.createTHead();
+  const hr = thead.insertRow();
+  const th0 = document.createElement('th');
+  th0.className = 'kh-row'; th0.textContent = 'Item'; hr.appendChild(th0);
+  for(let c=0; c<=KW; c++){
+    const th = document.createElement('th');
+    th.textContent = `c=${c}`; hr.appendChild(th);
+  }
+
+  // Data rows
+  const tbody = tbl.createTBody();
+  for(let i=0; i<=n; i++){
+    const tr = tbody.insertRow();
+    const td0 = tr.insertCell();
+    td0.className = 'kt-rowlabel';
+    td0.textContent = i === 0 ? '∅ (base)' : `${KITEMS[i-1].id}  w:${KITEMS[i-1].w} v:${KITEMS[i-1].v}`;
+    for(let c=0; c<=KW; c++){
+      const td = tr.insertCell();
+      td.id = `kc-${i}-${c}`;
+      td.textContent = i === 0 ? '0' : '';
+      if(i === 0) td.className = 'kt-base';
+    }
+  }
+}
+
+/* ── reset ──────────────────────────────────────────────── */
+function resetKnap(){
+  clearKTimers();
+  knapRunBtn.disabled = false;
+  knapEqLive.textContent = '';
+  knapStatus.textContent = 'Pronto para rodar.';
+  knapStatus.classList.remove('done');
+  knapBagWrap.style.display = 'none';
+  renderKnapItems();
+  renderKnapTable();
+}
+
+/* ── play ───────────────────────────────────────────────── */
+function playKnapsack(){
+  const { dp, dec, chosen, best } = computeKnapsack();
+  const n = KITEMS.length;
+  const CELL = 160, ROW_PAUSE = 320;
+  let t = 0;
+
+  for(let i=1; i<=n; i++){
+    t += ROW_PAUSE;
+    for(let c=0; c<=KW; c++){
+      const _i=i, _c=c;
+      kTimers.push(setTimeout(() => {
+        const cell    = document.getElementById(`kc-${_i}-${_c}`);
+        const srcAbove= document.getElementById(`kc-${_i-1}-${_c}`);
+        const item    = KITEMS[_i-1];
+        const srcLeft = _c >= item.w ? document.getElementById(`kc-${_i-1}-${_c-item.w}`) : null;
+
+        // highlight sources
+        if(srcAbove) srcAbove.classList.add('kt-src');
+        if(srcLeft)  srcLeft.classList.add('kt-src');
+
+        // fill cell
+        if(cell){
+          cell.textContent = dp[_i][_c];
+          cell.className = dec[_i][_c] === 'take' ? 'kt-take' : 'kt-skip';
+        }
+
+        // live equation
+        const skip = dp[_i-1][_c];
+        if(_c < item.w){
+          knapEqLive.innerHTML =
+            `V(${item.id}, c=${_c}) = V(prev, ${_c}) = ${skip} &nbsp; <em>← peso ${item.w} &gt; ${_c}, pular</em>`;
+        } else {
+          const take = item.v + dp[_i-1][_c-item.w];
+          const chose = dec[_i][_c] === 'take';
+          knapEqLive.innerHTML =
+            `V(${item.id}, c=${_c}) = max( pular:${skip},  tomar:${item.v}+${dp[_i-1][_c-item.w]}=${take} ) = ${dp[_i][_c]}` +
+            `  &nbsp; <em>← ${chose ? 'tomar '+item.id : 'pular '+item.id}</em>`;
+        }
+
+        // unmark sources
+        setTimeout(() => {
+          if(srcAbove) srcAbove.classList.remove('kt-src');
+          if(srcLeft)  srcLeft.classList.remove('kt-src');
+        }, CELL * 0.75);
+
+        // final cell
+        if(_i === n && _c === KW){
+          knapStatus.textContent = `Tabela completa. Valor ótimo: ${best} com capacidade ${KW}.`;
+          knapStatus.classList.add('done');
+          kTimers.push(setTimeout(() => revealBacktrack(dp, dec, chosen, best), 700));
+        }
+      }, t));
+      t += CELL;
+    }
+  }
+}
+
+/* ── backtracking reveal ─────────────────────────────────── */
+function revealBacktrack(dp, dec, chosen, best){
+  const n = KITEMS.length;
+  // highlight optimal path in table
+  let rc = KW;
+  for(let i=n; i>=0; i--){
+    const cell = document.getElementById(`kc-${i}-${rc}`);
+    if(cell) cell.classList.add('kt-optimal');
+    if(i>0 && dec[i][rc] === 'take') rc -= KITEMS[i-1].w;
+  }
+
+  // show bag
+  knapBagWrap.style.display = 'block';
+  knapBagItems.innerHTML = '';
+  let totalW = 0;
+  chosen.forEach((idx, rank) => {
+    const it = KITEMS[idx];
+    totalW += it.w;
+    const el = document.createElement('div');
+    el.className = 'knap-bag-item';
+    el.textContent = `${it.id}  w:${it.w} v:${it.v}`;
+    knapBagItems.appendChild(el);
+    kTimers.push(setTimeout(() => {
+      el.classList.add('visible');
+      document.getElementById(`kcard-${idx}`).classList.add('chosen');
+    }, rank * 300));
+  });
+  kTimers.push(setTimeout(() => {
+    knapBagFill.style.width = `${(totalW/KW)*100}%`;
+    knapBagLabel.textContent =
+      `Itens: ${chosen.map(i=>KITEMS[i].id).join(' + ')}  ·  peso total ${totalW}/${KW}  ·  valor total ${best}`;
+    knapRunBtn.disabled = false;
+  }, chosen.length * 300 + 200));
+}
+
+/* ── event listeners ─────────────────────────────────────── */
+knapRunBtn.addEventListener('click', () => {
+  knapRunBtn.disabled = true;
+  resetKnap();
+  knapRunBtn.disabled = true;
+  playKnapsack();
+});
+knapResetBtn.addEventListener('click', () => { resetKnap(); });
+
+resetKnap();
+</script>
+</body>
+</html>
