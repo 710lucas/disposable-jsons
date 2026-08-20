@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YHK Printer Studio</title>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f0f2f5;
+            color: #1c1e21;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        h1 { margin-top: 0; margin-bottom: 4px; }
+        .info { color: #65676b; font-size: 14px; margin-bottom: 20px; }
+        
+        .section {
+            background: #f7f8fa;
+            border: 1px solid #e4e6eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        button, input[type="file"], .btn-label {
+            padding: 8px 14px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #ccd0d5;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        button.primary { background: #0066cc; color: white; border: none; }
+        button.danger { background: #e41e3f; color: white; border: none; }
+        button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* Controles do Editor */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 13px;
+        }
+        .control-group label { display: flex; justify-content: space-between; }
+        .control-group input[type="range"] { width: 100%; }
+
+        /* Área de visualização */
+        .preview-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #e9eaec;
+            padding: 16px;
+            border-radius: 8px;
+            overflow: auto;
+            user-select: none;
+        }
+        #preview {
+            border: 2px dashed #8b949e;
+            background: white;
+            cursor: grab;
+            image-rendering: pixelated;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        #preview:active { cursor: grabbing; }
+
+        #status {
+            margin-top: 16px;
+            padding: 12px;
+            background: #1c1e21;
+            color: #30d158;
+            font-family: ui-monospace, Menlo, monospace;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>YHK Printer Studio</h1>
+    <div class="info">YHK-0FD4 · 384 pixels · Bluetooth RFCOMM / Web Serial</div>
+
+    <!-- Seção de Conexão -->
+    <div class="section">
+        <div class="section-title">Comunicação Serial / Bluetooth</div>
+        <div class="buttons">
+            <button id="connect" class="primary">Conectar Impressora</button>
+            <button id="disconnect" disabled>Desconectar</button>
+            <button id="forget" class="danger">Esquecer Dispositivo / Limpar Permissões</button>
+            <button id="print" class="primary" disabled style="margin-left: auto;">🖨️ Imprimir</button>
+        </div>
+    </div>
+
+    <!-- Seção de Upload e Edição -->
+    <div class="section">
+        <div class="section-title">Editor de Imagem</div>
+        <input id="file" type="file" accept="image/*">
+
+        <div class="controls-grid" id="editorControls" style="opacity: 0.5; pointer-events: none;">
+            <div class="control-group">
+                <label>Zoom <span id="valZoom">100%</span></label>
+                <input type="range" id="scale" min="0.1" max="3" step="0.05" value="1">
+            </div>
+            <div class="control-group">
+                <label>Brilho <span id="valBrightness">0</span></label>
+                <input type="range" id="brightness" min="-100" max="100" value="0">
+            </div>
+            <div class="control-group">
+                <label>Contraste <span id="valContrast">0</span></label>
+                <input type="range" id="contrast" min="-100" max="100" value="0">
+            </div>
+            <div class="control-group" style="justify-content: flex-end;">
+                <div class="buttons">
+                    <button id="rotate">🔄 Girar 90°</button>
+                    <button id="invert">🌓 Inverter</button>
+                    <button id="resetTransform">Resetar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área Interativa de Corte/Preview -->
+    <div class="preview-wrapper">
+        <small style="color: #65676b; margin-bottom: 8px;">Arraste a imagem abaixo para reposicionar ou use a roda do mouse para dar zoom.</small>
+        <canvas id="preview" width="384" height="240"></canvas>
+    </div>
+
+    <div id="status">Desconectado.</div>
+</div>
+
+<script>
+const PRINTER_WIDTH = 384;
+
+let port = null;
+let writer = null;
+let sourceImage = null;
+
+// Estado da Transformação
+let state = {
+    x: 0,
+    y: 0,
+    scale: 1,
+    rotation: 0, // graus: 0, 90, 180, 270
+    brightness: 0,
+    contrast: 0,
+    inverted: false,
+    cropHeight: 384 // altura do corte padrão
+};
+
+// Elementos DOM
+const connectBtn = document.getElementById("connect");
+const disconnectBtn = document.getElementById("disconnect");
+const forgetBtn = document.getElementById("forget");
+const printBtn = document.getElementById("print");
+const fileInput = document.getElementById("file");
+const canvas = document.getElementById("preview");
+const ctx = canvas.getContext("2d", { willReadFrequently: true });
+const statusBox = document.getElementById("status");
+const editorControls = document.getElementById("editorControls");
+
+// Controles
+const scaleInput = document.getElementById("scale");
+const brightnessInput = document.getElementById("brightness");
+const contrastInput = document.getElementById("contrast");
+const rotateBtn = document.getElementById("rotate");
+const invertBtn = document.getElementById("invert");
+const resetBtn = document.getElementById("resetTransform");
+
+function setStatus(text) {
+    statusBox.textContent = text;
+    statusBox.scrollTop = statusBox.scrollHeight;
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/* =========================================================
+ * 1. GERENCIAMENTO DE CONEXÃO & ESQUECER DISPOSITIVO
+ * ========================================================= */
+
+async function connectPrinter() {
+    try {
+        if (!("serial" in navigator)) {
+            throw new Error("Web Serial não é suportado neste navegador. Use Chrome ou Edge.");
+        }
+
+        setStatus("Selecione a porta serial (/dev/cu.* no macOS)...");
+        port = await navigator.serial.requestPort();
+
+        setStatus("Conectando...");
+        await port.open({ baudRate: 9600 });
+        writer = port.writable.getWriter();
+
+        // ESC @ (Reset)
+        await writer.write(new Uint8Array([0x1b, 0x40]));
+
+        setStatus("Impressora conectada!");
+        connectBtn.disabled = true;
+        disconnectBtn.disabled = false;
+        updatePrintButton();
+    } catch (err) {
+        console.error(err);
+        setStatus("Erro ao conectar:\n" + err.message);
+    }
+}
+
+async function disconnectPrinter() {
+    try {
+        if (writer) {
+            await writer.close();
+            writer = null;
+        }
+        if (port) {
+            await port.close();
+            port = null;
+        }
+        setStatus("Impressora desconectada.");
+        connectBtn.disabled = false;
+        disconnectBtn.disabled = true;
+        updatePrintButton();
+    } catch (err) {
+        setStatus("Erro ao desconectar: " + err.message);
+    }
+}
+
+async function forgetPrinter() {
+    try {
+        await disconnectPrinter();
+        
+        // Verifica suporte a forget() (Chrome 103+)
+        if ("serial" in navigator && "getPorts" in navigator.serial) {
+            const ports = await navigator.serial.getPorts();
+            for (const p of ports) {
+                if ("forget" in p) {
+                    await p.forget();
+                }
+            }
+            setStatus("Permissões limpas e dispositivos esquecidos.");
+        } else {
+            setStatus("Para esquecer, remova o pareamento no Bluetooth do SO.");
+        }
+    } catch (err) {
+        setStatus("Erro ao esquecer porta: " + err.message);
+    }
+}
+
+function updatePrintButton() {
+    printBtn.disabled = !(writer && sourceImage);
+}
+
+/* =========================================================
+ * 2. CARREGAMENTO E PROCESSAMENTO DA IMAGEM
+ * ========================================================= */
+
+fileInput.addEventListener("change", async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    try {
+        setStatus("Carregando imagem...");
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        
+        img.onload = () => {
+            URL.revokeObjectURL(url);
+            sourceImage = img;
+            
+            // Define altura inicial proporcional à largura fixa de 384px
+            const autoHeight = Math.round((img.naturalHeight * PRINTER_WIDTH) / img.naturalWidth);
+            state.cropHeight = Math.min(Math.max(autoHeight, 100), 800); // limita altura razoável
+            
+            resetTransformations();
+            editorControls.style.opacity = "1";
+            editorControls.style.pointerEvents = "auto";
+            
+            renderEditor();
+            updatePrintButton();
+            setStatus(`Imagem carregada. Ajuste o enquadramento se desejar.`);
+        };
+        img.src = url;
+    } catch (err) {
+        setStatus("Erro ao carregar: " + err.message);
+    }
+});
+
+function resetTransformations() {
+    if (!sourceImage) return;
+    state.scale = PRINTER_WIDTH / sourceImage.naturalWidth;
+    scaleInput.value = state.scale;
+    state.x = 0;
+    state.y = 0;
+    state.rotation = 0;
+    state.brightness = 0;
+    state.contrast = 0;
+    state.inverted = false;
+    
+    brightnessInput.value = 0;
+    contrastInput.value = 0;
+    document.getElementById("valZoom").textContent = `${Math.round(state.scale * 100)}%`;
+    document.getElementById("valBrightness").textContent = "0";
+    document.getElementById("valContrast").textContent = "0";
+}
+
+/* =========================================================
+ * 3. RENDERIZAÇÃO DO EDITOR + FLOYD-STEINBERG
+ * ========================================================= */
+
+function renderEditor() {
+    if (!sourceImage) return;
+
+    canvas.width = PRINTER_WIDTH;
+    canvas.height = state.cropHeight;
+
+    // Fundo branco base
+    ctx.save();
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Transformações (Posição, Escala, Rotação)
+    ctx.translate(canvas.width / 2 + state.x, canvas.height / 2 + state.y);
+    ctx.rotate((state.rotation * Math.PI) / 180);
+    ctx.scale(state.scale, state.scale);
+
+    ctx.drawImage(
+        sourceImage,
+        -sourceImage.naturalWidth / 2,
+        -sourceImage.naturalHeight / 2
+    );
+    ctx.restore();
+
+    // Aplica Efeitos + Dithering
+    applyDithering();
+}
+
+function applyDithering() {
+    const w = canvas.width;
+    const h = canvas.height;
+    const imgData = ctx.getImageData(0, 0, w, h);
+    const data = imgData.data;
+
+    // Pré-calcula fator de contraste
+    const factor = (259 * (state.contrast + 255)) / (255 * (259 - state.contrast));
+    const b = state.brightness;
+
+    // 1. Escala de cinza com ajuste de tom
+    const gray = new Float32Array(w * h);
+    for (let i = 0; i < data.length; i += 4) {
+        let r = factor * (data[i] - 128) + 128 + b;
+        let g = factor * (data[i + 1] - 128) + 128 + b;
+        let bl = factor * (data[i + 2] - 128) + 128 + b;
+
+        r = Math.max(0, Math.min(255, r));
+        g = Math.max(0, Math.min(255, g));
+        bl = Math.max(0, Math.min(255, bl));
+
+        let lum = 0.299 * r + 0.587 * g + 0.114 * bl;
+        if (state.inverted) lum = 255 - lum;
+        gray[i / 4] = lum;
+    }
+
+    // 2. Floyd-Steinberg Dithering
+    for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+            const idx = y * w + x;
+            const oldVal = gray[idx];
+            const newVal = oldVal < 128 ? 0 : 255;
+            gray[idx] = newVal;
+
+            const err = oldVal - newVal;
+
+            if (x + 1 < w) gray[idx + 1] += (err * 7) / 16;
+            if (x > 0 && y + 1 < h) gray[idx + w - 1] += (err * 3) / 16;
+            if (y + 1 < h) gray[idx + w] += (err * 5) / 16;
+            if (x + 1 < w && y + 1 < h) gray[idx + w + 1] += (err * 1) / 16;
+        }
+    }
+
+    // 3. Atualiza Canvas
+    for (let i = 0; i < gray.length; i++) {
+        const val = gray[i];
+        const p = i * 4;
+        data[p] = val;
+        data[p + 1] = val;
+        data[p + 2] = val;
+        data[p + 3] = 255;
+    }
+
+    ctx.putImageData(imgData, 0, 0);
+}
+
+/* =========================================================
+ * 4. EVENTOS DE INTERAÇÃO (DRAG & DROP, ZOOM)
+ * ========================================================= */
+
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+
+canvas.addEventListener("mousedown", (e) => {
+    if (!sourceImage) return;
+    isDragging = true;
+    startX = e.clientX - state.x;
+    startY = e.clientY - state.y;
+});
+
+window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    state.x = e.clientX - startX;
+    state.y = e.clientY - startY;
+    renderEditor();
+});
+
+window.addEventListener("mouseup", () => { isDragging = false; });
+
+// Zoom pelo Scroll do Mouse
+canvas.addEventListener("wheel", (e) => {
+    if (!sourceImage) return;
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.05 : -0.05;
+    state.scale = Math.max(0.1, Math.min(3, state.scale + delta));
+    scaleInput.value = state.scale;
+    document.getElementById("valZoom").textContent = `${Math.round(state.scale * 100)}%`;
+    renderEditor();
+}, { passive: false });
+
+// Controles dos Sliders
+scaleInput.addEventListener("input", (e) => {
+    state.scale = parseFloat(e.target.value);
+    document.getElementById("valZoom").textContent = `${Math.round(state.scale * 100)}%`;
+    renderEditor();
+});
+
+brightnessInput.addEventListener("input", (e) => {
+    state.brightness = parseInt(e.target.value);
+    document.getElementById("valBrightness").textContent = state.brightness;
+    renderEditor();
+});
+
+contrastInput.addEventListener("input", (e) => {
+    state.contrast = parseInt(e.target.value);
+    document.getElementById("valContrast").textContent = state.contrast;
+    renderEditor();
+});
+
+rotateBtn.addEventListener("click", () => {
+    state.rotation = (state.rotation + 90) % 360;
+    renderEditor();
+});
+
+invertBtn.addEventListener("click", () => {
+    state.inverted = !state.inverted;
+    renderEditor();
+});
+
+resetBtn.addEventListener("click", () => {
+    resetTransformations();
+    renderEditor();
+});
+
+/* =========================================================
+ * 5. GERAÇÃO DE RASTER E ENVIO PARA IMPRESSORA
+ * ========================================================= */
+
+function createRaster() {
+    const w = canvas.width;
+    const h = canvas.height;
+    const imgData = ctx.getImageData(0, 0, w, h);
+    const widthBytes = Math.ceil(w / 8);
+    const bitmap = new Uint8Array(widthBytes * h);
+
+    for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+            const idx = (y * w + x) * 4;
+            // 1 = preto, 0 = branco
+            if (imgData.data[idx] < 128) {
+                const byteIdx = y * widthBytes + Math.floor(x / 8);
+                const bit = 7 - (x % 8);
+                bitmap[byteIdx] |= (1 << bit);
+            }
+        }
+    }
+
+    const header = new Uint8Array([
+        0x1d, 0x76, 0x30, 0x00,
+        widthBytes & 0xff, (widthBytes >> 8) & 0xff,
+        h & 0xff, (h >> 8) & 0xff
+    ]);
+
+    const raster = new Uint8Array(header.length + bitmap.length);
+    raster.set(header, 0);
+    raster.set(bitmap, header.length);
+    return raster;
+}
+
+async function printImage() {
+    if (!writer) return;
+
+    try {
+        printBtn.disabled = true;
+        setStatus("Preparando comandos de impressão...");
+
+        const raster = createRaster();
+
+        // 1. Reset ESC @
+        await writer.write(new Uint8Array([0x1b, 0x40]));
+        await sleep(300);
+
+        // 2. YHK Magic Bytes
+        await writer.write(new Uint8Array([0x1d, 0x49, 0xf0, 0x19]));
+        await sleep(300);
+
+        // 3. Envio seguro da imagem em pedaços (chunks de 256 bytes)
+        setStatus(`Enviando imagem (${raster.length} bytes)...`);
+        const CHUNK_SIZE = 256;
+        for (let i = 0; i < raster.length; i += CHUNK_SIZE) {
+            const chunk = raster.slice(i, i + CHUNK_SIZE);
+            await writer.write(chunk);
+            await sleep(10);
+        }
+        await sleep(500);
+
+        // 4. Feed de 4 linhas
+        await writer.write(new Uint8Array([0x0a, 0x0a, 0x0a, 0x0a]));
+        await sleep(500);
+
+        setStatus("Impressão concluída com sucesso!");
+    } catch (err) {
+        console.error(err);
+        setStatus("Erro na impressão: " + err.message);
+    } finally {
+        printBtn.disabled = false;
+    }
+}
+
+connectBtn.addEventListener("click", connectPrinter);
+disconnectBtn.addEventListener("click", disconnectPrinter);
+forgetBtn.addEventListener("click", forgetPrinter);
+printBtn.addEventListener("click", printImage);
+</script>
+</body>
+</html>
